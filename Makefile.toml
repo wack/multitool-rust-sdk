@@ -87,9 +87,10 @@ docker run --rm -v "$PWD:/local" \
   -g rust \
   --additional-properties library=reqwest-trait \
   --additional-properties mockall=true \
+  --additional-properties topLevelApiClient=true \
   --additional-properties packageName=multitool-sdk \
   --additional-properties preferUnsignedInt=true \
+  --additional-properties useBonBuilder=true \
   -o /local/
-
 '''
 ]

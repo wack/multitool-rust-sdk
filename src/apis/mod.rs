@@ -100,3 +100,114 @@ pub mod users_api;
 pub mod workspaces_api;
 
 pub mod configuration;
+
+use std::sync::Arc;
+
+pub trait Api {
+    fn applications_api(&self) -> &dyn applications_api::ApplicationsApi;
+    fn deployments_api(&self) -> &dyn deployments_api::DeploymentsApi;
+    fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi;
+    fn response_code_metrics_api(&self) -> &dyn response_code_metrics_api::ResponseCodeMetricsApi;
+    fn users_api(&self) -> &dyn users_api::UsersApi;
+    fn workspaces_api(&self) -> &dyn workspaces_api::WorkspacesApi;
+}
+
+pub struct ApiClient {
+    applications_api: Box<dyn applications_api::ApplicationsApi>,
+    deployments_api: Box<dyn deployments_api::DeploymentsApi>,
+    heartbeat_api: Box<dyn heartbeat_api::HeartbeatApi>,
+    response_code_metrics_api: Box<dyn response_code_metrics_api::ResponseCodeMetricsApi>,
+    users_api: Box<dyn users_api::UsersApi>,
+    workspaces_api: Box<dyn workspaces_api::WorkspacesApi>,
+}
+
+impl ApiClient {
+    pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
+        Self {
+            applications_api: Box::new(applications_api::ApplicationsApiClient::new(
+                configuration.clone(),
+            )),
+            deployments_api: Box::new(deployments_api::DeploymentsApiClient::new(
+                configuration.clone(),
+            )),
+            heartbeat_api: Box::new(heartbeat_api::HeartbeatApiClient::new(
+                configuration.clone(),
+            )),
+            response_code_metrics_api: Box::new(
+                response_code_metrics_api::ResponseCodeMetricsApiClient::new(configuration.clone()),
+            ),
+            users_api: Box::new(users_api::UsersApiClient::new(configuration.clone())),
+            workspaces_api: Box::new(workspaces_api::WorkspacesApiClient::new(
+                configuration.clone(),
+            )),
+        }
+    }
+}
+
+impl Api for ApiClient {
+    fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
+        self.applications_api.as_ref()
+    }
+    fn deployments_api(&self) -> &dyn deployments_api::DeploymentsApi {
+        self.deployments_api.as_ref()
+    }
+    fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi {
+        self.heartbeat_api.as_ref()
+    }
+    fn response_code_metrics_api(&self) -> &dyn response_code_metrics_api::ResponseCodeMetricsApi {
+        self.response_code_metrics_api.as_ref()
+    }
+    fn users_api(&self) -> &dyn users_api::UsersApi {
+        self.users_api.as_ref()
+    }
+    fn workspaces_api(&self) -> &dyn workspaces_api::WorkspacesApi {
+        self.workspaces_api.as_ref()
+    }
+}
+
+#[cfg(feature = "mockall")]
+pub struct MockApiClient {
+    pub applications_api_mock: applications_api::MockApplicationsApi,
+    pub deployments_api_mock: deployments_api::MockDeploymentsApi,
+    pub heartbeat_api_mock: heartbeat_api::MockHeartbeatApi,
+    pub response_code_metrics_api_mock: response_code_metrics_api::MockResponseCodeMetricsApi,
+    pub users_api_mock: users_api::MockUsersApi,
+    pub workspaces_api_mock: workspaces_api::MockWorkspacesApi,
+}
+
+#[cfg(feature = "mockall")]
+impl MockApiClient {
+    pub fn new() -> Self {
+        Self {
+            applications_api_mock: applications_api::MockApplicationsApi::new(),
+            deployments_api_mock: deployments_api::MockDeploymentsApi::new(),
+            heartbeat_api_mock: heartbeat_api::MockHeartbeatApi::new(),
+            response_code_metrics_api_mock:
+                response_code_metrics_api::MockResponseCodeMetricsApi::new(),
+            users_api_mock: users_api::MockUsersApi::new(),
+            workspaces_api_mock: workspaces_api::MockWorkspacesApi::new(),
+        }
+    }
+}
+
+#[cfg(feature = "mockall")]
+impl Api for MockApiClient {
+    fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
+        &self.applications_api_mock
+    }
+    fn deployments_api(&self) -> &dyn deployments_api::DeploymentsApi {
+        &self.deployments_api_mock
+    }
+    fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi {
+        &self.heartbeat_api_mock
+    }
+    fn response_code_metrics_api(&self) -> &dyn response_code_metrics_api::ResponseCodeMetricsApi {
+        &self.response_code_metrics_api_mock
+    }
+    fn users_api(&self) -> &dyn users_api::UsersApi {
+        &self.users_api_mock
+    }
+    fn workspaces_api(&self) -> &dyn workspaces_api::WorkspacesApi {
+        &self.workspaces_api_mock
+    }
+}
