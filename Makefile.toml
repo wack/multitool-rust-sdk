@@ -1,0 +1,77 @@
+[env]
+CARGO_MAKE_RUN_CODECOV = true
+
+[tasks.dev-test-flow]
+dependencies = [
+  "pre-build",
+  "format-flow",
+  "clippy-flow",
+  "build",
+  "post-build",
+  "pre-docs",
+  "docs",
+  "post-docs",
+  "test-flow",
+]
+
+[tasks.pre-build]
+dependencies = [
+  "sort-ci",
+  "format-toml-conditioned-flow",
+]
+
+[tasks.ci-flow]
+dependencies = [
+  "pre-ci-flow",
+  "print-env-flow",
+  "pre-build",
+  "check-format-flow",
+  "clippy-flow",
+  "build",
+  "post-build",
+  "pre-docs",
+  "docs",
+  "post-docs",
+  "test-flow",
+  "post-ci-flow",
+]
+
+[tasks.fmt]
+workspace = true
+alias = "format"
+
+[tasks.check-format]
+workspace = true
+
+[tasks.wc]
+description = "Calculate the LoC in src. Require tokei to be installed."
+category = "Development"
+command = "tokei"
+args = [ "." ]
+
+[tasks.sort-ci]
+description = "Assert that Cargo.toml is sorted. Requires cargo-sort to be installed."
+category = "Development"
+command = "cargo"
+args = ["sort", "--check"]
+
+[tasks.sort]
+description = "Sort Cargo.toml. Requires cargo-sort to be installed."
+category = "Development"
+command = "cargo"
+args = ["sort"]
+
+[tasks.gen]
+alias = "generate"
+
+[tasks.generate]
+description = "Generate the Rust SDK from the API spec."
+script = [
+'''
+docker run --rm -v "$PWD:/local" \
+  openapitools/openapi-generator-cli:v7.4.0 generate \
+  -i /local/openapi.json \
+  -g rust \
+  -o /local/
+'''
+]
