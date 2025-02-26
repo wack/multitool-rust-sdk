@@ -66,6 +66,17 @@ alias = "generate"
 
 [tasks.generate]
 description = "Generate the Rust SDK from the API spec."
+dependencies = [
+  "generate-sdk",
+  "sort",
+  "format-flow",
+  "clippy-flow",
+]
+
+
+[tasks.generate-sdk]
+description = "Generate the SDK. Does not fmt or sort the output. Use `cargo make generate` instead."
+private = true
 script = [
 '''
 docker run --rm -v "$PWD:/local" \
