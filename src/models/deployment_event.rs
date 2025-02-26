@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DeploymentEvent {
@@ -17,7 +18,7 @@ pub struct DeploymentEvent {
     #[serde(rename = "event_type")]
     pub event_type: models::DeploymentEventType,
     #[serde(rename = "id")]
-    pub id: i64,
+    pub id: u64,
     #[serde(rename = "updated_at")]
     pub updated_at: String,
 }
@@ -26,7 +27,7 @@ impl DeploymentEvent {
     pub fn new(
         created_at: String,
         event_type: models::DeploymentEventType,
-        id: i64,
+        id: u64,
         updated_at: String,
     ) -> DeploymentEvent {
         DeploymentEvent {

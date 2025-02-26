@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 ///
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -31,17 +32,17 @@ pub enum DeploymentEventType {
     Superseded,
 }
 
-impl ToString for DeploymentEventType {
-    fn to_string(&self) -> String {
+impl std::fmt::Display for DeploymentEventType {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::DeploymentQueued => String::from("deployment_queued"),
-            Self::DeploymentReady => String::from("deployment_ready"),
-            Self::CanaryDeployed => String::from("canary_deployed"),
-            Self::TrafficIncreased => String::from("traffic_increased"),
-            Self::TrafficDecreased => String::from("traffic_decreased"),
-            Self::Promoted => String::from("promoted"),
-            Self::RolledBack => String::from("rolled_back"),
-            Self::Superseded => String::from("superseded"),
+            Self::DeploymentQueued => write!(f, "deployment_queued"),
+            Self::DeploymentReady => write!(f, "deployment_ready"),
+            Self::CanaryDeployed => write!(f, "canary_deployed"),
+            Self::TrafficIncreased => write!(f, "traffic_increased"),
+            Self::TrafficDecreased => write!(f, "traffic_decreased"),
+            Self::Promoted => write!(f, "promoted"),
+            Self::RolledBack => write!(f, "rolled_back"),
+            Self::Superseded => write!(f, "superseded"),
         }
     }
 }

@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 ///
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -25,14 +26,14 @@ pub enum DeploymentStatus {
     Superseded,
 }
 
-impl ToString for DeploymentStatus {
-    fn to_string(&self) -> String {
+impl std::fmt::Display for DeploymentStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::Queued => String::from("queued"),
-            Self::InProgress => String::from("in_progress"),
-            Self::Promoted => String::from("promoted"),
-            Self::RolledBack => String::from("rolled_back"),
-            Self::Superseded => String::from("superseded"),
+            Self::Queued => write!(f, "queued"),
+            Self::InProgress => write!(f, "in_progress"),
+            Self::Promoted => write!(f, "promoted"),
+            Self::RolledBack => write!(f, "rolled_back"),
+            Self::Superseded => write!(f, "superseded"),
         }
     }
 }

@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 ///
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -19,11 +20,11 @@ pub enum ApplicationGroup {
     Baseline,
 }
 
-impl ToString for ApplicationGroup {
-    fn to_string(&self) -> String {
+impl std::fmt::Display for ApplicationGroup {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::Canary => String::from("canary"),
-            Self::Baseline => String::from("baseline"),
+            Self::Canary => write!(f, "canary"),
+            Self::Baseline => write!(f, "baseline"),
         }
     }
 }

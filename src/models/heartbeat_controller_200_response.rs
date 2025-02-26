@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 /// HeartbeatController200Response : A Heartbeat response indicates the status of the server. In almost every conceivable circumstance, the response should be a success.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]

@@ -74,15 +74,22 @@ dependencies = [
 ]
 
 
+# TODO: Consider piping in the package version from Cargo.toml
+# if the generator is producing the wrong library version.
 [tasks.generate-sdk]
 description = "Generate the SDK. Does not fmt or sort the output. Use `cargo make generate` instead."
 private = true
 script = [
 '''
 docker run --rm -v "$PWD:/local" \
-  openapitools/openapi-generator-cli:v7.4.0 generate \
+  openapitools/openapi-generator-cli:v7.11.0 generate \
   -i /local/openapi.json \
   -g rust \
+  --additional-properties library=reqwest-trait \
+  --additional-properties mockall=true \
+  --additional-properties packageName=multitool-sdk \
+  --additional-properties preferUnsignedInt=true \
   -o /local/
+
 '''
 ]

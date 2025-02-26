@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **app_id** | [**uuid::Uuid**](uuid::Uuid.md) |  | 
 **created_at** | **String** |  | 
 **events** | [**Vec<models::DeploymentEvent>**](DeploymentEvent.md) |  | 
-**id** | **i64** |  | 
+**id** | **u64** |  | 
 **status** | [**models::DeploymentStatus**](DeploymentStatus.md) |  | 
 **updated_at** | **String** |  | 
 

@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 /// UserSummary : Successful login response payload
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
