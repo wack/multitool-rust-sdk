@@ -1,0 +1,1384 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MultiTool",
+    "description": "MultiTool backend API",
+    "license": {
+      "name": "All Rights Reserved",
+      "identifier": "LicenseRef-AllRightsReserved"
+    },
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local server for testing"
+    }
+  ],
+  "paths": {
+    "/api/v1/heartbeat": {
+      "get": {
+        "tags": [
+          "Heartbeat"
+        ],
+        "operationId": "heartbeat_controller",
+        "responses": {
+          "200": {
+            "description": "Application is online and available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "A Heartbeat response indicates the status of the server.\nIn almost every conceivable circumstance, the response should\nbe a success.",
+                  "required": [
+                    "ok"
+                  ],
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Create User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUserSuccess"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Create user failed due to invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Create user failed due to internal error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginSuccess"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Failed login"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "List Workspaces",
+        "responses": {
+          "200": {
+            "description": "List of workspaces",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListWorkspaceSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Create Workspace",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkspaceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Workspace details by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateWorkspaceSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{id}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Read Workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceReadSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Update Workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkspaceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Details of the updated Workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateWorkspaceSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "List Applications",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Applications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApplicationsSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Create Application",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApplicationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Workspace details by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateApplicationSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Get Application",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadApplicationSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Delete Application",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Application details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteApplicationResponseBody"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "List Deployments",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDeploymentsSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Create Deployment",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deployment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDeploymentSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Read Deployment",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The deployment's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadDeploymentSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes": {
+      "post": {
+        "tags": [
+          "Response Code Metrics"
+        ],
+        "operationId": "Create Response Code Metrics",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The deployment's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResponseCodeMetricsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Response code metrics details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateResponseCodeMetricsSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AppId": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "ApplicationConfig": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "web_service"
+            ],
+            "properties": {
+              "web_service": {
+                "$ref": "#/components/schemas/WebServiceConfig"
+              }
+            }
+          }
+        ]
+      },
+      "ApplicationDetails": {
+        "type": "object",
+        "required": [
+          "id",
+          "app_type",
+          "display_name",
+          "deployments",
+          "ingress",
+          "monitor",
+          "platform",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "app_type": {
+            "$ref": "#/components/schemas/ApplicationType"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "deployments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/AppId"
+          },
+          "ingress": {
+            "$ref": "#/components/schemas/IngressConfig"
+          },
+          "monitor": {
+            "$ref": "#/components/schemas/MonitorConfig"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/PlatformConfig"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "ApplicationGroup": {
+        "type": "string",
+        "enum": [
+          "canary",
+          "baseline"
+        ]
+      },
+      "ApplicationSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "app_type",
+          "display_name",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "app_type": {
+            "$ref": "#/components/schemas/ApplicationType"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/AppId"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "ApplicationType": {
+        "type": "string",
+        "description": "An identifier of what kind of application we're tracking.",
+        "enum": [
+          "web_service"
+        ]
+      },
+      "CleartextPassword": {
+        "type": "string"
+      },
+      "CreateApplicationRequest": {
+        "type": "object",
+        "required": [
+          "display_name",
+          "config"
+        ],
+        "properties": {
+          "config": {
+            "$ref": "#/components/schemas/ApplicationConfig"
+          },
+          "display_name": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateApplicationSuccess": {
+        "type": "object",
+        "required": [
+          "application"
+        ],
+        "properties": {
+          "application": {
+            "$ref": "#/components/schemas/ApplicationSummary"
+          }
+        }
+      },
+      "CreateDeploymentSuccess": {
+        "type": "object",
+        "required": [
+          "deployment"
+        ],
+        "properties": {
+          "deployment": {
+            "$ref": "#/components/schemas/Deployment"
+          }
+        }
+      },
+      "CreateResponseCodeMetricsRequest": {
+        "type": "object",
+        "required": [
+          "app_class",
+          "status_2xx_count",
+          "status_4xx_count",
+          "status_5xx_count"
+        ],
+        "properties": {
+          "app_class": {
+            "$ref": "#/components/schemas/ApplicationGroup"
+          },
+          "status_2xx_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status_4xx_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status_5xx_count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateResponseCodeMetricsSuccess": {
+        "type": "object",
+        "required": [
+          "response_code_metrics"
+        ],
+        "properties": {
+          "response_code_metrics": {
+            "$ref": "#/components/schemas/ResponseCodeMetrics"
+          }
+        }
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "description": "Expected body of user endpoint requests",
+        "required": [
+          "email",
+          "password",
+          "tos_accepted"
+        ],
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email",
+            "description": "String that may be invalid email address"
+          },
+          "password": {
+            "$ref": "#/components/schemas/CleartextPassword",
+            "description": "Password in cleartext, deserializes into more secure struct"
+          },
+          "tos_accepted": {
+            "type": "boolean",
+            "description": "Whether the user has accepted the terms of service"
+          }
+        }
+      },
+      "CreateUserSuccess": {
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserDetails"
+          }
+        }
+      },
+      "CreateWorkspaceRequest": {
+        "type": "object",
+        "required": [
+          "display_name"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateWorkspaceSuccess": {
+        "type": "object",
+        "required": [
+          "workspace"
+        ],
+        "properties": {
+          "workspace": {
+            "$ref": "#/components/schemas/WorkspaceSummary"
+          }
+        }
+      },
+      "DeleteApplicationResponseBody": {
+        "type": "object"
+      },
+      "Deployment": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "active",
+          "app_id",
+          "events",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "app_id": {
+            "$ref": "#/components/schemas/AppId"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeploymentEvent"
+            }
+          },
+          "id": {
+            "$ref": "#/components/schemas/DeploymentId"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DeploymentStatus"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "DeploymentEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "event_type",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "event_type": {
+            "$ref": "#/components/schemas/DeploymentEventType"
+          },
+          "id": {
+            "$ref": "#/components/schemas/DeploymentEventId"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "DeploymentEventId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "DeploymentEventType": {
+        "type": "string",
+        "enum": [
+          "deployment_queued",
+          "deployment_ready",
+          "canary_deployed",
+          "traffic_increased",
+          "traffic_decreased",
+          "promoted",
+          "rolled_back",
+          "superseded"
+        ]
+      },
+      "DeploymentId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "DeploymentStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "in_progress",
+          "promoted",
+          "rolled_back",
+          "superseded"
+        ]
+      },
+      "Email": {
+        "type": "string"
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "errors"
+        ],
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "IngressConfig": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "aws_rest_api_gateway"
+            ],
+            "properties": {
+              "aws_rest_api_gateway": {
+                "type": "object",
+                "required": [
+                  "region",
+                  "gateway_name",
+                  "stage_name",
+                  "resource_path",
+                  "resource_method"
+                ],
+                "properties": {
+                  "gateway_name": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "string"
+                  },
+                  "resource_method": {
+                    "type": "string"
+                  },
+                  "resource_path": {
+                    "type": "string"
+                  },
+                  "stage_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ListApplicationsSuccess": {
+        "type": "object",
+        "required": [
+          "applications"
+        ],
+        "properties": {
+          "applications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSummary"
+            }
+          }
+        }
+      },
+      "ListDeploymentsSuccess": {
+        "type": "object",
+        "required": [
+          "deployments"
+        ],
+        "properties": {
+          "deployments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Deployment"
+            }
+          }
+        }
+      },
+      "ListWorkspaceSuccess": {
+        "type": "object",
+        "required": [
+          "workspaces"
+        ],
+        "properties": {
+          "workspaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceSummary"
+            }
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email",
+            "description": "String that may be invalid email address"
+          },
+          "password": {
+            "$ref": "#/components/schemas/CleartextPassword",
+            "description": "Password in cleartext, deserializes into more secure struct"
+          }
+        }
+      },
+      "LoginSuccess": {
+        "type": "object",
+        "required": [
+          "user"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserSummary"
+          }
+        }
+      },
+      "MonitorConfig": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "aws_cloudwatch_metrics"
+            ],
+            "properties": {
+              "aws_cloudwatch_metrics": {
+                "type": "object",
+                "required": [
+                  "region"
+                ],
+                "properties": {
+                  "region": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PlatformConfig": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "aws_lambda"
+            ],
+            "properties": {
+              "aws_lambda": {
+                "type": "object",
+                "required": [
+                  "region",
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ReadApplicationSuccess": {
+        "type": "object",
+        "required": [
+          "application"
+        ],
+        "properties": {
+          "application": {
+            "$ref": "#/components/schemas/ApplicationDetails"
+          }
+        }
+      },
+      "ReadDeploymentSuccess": {
+        "type": "object",
+        "required": [
+          "deployment"
+        ],
+        "properties": {
+          "deployment": {
+            "$ref": "#/components/schemas/Deployment"
+          }
+        }
+      },
+      "ResponseCodeMetrics": {
+        "type": "object",
+        "required": [
+          "deployment_id",
+          "app_class",
+          "status_2xx_count",
+          "status_4xx_count",
+          "status_5xx_count",
+          "created_at"
+        ],
+        "properties": {
+          "app_class": {
+            "$ref": "#/components/schemas/ApplicationGroup"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "deployment_id": {
+            "$ref": "#/components/schemas/DeploymentId"
+          },
+          "status_2xx_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status_4xx_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status_5xx_count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateWorkspaceRequest": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "UpdateWorkspaceSuccess": {
+        "type": "object",
+        "required": [
+          "workspace"
+        ],
+        "properties": {
+          "workspace": {
+            "$ref": "#/components/schemas/WorkspaceSummary"
+          }
+        }
+      },
+      "UserDetails": {
+        "type": "object",
+        "required": [
+          "email",
+          "created_at",
+          "jwt",
+          "expires_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "jwt": {
+            "type": "string"
+          }
+        }
+      },
+      "UserSummary": {
+        "type": "object",
+        "description": "Successful login response payload",
+        "required": [
+          "email",
+          "jwt",
+          "expires_at"
+        ],
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "expires_at": {
+            "type": "string"
+          },
+          "jwt": {
+            "type": "string"
+          }
+        }
+      },
+      "WebServiceConfig": {
+        "type": "object",
+        "required": [
+          "ingress",
+          "monitor",
+          "platform"
+        ],
+        "properties": {
+          "ingress": {
+            "$ref": "#/components/schemas/IngressConfig"
+          },
+          "monitor": {
+            "$ref": "#/components/schemas/MonitorConfig"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/PlatformConfig"
+          }
+        }
+      },
+      "WorkspaceDetails": {
+        "type": "object",
+        "description": "Details about a particular workspace.",
+        "required": [
+          "id",
+          "display_name",
+          "applications",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "applications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSummary"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/WorkspaceId"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "WorkspaceId": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "WorkspaceReadSuccess": {
+        "type": "object",
+        "required": [
+          "workspace"
+        ],
+        "properties": {
+          "workspace": {
+            "$ref": "#/components/schemas/WorkspaceDetails"
+          }
+        }
+      },
+      "WorkspaceSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "display_name",
+          "created_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/WorkspaceId"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer_auth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearer_auth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Users"
+    },
+    {
+      "name": "Workspaces",
+      "description": "Workspaces"
+    },
+    {
+      "name": "Applications",
+      "description": "Applications"
+    },
+    {
+      "name": "Deployments",
+      "description": "Deployments"
+    },
+    {
+      "name": "Response Code Metrics",
+      "description": "Response Code Metrics"
+    }
+  ]
+}
