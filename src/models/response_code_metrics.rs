@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResponseCodeMetrics {
@@ -17,7 +18,7 @@ pub struct ResponseCodeMetrics {
     #[serde(rename = "created_at")]
     pub created_at: String,
     #[serde(rename = "deployment_id")]
-    pub deployment_id: i64,
+    pub deployment_id: u64,
     #[serde(rename = "status_2xx_count")]
     pub status_2xx_count: i32,
     #[serde(rename = "status_4xx_count")]
@@ -30,7 +31,7 @@ impl ResponseCodeMetrics {
     pub fn new(
         app_class: models::ApplicationGroup,
         created_at: String,
-        deployment_id: i64,
+        deployment_id: u64,
         status_2xx_count: i32,
         status_4xx_count: i32,
         status_5xx_count: i32,

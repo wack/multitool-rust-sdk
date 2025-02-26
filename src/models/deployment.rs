@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Deployment {
@@ -21,7 +22,7 @@ pub struct Deployment {
     #[serde(rename = "events")]
     pub events: Vec<models::DeploymentEvent>,
     #[serde(rename = "id")]
-    pub id: i64,
+    pub id: u64,
     #[serde(rename = "status")]
     pub status: models::DeploymentStatus,
     #[serde(rename = "updated_at")]
@@ -34,7 +35,7 @@ impl Deployment {
         app_id: uuid::Uuid,
         created_at: String,
         events: Vec<models::DeploymentEvent>,
-        id: i64,
+        id: u64,
         status: models::DeploymentStatus,
         updated_at: String,
     ) -> Deployment {

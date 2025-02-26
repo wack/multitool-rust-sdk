@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 /// ApplicationType : An identifier of what kind of application we're tracking.
 /// An identifier of what kind of application we're tracking.
@@ -18,10 +19,10 @@ pub enum ApplicationType {
     WebService,
 }
 
-impl ToString for ApplicationType {
-    fn to_string(&self) -> String {
+impl std::fmt::Display for ApplicationType {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::WebService => String::from("web_service"),
+            Self::WebService => write!(f, "web_service"),
         }
     }
 }

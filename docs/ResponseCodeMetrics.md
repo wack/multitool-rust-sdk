@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app_class** | [**models::ApplicationGroup**](ApplicationGroup.md) |  | 
 **created_at** | **String** |  | 
-**deployment_id** | **i64** |  | 
+**deployment_id** | **u64** |  | 
 **status_2xx_count** | **i32** |  | 
 **status_4xx_count** | **i32** |  | 
 **status_5xx_count** | **i32** |  | 

@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 /// WorkspaceDetails : Details about a particular workspace.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]

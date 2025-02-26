@@ -9,6 +9,7 @@
  */
 
 use crate::models;
+use serde::{Deserialize, Serialize};
 
 /// CreateUserRequest : Expected body of user endpoint requests
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
