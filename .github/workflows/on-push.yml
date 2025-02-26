@@ -1,0 +1,15 @@
+name: "On Push"
+
+on:
+  push:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # This job installs Cargo Make and Cargo Nextest before running
+  # the CI workflow using Cargo Make. Most of the time, it should
+  # restore Cargo Make and other dependencies from cache.
+  build:
+    name: Validate Rust Build
+    uses: "wack/gh-actions/.github/workflows/validate.yml@trunk"
