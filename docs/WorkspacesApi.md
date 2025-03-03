@@ -41,12 +41,15 @@ Name | Type | Description  | Required | Notes
 
 ## list_workspaces
 
-> models::ListWorkspaceSuccess list_workspaces()
+> models::ListWorkspaceSuccess list_workspaces(display_name)
 
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**display_name** | Option<**String**> | An optional workspace name to filter by |  |
 
 ### Return type
 

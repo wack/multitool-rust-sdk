@@ -133,6 +133,17 @@
           "Workspaces"
         ],
         "operationId": "List Workspaces",
+        "parameters": [
+          {
+            "name": "display_name",
+            "in": "query",
+            "description": "An optional workspace name to filter by",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of workspaces",
@@ -318,7 +329,7 @@
         },
         "responses": {
           "200": {
-            "description": "Workspace details by id",
+            "description": "Application details by id",
             "content": {
               "application/json": {
                 "schema": {

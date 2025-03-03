@@ -24,8 +24,9 @@ pub trait WorkspacesApi: Send + Sync {
         &self,
         create_workspace_request: models::CreateWorkspaceRequest,
     ) -> Result<models::CreateWorkspaceSuccess, Error<CreateWorkspaceError>>;
-    async fn list_workspaces(
+    async fn list_workspaces<'display_name>(
         &self,
+        display_name: Option<&'display_name str>,
     ) -> Result<models::ListWorkspaceSuccess, Error<ListWorkspacesError>>;
     async fn read_workspace<'id>(
         &self,
@@ -91,8 +92,9 @@ impl WorkspacesApi for WorkspacesApiClient {
         }
     }
 
-    async fn list_workspaces(
+    async fn list_workspaces<'display_name>(
         &self,
+        display_name: Option<&'display_name str>,
     ) -> Result<models::ListWorkspaceSuccess, Error<ListWorkspacesError>> {
         let local_var_configuration = &self.configuration;
 
@@ -102,6 +104,10 @@ impl WorkspacesApi for WorkspacesApiClient {
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref local_var_str) = display_name {
+            local_var_req_builder =
+                local_var_req_builder.query(&[("display_name", &local_var_str.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder
                 .header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
