@@ -93,6 +93,7 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
 }
 
 pub mod applications_api;
+pub mod deployment_states_api;
 pub mod deployments_api;
 pub mod heartbeat_api;
 pub mod response_code_metrics_api;
@@ -105,6 +106,7 @@ use std::sync::Arc;
 
 pub trait Api {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi;
+    fn deployment_states_api(&self) -> &dyn deployment_states_api::DeploymentStatesApi;
     fn deployments_api(&self) -> &dyn deployments_api::DeploymentsApi;
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi;
     fn response_code_metrics_api(&self) -> &dyn response_code_metrics_api::ResponseCodeMetricsApi;
@@ -114,6 +116,7 @@ pub trait Api {
 
 pub struct ApiClient {
     applications_api: Box<dyn applications_api::ApplicationsApi>,
+    deployment_states_api: Box<dyn deployment_states_api::DeploymentStatesApi>,
     deployments_api: Box<dyn deployments_api::DeploymentsApi>,
     heartbeat_api: Box<dyn heartbeat_api::HeartbeatApi>,
     response_code_metrics_api: Box<dyn response_code_metrics_api::ResponseCodeMetricsApi>,
@@ -125,6 +128,9 @@ impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
             applications_api: Box::new(applications_api::ApplicationsApiClient::new(
+                configuration.clone(),
+            )),
+            deployment_states_api: Box::new(deployment_states_api::DeploymentStatesApiClient::new(
                 configuration.clone(),
             )),
             deployments_api: Box::new(deployments_api::DeploymentsApiClient::new(
@@ -148,6 +154,9 @@ impl Api for ApiClient {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
         self.applications_api.as_ref()
     }
+    fn deployment_states_api(&self) -> &dyn deployment_states_api::DeploymentStatesApi {
+        self.deployment_states_api.as_ref()
+    }
     fn deployments_api(&self) -> &dyn deployments_api::DeploymentsApi {
         self.deployments_api.as_ref()
     }
@@ -168,6 +177,7 @@ impl Api for ApiClient {
 #[cfg(feature = "mockall")]
 pub struct MockApiClient {
     pub applications_api_mock: applications_api::MockApplicationsApi,
+    pub deployment_states_api_mock: deployment_states_api::MockDeploymentStatesApi,
     pub deployments_api_mock: deployments_api::MockDeploymentsApi,
     pub heartbeat_api_mock: heartbeat_api::MockHeartbeatApi,
     pub response_code_metrics_api_mock: response_code_metrics_api::MockResponseCodeMetricsApi,
@@ -180,6 +190,7 @@ impl MockApiClient {
     pub fn new() -> Self {
         Self {
             applications_api_mock: applications_api::MockApplicationsApi::new(),
+            deployment_states_api_mock: deployment_states_api::MockDeploymentStatesApi::new(),
             deployments_api_mock: deployments_api::MockDeploymentsApi::new(),
             heartbeat_api_mock: heartbeat_api::MockHeartbeatApi::new(),
             response_code_metrics_api_mock:
@@ -194,6 +205,9 @@ impl MockApiClient {
 impl Api for MockApiClient {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
         &self.applications_api_mock
+    }
+    fn deployment_states_api(&self) -> &dyn deployment_states_api::DeploymentStatesApi {
+        &self.deployment_states_api_mock
     }
     fn deployments_api(&self) -> &dyn deployments_api::DeploymentsApi {
         &self.deployments_api_mock

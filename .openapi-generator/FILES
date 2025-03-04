@@ -20,6 +20,10 @@ docs/CreateWorkspaceSuccess.md
 docs/Deployment.md
 docs/DeploymentEvent.md
 docs/DeploymentEventType.md
+docs/DeploymentState.md
+docs/DeploymentStateStatus.md
+docs/DeploymentStateType.md
+docs/DeploymentStatesApi.md
 docs/DeploymentStatus.md
 docs/DeploymentsApi.md
 docs/ErrorResponse.md
@@ -29,6 +33,7 @@ docs/IngressConfig.md
 docs/IngressConfigOneOf.md
 docs/IngressConfigOneOfAwsRestApiGateway.md
 docs/ListApplicationsSuccess.md
+docs/ListDeploymentStatesSuccess.md
 docs/ListDeploymentsSuccess.md
 docs/ListWorkspaceSuccess.md
 docs/LoginRequest.md
@@ -43,6 +48,8 @@ docs/ReadApplicationSuccess.md
 docs/ReadDeploymentSuccess.md
 docs/ResponseCodeMetrics.md
 docs/ResponseCodeMetricsApi.md
+docs/UpdateDeploymentStateRequest.md
+docs/UpdateDeploymentStateSuccess.md
 docs/UpdateWorkspaceRequest.md
 docs/UpdateWorkspaceSuccess.md
 docs/UserDetails.md
@@ -55,6 +62,7 @@ docs/WorkspaceSummary.md
 docs/WorkspacesApi.md
 src/apis/applications_api.rs
 src/apis/configuration.rs
+src/apis/deployment_states_api.rs
 src/apis/deployments_api.rs
 src/apis/heartbeat_api.rs
 src/apis/mod.rs
@@ -80,6 +88,9 @@ src/models/create_workspace_success.rs
 src/models/deployment.rs
 src/models/deployment_event.rs
 src/models/deployment_event_type.rs
+src/models/deployment_state.rs
+src/models/deployment_state_status.rs
+src/models/deployment_state_type.rs
 src/models/deployment_status.rs
 src/models/error_response.rs
 src/models/heartbeat_controller_200_response.rs
@@ -87,6 +98,7 @@ src/models/ingress_config.rs
 src/models/ingress_config_one_of.rs
 src/models/ingress_config_one_of_aws_rest_api_gateway.rs
 src/models/list_applications_success.rs
+src/models/list_deployment_states_success.rs
 src/models/list_deployments_success.rs
 src/models/list_workspace_success.rs
 src/models/login_request.rs
@@ -101,6 +113,8 @@ src/models/platform_config_one_of_aws_lambda.rs
 src/models/read_application_success.rs
 src/models/read_deployment_success.rs
 src/models/response_code_metrics.rs
+src/models/update_deployment_state_request.rs
+src/models/update_deployment_state_success.rs
 src/models/update_workspace_request.rs
 src/models/update_workspace_success.rs
 src/models/user_details.rs

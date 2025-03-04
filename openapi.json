@@ -632,6 +632,199 @@
           }
         }
       }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states": {
+      "get": {
+        "tags": [
+          "Deployment States"
+        ],
+        "operationId": "List Deployment States",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The deployment's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentId"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "An optional status to filter by",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentStateStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment state details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDeploymentStatesSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}": {
+      "patch": {
+        "tags": [
+          "Deployment States"
+        ],
+        "operationId": "Update Deployment State",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The deployment's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentId"
+            }
+          },
+          {
+            "name": "state_id",
+            "in": "path",
+            "description": "The deployment state's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentStateId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDeploymentStateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Deployment state details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDeploymentStateSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh": {
+      "patch": {
+        "tags": [
+          "Deployment States"
+        ],
+        "operationId": "Refresh Deployment State",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AppId"
+            }
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The deployment's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentId"
+            }
+          },
+          {
+            "name": "state_id",
+            "in": "path",
+            "description": "The deployment state's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/DeploymentStateId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment state details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDeploymentStateSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -962,6 +1155,61 @@
         "format": "int64",
         "minimum": 0
       },
+      "DeploymentState": {
+        "type": "object",
+        "required": [
+          "id",
+          "deployment_id",
+          "state_type",
+          "status",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "deployment_id": {
+            "$ref": "#/components/schemas/DeploymentId"
+          },
+          "id": {
+            "$ref": "#/components/schemas/DeploymentStateId"
+          },
+          "state_type": {
+            "$ref": "#/components/schemas/DeploymentStateType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DeploymentStateStatus"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "DeploymentStateId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "DeploymentStateStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "in_progress",
+          "superseded",
+          "done",
+          "cancelled"
+        ]
+      },
+      "DeploymentStateType": {
+        "type": "string",
+        "enum": [
+          "promote_canary",
+          "deploy_canary",
+          "set_canary_traffic",
+          "rollback_canary"
+        ]
+      },
       "DeploymentStatus": {
         "type": "string",
         "enum": [
@@ -1038,6 +1286,20 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApplicationSummary"
+            }
+          }
+        }
+      },
+      "ListDeploymentStatesSuccess": {
+        "type": "object",
+        "required": [
+          "states"
+        ],
+        "properties": {
+          "states": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeploymentState"
             }
           }
         }
@@ -1201,6 +1463,32 @@
           "status_5xx_count": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "UpdateDeploymentStateRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DeploymentStateStatus"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateDeploymentStateSuccess": {
+        "type": "object",
+        "required": [
+          "state"
+        ],
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/DeploymentState"
           }
         }
       },
@@ -1390,6 +1678,10 @@
     {
       "name": "Response Code Metrics",
       "description": "Response Code Metrics"
+    },
+    {
+      "name": "Deployment States",
+      "description": "Deployment States"
     }
   ]
 }

@@ -30,6 +30,9 @@ Class | Method | HTTP request | Description
 *ApplicationsApi* | [**delete_application**](docs/ApplicationsApi.md#delete_application) | **DELETE** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**get_application**](docs/ApplicationsApi.md#get_application) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**list_applications**](docs/ApplicationsApi.md#list_applications) | **GET** /api/v1/workspaces/{workspace_id}/applications | 
+*DeploymentStatesApi* | [**list_deployment_states**](docs/DeploymentStatesApi.md#list_deployment_states) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states | 
+*DeploymentStatesApi* | [**refresh_deployment_state**](docs/DeploymentStatesApi.md#refresh_deployment_state) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh | 
+*DeploymentStatesApi* | [**update_deployment_state**](docs/DeploymentStatesApi.md#update_deployment_state) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id} | 
 *DeploymentsApi* | [**create_deployment**](docs/DeploymentsApi.md#create_deployment) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments | 
 *DeploymentsApi* | [**list_deployments**](docs/DeploymentsApi.md#list_deployments) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments | 
 *DeploymentsApi* | [**read_deployment**](docs/DeploymentsApi.md#read_deployment) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id} | 
@@ -63,6 +66,9 @@ Class | Method | HTTP request | Description
  - [Deployment](docs/Deployment.md)
  - [DeploymentEvent](docs/DeploymentEvent.md)
  - [DeploymentEventType](docs/DeploymentEventType.md)
+ - [DeploymentState](docs/DeploymentState.md)
+ - [DeploymentStateStatus](docs/DeploymentStateStatus.md)
+ - [DeploymentStateType](docs/DeploymentStateType.md)
  - [DeploymentStatus](docs/DeploymentStatus.md)
  - [ErrorResponse](docs/ErrorResponse.md)
  - [HeartbeatController200Response](docs/HeartbeatController200Response.md)
@@ -70,6 +76,7 @@ Class | Method | HTTP request | Description
  - [IngressConfigOneOf](docs/IngressConfigOneOf.md)
  - [IngressConfigOneOfAwsRestApiGateway](docs/IngressConfigOneOfAwsRestApiGateway.md)
  - [ListApplicationsSuccess](docs/ListApplicationsSuccess.md)
+ - [ListDeploymentStatesSuccess](docs/ListDeploymentStatesSuccess.md)
  - [ListDeploymentsSuccess](docs/ListDeploymentsSuccess.md)
  - [ListWorkspaceSuccess](docs/ListWorkspaceSuccess.md)
  - [LoginRequest](docs/LoginRequest.md)
@@ -83,6 +90,8 @@ Class | Method | HTTP request | Description
  - [ReadApplicationSuccess](docs/ReadApplicationSuccess.md)
  - [ReadDeploymentSuccess](docs/ReadDeploymentSuccess.md)
  - [ResponseCodeMetrics](docs/ResponseCodeMetrics.md)
+ - [UpdateDeploymentStateRequest](docs/UpdateDeploymentStateRequest.md)
+ - [UpdateDeploymentStateSuccess](docs/UpdateDeploymentStateSuccess.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceSuccess](docs/UpdateWorkspaceSuccess.md)
  - [UserDetails](docs/UserDetails.md)
