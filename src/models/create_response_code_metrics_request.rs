@@ -16,19 +16,19 @@ pub struct CreateResponseCodeMetricsRequest {
     #[serde(rename = "app_class")]
     pub app_class: models::ApplicationGroup,
     #[serde(rename = "status_2xx_count")]
-    pub status_2xx_count: i32,
+    pub status_2xx_count: u32,
     #[serde(rename = "status_4xx_count")]
-    pub status_4xx_count: i32,
+    pub status_4xx_count: u32,
     #[serde(rename = "status_5xx_count")]
-    pub status_5xx_count: i32,
+    pub status_5xx_count: u32,
 }
 
 impl CreateResponseCodeMetricsRequest {
     pub fn new(
         app_class: models::ApplicationGroup,
-        status_2xx_count: i32,
-        status_4xx_count: i32,
-        status_5xx_count: i32,
+        status_2xx_count: u32,
+        status_4xx_count: u32,
+        status_5xx_count: u32,
     ) -> CreateResponseCodeMetricsRequest {
         CreateResponseCodeMetricsRequest {
             app_class,
