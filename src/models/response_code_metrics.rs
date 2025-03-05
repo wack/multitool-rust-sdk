@@ -20,11 +20,11 @@ pub struct ResponseCodeMetrics {
     #[serde(rename = "deployment_id")]
     pub deployment_id: u64,
     #[serde(rename = "status_2xx_count")]
-    pub status_2xx_count: i32,
+    pub status_2xx_count: u32,
     #[serde(rename = "status_4xx_count")]
-    pub status_4xx_count: i32,
+    pub status_4xx_count: u32,
     #[serde(rename = "status_5xx_count")]
-    pub status_5xx_count: i32,
+    pub status_5xx_count: u32,
 }
 
 impl ResponseCodeMetrics {
@@ -32,9 +32,9 @@ impl ResponseCodeMetrics {
         app_class: models::ApplicationGroup,
         created_at: String,
         deployment_id: u64,
-        status_2xx_count: i32,
-        status_4xx_count: i32,
-        status_5xx_count: i32,
+        status_2xx_count: u32,
+        status_4xx_count: u32,
+        status_5xx_count: u32,
     ) -> ResponseCodeMetrics {
         ResponseCodeMetrics {
             app_class,
