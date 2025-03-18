@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created_at** | **String** |  | 
-**deployment_id** | **u64** |  | 
+**data** | Option<[**models::DeploymentStateData**](DeploymentStateData.md)> |  | [optional]
 **id** | **u64** |  | 
 **state_type** | [**models::DeploymentStateType**](DeploymentStateType.md) |  | 
 **status** | [**models::DeploymentStateStatus**](DeploymentStateStatus.md) |  | 

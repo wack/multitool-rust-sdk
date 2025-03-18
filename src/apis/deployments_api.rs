@@ -22,18 +22,18 @@ use std::sync::Arc;
 pub trait DeploymentsApi: Send + Sync {
     async fn create_deployment<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<models::CreateDeploymentSuccess, Error<CreateDeploymentError>>;
     async fn list_deployments<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<models::ListDeploymentsSuccess, Error<ListDeploymentsError>>;
     async fn read_deployment<'workspace_id, 'application_id, 'deployment_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
     ) -> Result<models::ReadDeploymentSuccess, Error<ReadDeploymentError>>;
 }
@@ -52,8 +52,8 @@ impl DeploymentsApiClient {
 impl DeploymentsApi for DeploymentsApiClient {
     async fn create_deployment<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<models::CreateDeploymentSuccess, Error<CreateDeploymentError>> {
         let local_var_configuration = &self.configuration;
 
@@ -62,8 +62,8 @@ impl DeploymentsApi for DeploymentsApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments",
             local_var_configuration.base_path,
-            workspace_id = crate::apis::urlencode(workspace_id),
-            application_id = crate::apis::urlencode(application_id)
+            workspace_id = workspace_id,
+            application_id = application_id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
@@ -98,8 +98,8 @@ impl DeploymentsApi for DeploymentsApiClient {
 
     async fn list_deployments<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<models::ListDeploymentsSuccess, Error<ListDeploymentsError>> {
         let local_var_configuration = &self.configuration;
 
@@ -108,8 +108,8 @@ impl DeploymentsApi for DeploymentsApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments",
             local_var_configuration.base_path,
-            workspace_id = crate::apis::urlencode(workspace_id),
-            application_id = crate::apis::urlencode(application_id)
+            workspace_id = workspace_id,
+            application_id = application_id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
@@ -144,15 +144,15 @@ impl DeploymentsApi for DeploymentsApiClient {
 
     async fn read_deployment<'workspace_id, 'application_id, 'deployment_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
     ) -> Result<models::ReadDeploymentSuccess, Error<ReadDeploymentError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}", local_var_configuration.base_path, workspace_id=crate::apis::urlencode(workspace_id), application_id=crate::apis::urlencode(application_id), deployment_id=deployment_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_class** | [**models::ApplicationGroup**](ApplicationGroup.md) |  | 
+**app_group** | [**models::ApplicationGroup**](ApplicationGroup.md) |  | 
 **created_at** | **String** |  | 
 **deployment_id** | **u64** |  | 
 **status_2xx_count** | **u32** |  | 

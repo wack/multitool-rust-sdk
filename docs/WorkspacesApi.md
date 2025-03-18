@@ -77,7 +77,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **uuid::Uuid** | The workspace's id | [required] |
+**id** | **u32** | The workspace's id | [required] |
 
 ### Return type
 
@@ -105,7 +105,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **uuid::Uuid** | The workspace's id | [required] |
+**id** | **u32** | The workspace's id | [required] |
 **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md) |  | [required] |
 
 ### Return type

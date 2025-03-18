@@ -30,11 +30,11 @@ pub trait WorkspacesApi: Send + Sync {
     ) -> Result<models::ListWorkspaceSuccess, Error<ListWorkspacesError>>;
     async fn read_workspace<'id>(
         &self,
-        id: &str,
+        id: u32,
     ) -> Result<models::WorkspaceReadSuccess, Error<ReadWorkspaceError>>;
     async fn update_workspace<'id, 'update_workspace_request>(
         &self,
-        id: &str,
+        id: u32,
         update_workspace_request: models::UpdateWorkspaceRequest,
     ) -> Result<models::UpdateWorkspaceSuccess, Error<UpdateWorkspaceError>>;
 }
@@ -138,7 +138,7 @@ impl WorkspacesApi for WorkspacesApiClient {
 
     async fn read_workspace<'id>(
         &self,
-        id: &str,
+        id: u32,
     ) -> Result<models::WorkspaceReadSuccess, Error<ReadWorkspaceError>> {
         let local_var_configuration = &self.configuration;
 
@@ -147,7 +147,7 @@ impl WorkspacesApi for WorkspacesApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{id}",
             local_var_configuration.base_path,
-            id = crate::apis::urlencode(id)
+            id = id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
@@ -182,7 +182,7 @@ impl WorkspacesApi for WorkspacesApiClient {
 
     async fn update_workspace<'id, 'update_workspace_request>(
         &self,
-        id: &str,
+        id: u32,
         update_workspace_request: models::UpdateWorkspaceRequest,
     ) -> Result<models::UpdateWorkspaceSuccess, Error<UpdateWorkspaceError>> {
         let local_var_configuration = &self.configuration;
@@ -192,7 +192,7 @@ impl WorkspacesApi for WorkspacesApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{id}",
             local_var_configuration.base_path,
-            id = crate::apis::urlencode(id)
+            id = id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());

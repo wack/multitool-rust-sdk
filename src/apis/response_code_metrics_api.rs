@@ -27,8 +27,8 @@ pub trait ResponseCodeMetricsApi: Send + Sync {
         'create_response_code_metrics_request,
     >(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
     ) -> Result<models::CreateResponseCodeMetricsSuccess, Error<CreateResponseCodeMetricsError>>;
@@ -53,8 +53,8 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
         'create_response_code_metrics_request,
     >(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
     ) -> Result<models::CreateResponseCodeMetricsSuccess, Error<CreateResponseCodeMetricsError>>
@@ -63,7 +63,7 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=crate::apis::urlencode(workspace_id), application_id=crate::apis::urlencode(application_id), deployment_id=deployment_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 

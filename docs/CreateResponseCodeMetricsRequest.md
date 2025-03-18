@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_class** | [**models::ApplicationGroup**](ApplicationGroup.md) |  | 
+**app_group** | [**models::ApplicationGroup**](ApplicationGroup.md) |  | 
 **status_2xx_count** | **u32** |  | 
 **status_4xx_count** | **u32** |  | 
 **status_5xx_count** | **u32** |  | 

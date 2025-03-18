@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateResponseCodeMetricsRequest {
-    #[serde(rename = "app_class")]
-    pub app_class: models::ApplicationGroup,
+    #[serde(rename = "app_group")]
+    pub app_group: models::ApplicationGroup,
     #[serde(rename = "status_2xx_count")]
     pub status_2xx_count: u32,
     #[serde(rename = "status_4xx_count")]
@@ -25,13 +25,13 @@ pub struct CreateResponseCodeMetricsRequest {
 
 impl CreateResponseCodeMetricsRequest {
     pub fn new(
-        app_class: models::ApplicationGroup,
+        app_group: models::ApplicationGroup,
         status_2xx_count: u32,
         status_4xx_count: u32,
         status_5xx_count: u32,
     ) -> CreateResponseCodeMetricsRequest {
         CreateResponseCodeMetricsRequest {
-            app_class,
+            app_group,
             status_2xx_count,
             status_4xx_count,
             status_5xx_count,

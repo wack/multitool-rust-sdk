@@ -16,7 +16,7 @@ pub struct Deployment {
     #[serde(rename = "active")]
     pub active: bool,
     #[serde(rename = "app_id")]
-    pub app_id: uuid::Uuid,
+    pub app_id: u32,
     #[serde(rename = "created_at")]
     pub created_at: String,
     #[serde(rename = "events")]
@@ -32,7 +32,7 @@ pub struct Deployment {
 impl Deployment {
     pub fn new(
         active: bool,
-        app_id: uuid::Uuid,
+        app_id: u32,
         created_at: String,
         events: Vec<models::DeploymentEvent>,
         id: u64,

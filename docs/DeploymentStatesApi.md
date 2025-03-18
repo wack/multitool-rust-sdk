@@ -20,10 +20,10 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
-**application_id** | **uuid::Uuid** | The application's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
 **deployment_id** | **u64** | The deployment's id | [required] |
-**status** | [**DeploymentStateStatus**](.md) | An optional status to filter by | [required] |
+**status** | Option<[**DeploymentStateStatus**](.md)> | An optional status to filter by |  |
 
 ### Return type
 
@@ -51,8 +51,8 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
-**application_id** | **uuid::Uuid** | The application's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
 **deployment_id** | **u64** | The deployment's id | [required] |
 **state_id** | **u64** | The deployment state's id | [required] |
 
@@ -82,8 +82,8 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
-**application_id** | **uuid::Uuid** | The application's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
 **deployment_id** | **u64** | The deployment's id | [required] |
 **state_id** | **u64** | The deployment state's id | [required] |
 **update_deployment_state_request** | [**UpdateDeploymentStateRequest**](UpdateDeploymentStateRequest.md) |  | [required] |

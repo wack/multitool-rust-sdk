@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active** | **bool** |  | 
-**app_id** | [**uuid::Uuid**](uuid::Uuid.md) |  | 
+**app_id** | **u32** |  | 
 **created_at** | **String** |  | 
 **events** | [**Vec<models::DeploymentEvent>**](DeploymentEvent.md) |  | 
 **id** | **u64** |  | 

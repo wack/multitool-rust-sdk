@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created_at** | **String** |  | 
 **display_name** | **String** |  | 
-**id** | [**uuid::Uuid**](uuid::Uuid.md) |  | 
+**id** | **u32** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

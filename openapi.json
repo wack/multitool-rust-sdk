@@ -366,7 +366,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           }
         ],
@@ -407,7 +407,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           }
         ],
@@ -457,7 +457,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           }
         ],
@@ -498,7 +498,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           }
         ],
@@ -541,7 +541,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           },
           {
@@ -593,7 +593,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           },
           {
@@ -655,7 +655,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           },
           {
@@ -671,7 +671,7 @@
             "name": "status",
             "in": "query",
             "description": "An optional status to filter by",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/components/schemas/DeploymentStateStatus"
             }
@@ -716,7 +716,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           },
           {
@@ -787,7 +787,7 @@
             "description": "The application's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/AppId"
+              "$ref": "#/components/schemas/ApplicationId"
             }
           },
           {
@@ -829,10 +829,6 @@
   },
   "components": {
     "schemas": {
-      "AppId": {
-        "type": "string",
-        "format": "uuid"
-      },
       "ApplicationConfig": {
         "oneOf": [
           {
@@ -878,7 +874,7 @@
             "type": "string"
           },
           "id": {
-            "$ref": "#/components/schemas/AppId"
+            "$ref": "#/components/schemas/ApplicationId"
           },
           "ingress": {
             "$ref": "#/components/schemas/IngressConfig"
@@ -901,6 +897,11 @@
           "baseline"
         ]
       },
+      "ApplicationId": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
+      },
       "ApplicationSummary": {
         "type": "object",
         "required": [
@@ -921,7 +922,7 @@
             "type": "string"
           },
           "id": {
-            "$ref": "#/components/schemas/AppId"
+            "$ref": "#/components/schemas/ApplicationId"
           },
           "updated_at": {
             "type": "string"
@@ -978,13 +979,13 @@
       "CreateResponseCodeMetricsRequest": {
         "type": "object",
         "required": [
-          "app_class",
+          "app_group",
           "status_2xx_count",
           "status_4xx_count",
           "status_5xx_count"
         ],
         "properties": {
-          "app_class": {
+          "app_group": {
             "$ref": "#/components/schemas/ApplicationGroup"
           },
           "status_2xx_count": {
@@ -1090,7 +1091,7 @@
             "type": "boolean"
           },
           "app_id": {
-            "$ref": "#/components/schemas/AppId"
+            "$ref": "#/components/schemas/ApplicationId"
           },
           "created_at": {
             "type": "string"
@@ -1162,7 +1163,6 @@
         "type": "object",
         "required": [
           "id",
-          "deployment_id",
           "state_type",
           "status",
           "created_at",
@@ -1172,8 +1172,15 @@
           "created_at": {
             "type": "string"
           },
-          "deployment_id": {
-            "$ref": "#/components/schemas/DeploymentId"
+          "data": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DeploymentStateData"
+              }
+            ]
           },
           "id": {
             "$ref": "#/components/schemas/DeploymentStateId"
@@ -1188,6 +1195,31 @@
             "type": "string"
           }
         }
+      },
+      "DeploymentStateData": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "SetCanaryTraffic"
+            ],
+            "properties": {
+              "SetCanaryTraffic": {
+                "type": "object",
+                "required": [
+                  "percent_traffic"
+                ],
+                "properties": {
+                  "percent_traffic": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        ]
       },
       "DeploymentStateId": {
         "type": "integer",
@@ -1439,14 +1471,14 @@
         "type": "object",
         "required": [
           "deployment_id",
-          "app_class",
+          "app_group",
           "status_2xx_count",
           "status_4xx_count",
           "status_5xx_count",
           "created_at"
         ],
         "properties": {
-          "app_class": {
+          "app_group": {
             "$ref": "#/components/schemas/ApplicationGroup"
           },
           "created_at": {
@@ -1523,6 +1555,7 @@
       "UserDetails": {
         "type": "object",
         "required": [
+          "id",
           "email",
           "created_at",
           "jwt",
@@ -1540,15 +1573,23 @@
             "type": "string",
             "format": "date-time"
           },
+          "id": {
+            "$ref": "#/components/schemas/UserId"
+          },
           "jwt": {
             "type": "string"
           }
         }
       },
+      "UserId": {
+        "type": "string",
+        "format": "uuid"
+      },
       "UserSummary": {
         "type": "object",
         "description": "Successful login response payload",
         "required": [
+          "id",
           "email",
           "jwt",
           "expires_at"
@@ -1559,6 +1600,9 @@
           },
           "expires_at": {
             "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/UserId"
           },
           "jwt": {
             "type": "string"
@@ -1618,8 +1662,9 @@
         }
       },
       "WorkspaceId": {
-        "type": "string",
-        "format": "uuid"
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
       },
       "WorkspaceReadSuccess": {
         "type": "object",

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **created_at** | **String** |  | 
 **deployments** | [**Vec<serde_json::Value>**](serde_json::Value.md) |  | 
 **display_name** | **String** |  | 
-**id** | [**uuid::Uuid**](uuid::Uuid.md) |  | 
+**id** | **u32** |  | 
 **ingress** | [**models::IngressConfig**](IngressConfig.md) |  | 
 **monitor** | [**models::MonitorConfig**](MonitorConfig.md) |  | 
 **platform** | [**models::PlatformConfig**](PlatformConfig.md) |  | 

@@ -22,15 +22,15 @@ use std::sync::Arc;
 pub trait DeploymentStatesApi: Send + Sync {
     async fn list_deployment_states<'workspace_id, 'application_id, 'deployment_id, 'status>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
-        status: models::DeploymentStateStatus,
+        status: Option<models::DeploymentStateStatus>,
     ) -> Result<models::ListDeploymentStatesSuccess, Error<ListDeploymentStatesError>>;
     async fn refresh_deployment_state<'workspace_id, 'application_id, 'deployment_id, 'state_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
         state_id: u64,
     ) -> Result<models::UpdateDeploymentStateSuccess, Error<RefreshDeploymentStateError>>;
@@ -42,8 +42,8 @@ pub trait DeploymentStatesApi: Send + Sync {
         'update_deployment_state_request,
     >(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
         state_id: u64,
         update_deployment_state_request: models::UpdateDeploymentStateRequest,
@@ -64,20 +64,23 @@ impl DeploymentStatesApiClient {
 impl DeploymentStatesApi for DeploymentStatesApiClient {
     async fn list_deployment_states<'workspace_id, 'application_id, 'deployment_id, 'status>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
-        status: models::DeploymentStateStatus,
+        status: Option<models::DeploymentStateStatus>,
     ) -> Result<models::ListDeploymentStatesSuccess, Error<ListDeploymentStatesError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states", local_var_configuration.base_path, workspace_id=crate::apis::urlencode(workspace_id), application_id=crate::apis::urlencode(application_id), deployment_id=deployment_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
-        local_var_req_builder = local_var_req_builder.query(&[("status", &status.to_string())]);
+        if let Some(ref local_var_str) = status {
+            local_var_req_builder =
+                local_var_req_builder.query(&[("status", &local_var_str.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder
                 .header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
@@ -108,8 +111,8 @@ impl DeploymentStatesApi for DeploymentStatesApiClient {
 
     async fn refresh_deployment_state<'workspace_id, 'application_id, 'deployment_id, 'state_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
         state_id: u64,
     ) -> Result<models::UpdateDeploymentStateSuccess, Error<RefreshDeploymentStateError>> {
@@ -117,7 +120,7 @@ impl DeploymentStatesApi for DeploymentStatesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh", local_var_configuration.base_path, workspace_id=crate::apis::urlencode(workspace_id), application_id=crate::apis::urlencode(application_id), deployment_id=deployment_id, state_id=state_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id, state_id=state_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 
@@ -157,8 +160,8 @@ impl DeploymentStatesApi for DeploymentStatesApiClient {
         'update_deployment_state_request,
     >(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
         deployment_id: u64,
         state_id: u64,
         update_deployment_state_request: models::UpdateDeploymentStateRequest,
@@ -167,7 +170,7 @@ impl DeploymentStatesApi for DeploymentStatesApiClient {
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}", local_var_configuration.base_path, workspace_id=crate::apis::urlencode(workspace_id), application_id=crate::apis::urlencode(application_id), deployment_id=deployment_id, state_id=state_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id, state_id=state_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
 

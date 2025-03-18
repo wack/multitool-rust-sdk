@@ -21,6 +21,9 @@ docs/Deployment.md
 docs/DeploymentEvent.md
 docs/DeploymentEventType.md
 docs/DeploymentState.md
+docs/DeploymentStateData.md
+docs/DeploymentStateDataOneOf.md
+docs/DeploymentStateDataOneOfSetCanaryTraffic.md
 docs/DeploymentStateStatus.md
 docs/DeploymentStateType.md
 docs/DeploymentStatesApi.md
@@ -89,6 +92,9 @@ src/models/deployment.rs
 src/models/deployment_event.rs
 src/models/deployment_event_type.rs
 src/models/deployment_state.rs
+src/models/deployment_state_data.rs
+src/models/deployment_state_data_one_of.rs
+src/models/deployment_state_data_one_of_set_canary_traffic.rs
 src/models/deployment_state_status.rs
 src/models/deployment_state_type.rs
 src/models/deployment_status.rs

@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
 **create_application_request** | [**CreateApplicationRequest**](CreateApplicationRequest.md) |  | [required] |
 
 ### Return type
@@ -50,8 +50,8 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
-**application_id** | **uuid::Uuid** | The application's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
 
 ### Return type
 
@@ -79,8 +79,8 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
-**application_id** | **uuid::Uuid** | The application's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
 
 ### Return type
 
@@ -108,7 +108,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
 
 ### Return type
 

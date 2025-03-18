@@ -22,7 +22,7 @@ pub struct ApplicationDetails {
     #[serde(rename = "display_name")]
     pub display_name: String,
     #[serde(rename = "id")]
-    pub id: uuid::Uuid,
+    pub id: u32,
     #[serde(rename = "ingress")]
     pub ingress: Box<models::IngressConfig>,
     #[serde(rename = "monitor")]
@@ -39,7 +39,7 @@ impl ApplicationDetails {
         created_at: String,
         deployments: Vec<serde_json::Value>,
         display_name: String,
-        id: uuid::Uuid,
+        id: u32,
         ingress: models::IngressConfig,
         monitor: models::MonitorConfig,
         platform: models::PlatformConfig,

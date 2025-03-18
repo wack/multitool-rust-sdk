@@ -13,13 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum MonitorConfig {
-    MonitorConfigOneOf(Box<models::MonitorConfigOneOf>),
+pub enum DeploymentStateData {
+    DeploymentStateDataOneOf(Box<models::DeploymentStateDataOneOf>),
 }
 
-impl Default for MonitorConfig {
+impl Default for DeploymentStateData {
     fn default() -> Self {
-        Self::MonitorConfigOneOf(Default::default())
+        Self::DeploymentStateDataOneOf(Default::default())
     }
 }
 

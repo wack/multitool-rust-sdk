@@ -20,7 +20,7 @@ pub struct ApplicationSummary {
     #[serde(rename = "display_name")]
     pub display_name: String,
     #[serde(rename = "id")]
-    pub id: uuid::Uuid,
+    pub id: u32,
     #[serde(rename = "updated_at")]
     pub updated_at: String,
 }
@@ -30,7 +30,7 @@ impl ApplicationSummary {
         app_type: models::ApplicationType,
         created_at: String,
         display_name: String,
-        id: uuid::Uuid,
+        id: u32,
         updated_at: String,
     ) -> ApplicationSummary {
         ApplicationSummary {

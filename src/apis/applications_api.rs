@@ -22,22 +22,22 @@ use std::sync::Arc;
 pub trait ApplicationsApi: Send + Sync {
     async fn create_application<'workspace_id, 'create_application_request>(
         &self,
-        workspace_id: &str,
+        workspace_id: u32,
         create_application_request: models::CreateApplicationRequest,
     ) -> Result<models::CreateApplicationSuccess, Error<CreateApplicationError>>;
     async fn delete_application<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<serde_json::Value, Error<DeleteApplicationError>>;
     async fn get_application<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<models::ReadApplicationSuccess, Error<GetApplicationError>>;
     async fn list_applications<'workspace_id>(
         &self,
-        workspace_id: &str,
+        workspace_id: u32,
     ) -> Result<models::ListApplicationsSuccess, Error<ListApplicationsError>>;
 }
 
@@ -55,7 +55,7 @@ impl ApplicationsApiClient {
 impl ApplicationsApi for ApplicationsApiClient {
     async fn create_application<'workspace_id, 'create_application_request>(
         &self,
-        workspace_id: &str,
+        workspace_id: u32,
         create_application_request: models::CreateApplicationRequest,
     ) -> Result<models::CreateApplicationSuccess, Error<CreateApplicationError>> {
         let local_var_configuration = &self.configuration;
@@ -65,7 +65,7 @@ impl ApplicationsApi for ApplicationsApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{workspace_id}/applications",
             local_var_configuration.base_path,
-            workspace_id = crate::apis::urlencode(workspace_id)
+            workspace_id = workspace_id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
@@ -101,8 +101,8 @@ impl ApplicationsApi for ApplicationsApiClient {
 
     async fn delete_application<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<serde_json::Value, Error<DeleteApplicationError>> {
         let local_var_configuration = &self.configuration;
 
@@ -111,8 +111,8 @@ impl ApplicationsApi for ApplicationsApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{workspace_id}/applications/{application_id}",
             local_var_configuration.base_path,
-            workspace_id = crate::apis::urlencode(workspace_id),
-            application_id = crate::apis::urlencode(application_id)
+            workspace_id = workspace_id,
+            application_id = application_id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::DELETE, local_var_uri_str.as_str());
@@ -147,8 +147,8 @@ impl ApplicationsApi for ApplicationsApiClient {
 
     async fn get_application<'workspace_id, 'application_id>(
         &self,
-        workspace_id: &str,
-        application_id: &str,
+        workspace_id: u32,
+        application_id: u32,
     ) -> Result<models::ReadApplicationSuccess, Error<GetApplicationError>> {
         let local_var_configuration = &self.configuration;
 
@@ -157,8 +157,8 @@ impl ApplicationsApi for ApplicationsApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{workspace_id}/applications/{application_id}",
             local_var_configuration.base_path,
-            workspace_id = crate::apis::urlencode(workspace_id),
-            application_id = crate::apis::urlencode(application_id)
+            workspace_id = workspace_id,
+            application_id = application_id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
@@ -193,7 +193,7 @@ impl ApplicationsApi for ApplicationsApiClient {
 
     async fn list_applications<'workspace_id>(
         &self,
-        workspace_id: &str,
+        workspace_id: u32,
     ) -> Result<models::ListApplicationsSuccess, Error<ListApplicationsError>> {
         let local_var_configuration = &self.configuration;
 
@@ -202,7 +202,7 @@ impl ApplicationsApi for ApplicationsApiClient {
         let local_var_uri_str = format!(
             "{}/api/v1/workspaces/{workspace_id}/applications",
             local_var_configuration.base_path,
-            workspace_id = crate::apis::urlencode(workspace_id)
+            workspace_id = workspace_id
         );
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());

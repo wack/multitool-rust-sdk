@@ -15,8 +15,13 @@ use serde::{Deserialize, Serialize};
 pub struct DeploymentState {
     #[serde(rename = "created_at")]
     pub created_at: String,
-    #[serde(rename = "deployment_id")]
-    pub deployment_id: u64,
+    #[serde(
+        rename = "data",
+        default,
+        with = "::serde_with::rust::double_option",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data: Option<Option<Box<models::DeploymentStateData>>>,
     #[serde(rename = "id")]
     pub id: u64,
     #[serde(rename = "state_type")]
@@ -30,7 +35,6 @@ pub struct DeploymentState {
 impl DeploymentState {
     pub fn new(
         created_at: String,
-        deployment_id: u64,
         id: u64,
         state_type: models::DeploymentStateType,
         status: models::DeploymentStateStatus,
@@ -38,7 +42,7 @@ impl DeploymentState {
     ) -> DeploymentState {
         DeploymentState {
             created_at,
-            deployment_id,
+            data: None,
             id,
             state_type,
             status,

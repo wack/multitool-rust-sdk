@@ -18,8 +18,8 @@ Method | HTTP request | Description
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**workspace_id** | **uuid::Uuid** | The workspace's id | [required] |
-**application_id** | **uuid::Uuid** | The application's id | [required] |
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
 **deployment_id** | **u64** | The deployment's id | [required] |
 **create_response_code_metrics_request** | [**CreateResponseCodeMetricsRequest**](CreateResponseCodeMetricsRequest.md) |  | [required] |
 
