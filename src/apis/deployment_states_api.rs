@@ -122,7 +122,7 @@ impl DeploymentStatesApi for DeploymentStatesApiClient {
 
         let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id, state_id=state_id);
         let mut local_var_req_builder =
-            local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
+            local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder

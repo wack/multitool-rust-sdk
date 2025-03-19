@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost:8080*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**list_deployment_states**](DeploymentStatesApi.md#list_deployment_states) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states | 
-[**refresh_deployment_state**](DeploymentStatesApi.md#refresh_deployment_state) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh | 
+[**refresh_deployment_state**](DeploymentStatesApi.md#refresh_deployment_state) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh | 
 [**update_deployment_state**](DeploymentStatesApi.md#update_deployment_state) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id} | 
 
 
