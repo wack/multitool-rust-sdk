@@ -8,6 +8,7 @@ docs/ApplicationGroup.md
 docs/ApplicationSummary.md
 docs/ApplicationType.md
 docs/ApplicationsApi.md
+docs/CloudWatchDimensions.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationSuccess.md
 docs/CreateDeploymentSuccess.md
@@ -79,6 +80,7 @@ src/models/application_details.rs
 src/models/application_group.rs
 src/models/application_summary.rs
 src/models/application_type.rs
+src/models/cloud_watch_dimensions.rs
 src/models/create_application_request.rs
 src/models/create_application_success.rs
 src/models/create_deployment_success.rs

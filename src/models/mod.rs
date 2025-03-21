@@ -10,6 +10,8 @@ pub mod application_summary;
 pub use self::application_summary::ApplicationSummary;
 pub mod application_type;
 pub use self::application_type::ApplicationType;
+pub mod cloud_watch_dimensions;
+pub use self::cloud_watch_dimensions::CloudWatchDimensions;
 pub mod create_application_request;
 pub use self::create_application_request::CreateApplicationRequest;
 pub mod create_application_success;

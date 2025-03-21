@@ -18,9 +18,7 @@
   "paths": {
     "/api/v1/heartbeat": {
       "get": {
-        "tags": [
-          "Heartbeat"
-        ],
+        "tags": ["Heartbeat"],
         "operationId": "heartbeat_controller",
         "responses": {
           "200": {
@@ -30,9 +28,7 @@
                 "schema": {
                   "type": "object",
                   "description": "A Heartbeat response indicates the status of the server.\nIn almost every conceivable circumstance, the response should\nbe a success.",
-                  "required": [
-                    "ok"
-                  ],
+                  "required": ["ok"],
                   "properties": {
                     "ok": {
                       "type": "boolean"
@@ -48,9 +44,7 @@
     },
     "/api/v1/users": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Create User",
         "requestBody": {
           "content": {
@@ -92,9 +86,7 @@
     },
     "/api/v1/users/login": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Login",
         "requestBody": {
           "content": {
@@ -129,9 +121,7 @@
     },
     "/api/v1/workspaces": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "List Workspaces",
         "parameters": [
           {
@@ -161,9 +151,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "Create Workspace",
         "requestBody": {
           "content": {
@@ -194,9 +182,7 @@
     },
     "/api/v1/workspaces/{id}": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "Read Workspace",
         "parameters": [
           {
@@ -226,9 +212,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "Update Workspace",
         "parameters": [
           {
@@ -270,9 +254,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications": {
       "get": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "List Applications",
         "parameters": [
           {
@@ -302,9 +284,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Create Application",
         "parameters": [
           {
@@ -346,9 +326,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}": {
       "get": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Get Application",
         "parameters": [
           {
@@ -387,9 +365,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Delete Application",
         "parameters": [
           {
@@ -437,9 +413,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments": {
       "get": {
-        "tags": [
-          "Deployments"
-        ],
+        "tags": ["Deployments"],
         "operationId": "List Deployments",
         "parameters": [
           {
@@ -478,9 +452,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Deployments"
-        ],
+        "tags": ["Deployments"],
         "operationId": "Create Deployment",
         "parameters": [
           {
@@ -521,9 +493,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}": {
       "get": {
-        "tags": [
-          "Deployments"
-        ],
+        "tags": ["Deployments"],
         "operationId": "Read Deployment",
         "parameters": [
           {
@@ -573,9 +543,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes": {
       "post": {
-        "tags": [
-          "Response Code Metrics"
-        ],
+        "tags": ["Response Code Metrics"],
         "operationId": "Create Response Code Metrics",
         "parameters": [
           {
@@ -635,9 +603,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states": {
       "get": {
-        "tags": [
-          "Deployment States"
-        ],
+        "tags": ["Deployment States"],
         "operationId": "List Deployment States",
         "parameters": [
           {
@@ -696,9 +662,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}": {
       "patch": {
-        "tags": [
-          "Deployment States"
-        ],
+        "tags": ["Deployment States"],
         "operationId": "Update Deployment State",
         "parameters": [
           {
@@ -767,9 +731,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh": {
       "post": {
-        "tags": [
-          "Deployment States"
-        ],
+        "tags": ["Deployment States"],
         "operationId": "Refresh Deployment State",
         "parameters": [
           {
@@ -833,9 +795,7 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "web_service"
-            ],
+            "required": ["web_service"],
             "properties": {
               "web_service": {
                 "$ref": "#/components/schemas/WebServiceConfig"
@@ -892,10 +852,7 @@
       },
       "ApplicationGroup": {
         "type": "string",
-        "enum": [
-          "canary",
-          "baseline"
-        ]
+        "enum": ["canary", "baseline"]
       },
       "ApplicationId": {
         "type": "integer",
@@ -932,19 +889,26 @@
       "ApplicationType": {
         "type": "string",
         "description": "An identifier of what kind of application we're tracking.",
-        "enum": [
-          "web_service"
-        ]
+        "enum": ["web_service"]
       },
       "CleartextPassword": {
         "type": "string"
       },
+      "CloudWatchDimensions": {
+        "type": "object",
+        "required": ["name", "value"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
       "CreateApplicationRequest": {
         "type": "object",
-        "required": [
-          "display_name",
-          "config"
-        ],
+        "required": ["display_name", "config"],
         "properties": {
           "config": {
             "$ref": "#/components/schemas/ApplicationConfig"
@@ -956,9 +920,7 @@
       },
       "CreateApplicationSuccess": {
         "type": "object",
-        "required": [
-          "application"
-        ],
+        "required": ["application"],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationSummary"
@@ -967,9 +929,7 @@
       },
       "CreateDeploymentSuccess": {
         "type": "object",
-        "required": [
-          "deployment"
-        ],
+        "required": ["deployment"],
         "properties": {
           "deployment": {
             "$ref": "#/components/schemas/Deployment"
@@ -1007,9 +967,7 @@
       },
       "CreateResponseCodeMetricsSuccess": {
         "type": "object",
-        "required": [
-          "response_code_metrics"
-        ],
+        "required": ["response_code_metrics"],
         "properties": {
           "response_code_metrics": {
             "$ref": "#/components/schemas/ResponseCodeMetrics"
@@ -1019,11 +977,7 @@
       "CreateUserRequest": {
         "type": "object",
         "description": "Expected body of user endpoint requests",
-        "required": [
-          "email",
-          "password",
-          "tos_accepted"
-        ],
+        "required": ["email", "password", "tos_accepted"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email",
@@ -1041,9 +995,7 @@
       },
       "CreateUserSuccess": {
         "type": "object",
-        "required": [
-          "user"
-        ],
+        "required": ["user"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserDetails"
@@ -1052,9 +1004,7 @@
       },
       "CreateWorkspaceRequest": {
         "type": "object",
-        "required": [
-          "display_name"
-        ],
+        "required": ["display_name"],
         "properties": {
           "display_name": {
             "type": "string"
@@ -1063,9 +1013,7 @@
       },
       "CreateWorkspaceSuccess": {
         "type": "object",
-        "required": [
-          "workspace"
-        ],
+        "required": ["workspace"],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceSummary"
@@ -1115,12 +1063,7 @@
       },
       "DeploymentEvent": {
         "type": "object",
-        "required": [
-          "id",
-          "event_type",
-          "created_at",
-          "updated_at"
-        ],
+        "required": ["id", "event_type", "created_at", "updated_at"],
         "properties": {
           "created_at": {
             "type": "string"
@@ -1142,7 +1085,6 @@
         "minimum": 0
       },
       "DeploymentEventType": {
-        "type": "string",
         "enum": [
           "deployment_queued",
           "deployment_ready",
@@ -1161,13 +1103,7 @@
       },
       "DeploymentState": {
         "type": "object",
-        "required": [
-          "id",
-          "state_type",
-          "status",
-          "created_at",
-          "updated_at"
-        ],
+        "required": ["id", "state_type", "status", "created_at", "updated_at"],
         "properties": {
           "created_at": {
             "type": "string"
@@ -1200,15 +1136,11 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "SetCanaryTraffic"
-            ],
+            "required": ["SetCanaryTraffic"],
             "properties": {
               "SetCanaryTraffic": {
                 "type": "object",
-                "required": [
-                  "percent_traffic"
-                ],
+                "required": ["percent_traffic"],
                 "properties": {
                   "percent_traffic": {
                     "type": "integer",
@@ -1228,13 +1160,7 @@
       },
       "DeploymentStateStatus": {
         "type": "string",
-        "enum": [
-          "pending",
-          "in_progress",
-          "superseded",
-          "done",
-          "cancelled"
-        ]
+        "enum": ["pending", "in_progress", "superseded", "done", "cancelled"]
       },
       "DeploymentStateType": {
         "type": "string",
@@ -1260,9 +1186,7 @@
       },
       "ErrorResponse": {
         "type": "object",
-        "required": [
-          "errors"
-        ],
+        "required": ["errors"],
         "properties": {
           "errors": {
             "type": "array",
@@ -1276,9 +1200,7 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "aws_rest_api_gateway"
-            ],
+            "required": ["aws_rest_api_gateway"],
             "properties": {
               "aws_rest_api_gateway": {
                 "type": "object",
@@ -1313,9 +1235,7 @@
       },
       "ListApplicationsSuccess": {
         "type": "object",
-        "required": [
-          "applications"
-        ],
+        "required": ["applications"],
         "properties": {
           "applications": {
             "type": "array",
@@ -1327,9 +1247,7 @@
       },
       "ListDeploymentStatesSuccess": {
         "type": "object",
-        "required": [
-          "states"
-        ],
+        "required": ["states"],
         "properties": {
           "states": {
             "type": "array",
@@ -1341,9 +1259,7 @@
       },
       "ListDeploymentsSuccess": {
         "type": "object",
-        "required": [
-          "deployments"
-        ],
+        "required": ["deployments"],
         "properties": {
           "deployments": {
             "type": "array",
@@ -1355,9 +1271,7 @@
       },
       "ListWorkspaceSuccess": {
         "type": "object",
-        "required": [
-          "workspaces"
-        ],
+        "required": ["workspaces"],
         "properties": {
           "workspaces": {
             "type": "array",
@@ -1369,10 +1283,7 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email",
@@ -1386,9 +1297,7 @@
       },
       "LoginSuccess": {
         "type": "object",
-        "required": [
-          "user"
-        ],
+        "required": ["user"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserSummary"
@@ -1399,16 +1308,18 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "aws_cloudwatch_metrics"
-            ],
+            "required": ["aws_cloudwatch_metrics"],
             "properties": {
               "aws_cloudwatch_metrics": {
                 "type": "object",
-                "required": [
-                  "region"
-                ],
+                "required": ["region", "dimensions"],
                 "properties": {
+                  "dimensions": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CloudWatchDimensions"
+                    }
+                  },
                   "region": {
                     "type": "string"
                   }
@@ -1422,16 +1333,11 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "aws_lambda"
-            ],
+            "required": ["aws_lambda"],
             "properties": {
               "aws_lambda": {
                 "type": "object",
-                "required": [
-                  "region",
-                  "name"
-                ],
+                "required": ["region", "name"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -1447,9 +1353,7 @@
       },
       "ReadApplicationSuccess": {
         "type": "object",
-        "required": [
-          "application"
-        ],
+        "required": ["application"],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationDetails"
@@ -1458,9 +1362,7 @@
       },
       "ReadDeploymentSuccess": {
         "type": "object",
-        "required": [
-          "deployment"
-        ],
+        "required": ["deployment"],
         "properties": {
           "deployment": {
             "$ref": "#/components/schemas/Deployment"
@@ -1521,9 +1423,7 @@
       },
       "UpdateDeploymentStateSuccess": {
         "type": "object",
-        "required": [
-          "state"
-        ],
+        "required": ["state"],
         "properties": {
           "state": {
             "$ref": "#/components/schemas/DeploymentState"
@@ -1534,18 +1434,13 @@
         "type": "object",
         "properties": {
           "display_name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           }
         }
       },
       "UpdateWorkspaceSuccess": {
         "type": "object",
-        "required": [
-          "workspace"
-        ],
+        "required": ["workspace"],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceSummary"
@@ -1554,13 +1449,7 @@
       },
       "UserDetails": {
         "type": "object",
-        "required": [
-          "id",
-          "email",
-          "created_at",
-          "jwt",
-          "expires_at"
-        ],
+        "required": ["id", "email", "created_at", "jwt", "expires_at"],
         "properties": {
           "created_at": {
             "type": "string",
@@ -1588,12 +1477,7 @@
       "UserSummary": {
         "type": "object",
         "description": "Successful login response payload",
-        "required": [
-          "id",
-          "email",
-          "jwt",
-          "expires_at"
-        ],
+        "required": ["id", "email", "jwt", "expires_at"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email"
@@ -1611,11 +1495,7 @@
       },
       "WebServiceConfig": {
         "type": "object",
-        "required": [
-          "ingress",
-          "monitor",
-          "platform"
-        ],
+        "required": ["ingress", "monitor", "platform"],
         "properties": {
           "ingress": {
             "$ref": "#/components/schemas/IngressConfig"
@@ -1668,9 +1548,7 @@
       },
       "WorkspaceReadSuccess": {
         "type": "object",
-        "required": [
-          "workspace"
-        ],
+        "required": ["workspace"],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceDetails"
@@ -1679,11 +1557,7 @@
       },
       "WorkspaceSummary": {
         "type": "object",
-        "required": [
-          "id",
-          "display_name",
-          "created_at"
-        ],
+        "required": ["id", "display_name", "created_at"],
         "properties": {
           "created_at": {
             "type": "string"

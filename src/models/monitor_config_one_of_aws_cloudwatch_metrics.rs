@@ -13,13 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MonitorConfigOneOfAwsCloudwatchMetrics {
+    #[serde(rename = "dimensions")]
+    pub dimensions: Vec<models::CloudWatchDimensions>,
     #[serde(rename = "region")]
     pub region: String,
 }
 
 impl MonitorConfigOneOfAwsCloudwatchMetrics {
-    pub fn new(region: String) -> MonitorConfigOneOfAwsCloudwatchMetrics {
+    pub fn new(dimensions: Vec<models::CloudWatchDimensions>, region: String) -> MonitorConfigOneOfAwsCloudwatchMetrics {
         MonitorConfigOneOfAwsCloudwatchMetrics {
+            dimensions,
             region,
         }
     }
