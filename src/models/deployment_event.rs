@@ -15,6 +15,8 @@ use serde::{Deserialize, Serialize};
 pub struct DeploymentEvent {
     #[serde(rename = "created_at")]
     pub created_at: String,
+    #[serde(rename = "data", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub data: Option<Option<serde_json::Value>>,
     #[serde(rename = "event_type")]
     pub event_type: models::DeploymentEventType,
     #[serde(rename = "id")]
@@ -27,6 +29,7 @@ impl DeploymentEvent {
     pub fn new(created_at: String, event_type: models::DeploymentEventType, id: u64, updated_at: String) -> DeploymentEvent {
         DeploymentEvent {
             created_at,
+            data: None,
             event_type,
             id,
             updated_at,
