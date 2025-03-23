@@ -35,7 +35,7 @@ pub trait ResponseCodeMetricsApi: Send + Sync {
         application_id: u32,
         deployment_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
-    ) -> Result<models::CreateResponseCodeMetricsSuccess, Error<CreateResponseCodeMetricsError>>;
+    ) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>>;
 }
 
 pub struct ResponseCodeMetricsApiClient {
@@ -61,8 +61,7 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
         application_id: u32,
         deployment_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
-    ) -> Result<models::CreateResponseCodeMetricsSuccess, Error<CreateResponseCodeMetricsError>>
-    {
+    ) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
@@ -95,8 +94,8 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
             match local_var_content_type {
                 ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateResponseCodeMetricsSuccess`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::CreateResponseCodeMetricsSuccess`")))),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
             }
         } else {
             let local_var_entity: Option<CreateResponseCodeMetricsError> =

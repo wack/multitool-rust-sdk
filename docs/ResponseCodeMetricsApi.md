@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## create_response_code_metrics
 
-> models::CreateResponseCodeMetricsSuccess create_response_code_metrics(workspace_id, application_id, deployment_id, create_response_code_metrics_request)
+> serde_json::Value create_response_code_metrics(workspace_id, application_id, deployment_id, create_response_code_metrics_request)
 
 
 ### Parameters
@@ -25,7 +25,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CreateResponseCodeMetricsSuccess**](CreateResponseCodeMetricsSuccess.md)
+[**serde_json::Value**](serde_json::Value.md)
 
 ### Authorization
 

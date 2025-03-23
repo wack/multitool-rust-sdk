@@ -13,7 +13,6 @@ docs/CreateApplicationRequest.md
 docs/CreateApplicationSuccess.md
 docs/CreateDeploymentSuccess.md
 docs/CreateResponseCodeMetricsRequest.md
-docs/CreateResponseCodeMetricsSuccess.md
 docs/CreateUserRequest.md
 docs/CreateUserSuccess.md
 docs/CreateWorkspaceRequest.md
@@ -50,8 +49,8 @@ docs/PlatformConfigOneOf.md
 docs/PlatformConfigOneOfAwsLambda.md
 docs/ReadApplicationSuccess.md
 docs/ReadDeploymentSuccess.md
-docs/ResponseCodeMetrics.md
 docs/ResponseCodeMetricsApi.md
+docs/StatusCodeMetrics.md
 docs/UpdateDeploymentStateRequest.md
 docs/UpdateDeploymentStateSuccess.md
 docs/UpdateWorkspaceRequest.md
@@ -85,7 +84,6 @@ src/models/create_application_request.rs
 src/models/create_application_success.rs
 src/models/create_deployment_success.rs
 src/models/create_response_code_metrics_request.rs
-src/models/create_response_code_metrics_success.rs
 src/models/create_user_request.rs
 src/models/create_user_success.rs
 src/models/create_workspace_request.rs
@@ -120,7 +118,7 @@ src/models/platform_config_one_of.rs
 src/models/platform_config_one_of_aws_lambda.rs
 src/models/read_application_success.rs
 src/models/read_deployment_success.rs
-src/models/response_code_metrics.rs
+src/models/status_code_metrics.rs
 src/models/update_deployment_state_request.rs
 src/models/update_deployment_state_success.rs
 src/models/update_workspace_request.rs
