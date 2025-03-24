@@ -1354,11 +1354,15 @@
           "app_group",
           "status_2xx_count",
           "status_4xx_count",
-          "status_5xx_count"
+          "status_5xx_count",
+          "created_at"
         ],
         "properties": {
           "app_group": {
             "$ref": "#/components/schemas/ApplicationGroup"
+          },
+          "created_at": {
+            "type": "string"
           },
           "status_2xx_count": {
             "type": "integer",
