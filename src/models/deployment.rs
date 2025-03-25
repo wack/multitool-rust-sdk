@@ -23,6 +23,8 @@ pub struct Deployment {
     pub events: Vec<models::DeploymentEvent>,
     #[serde(rename = "id")]
     pub id: u64,
+    #[serde(rename = "number")]
+    pub number: u64,
     #[serde(rename = "status")]
     pub status: models::DeploymentStatus,
     #[serde(rename = "updated_at")]
@@ -36,6 +38,7 @@ impl Deployment {
         created_at: String,
         events: Vec<models::DeploymentEvent>,
         id: u64,
+        number: u64,
         status: models::DeploymentStatus,
         updated_at: String,
     ) -> Deployment {
@@ -45,6 +48,7 @@ impl Deployment {
             created_at,
             events,
             id,
+            number,
             status,
             updated_at,
         }

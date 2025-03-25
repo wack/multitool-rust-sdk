@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **created_at** | **String** |  | 
 **events** | [**Vec<models::DeploymentEvent>**](DeploymentEvent.md) |  | 
 **id** | **u64** |  | 
+**number** | **u64** |  | 
 **status** | [**models::DeploymentStatus**](DeploymentStatus.md) |  | 
 **updated_at** | **String** |  | 
 

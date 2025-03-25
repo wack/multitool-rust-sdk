@@ -1006,6 +1006,7 @@
           "id",
           "status",
           "active",
+          "number",
           "app_id",
           "events",
           "created_at",
@@ -1029,6 +1030,11 @@
           },
           "id": {
             "$ref": "#/components/schemas/DeploymentId"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
           },
           "status": {
             "$ref": "#/components/schemas/DeploymentStatus"
