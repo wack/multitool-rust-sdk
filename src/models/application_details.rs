@@ -17,8 +17,6 @@ pub struct ApplicationDetails {
     pub app_type: models::ApplicationType,
     #[serde(rename = "created_at")]
     pub created_at: String,
-    #[serde(rename = "deployments")]
-    pub deployments: Vec<serde_json::Value>,
     #[serde(rename = "display_name")]
     pub display_name: String,
     #[serde(rename = "id")]
@@ -29,6 +27,8 @@ pub struct ApplicationDetails {
     pub monitor: Box<models::MonitorConfig>,
     #[serde(rename = "platform")]
     pub platform: Box<models::PlatformConfig>,
+    #[serde(rename = "rollouts")]
+    pub rollouts: Vec<serde_json::Value>,
     #[serde(rename = "updated_at")]
     pub updated_at: String,
 }
@@ -37,23 +37,23 @@ impl ApplicationDetails {
     pub fn new(
         app_type: models::ApplicationType,
         created_at: String,
-        deployments: Vec<serde_json::Value>,
         display_name: String,
         id: u32,
         ingress: models::IngressConfig,
         monitor: models::MonitorConfig,
         platform: models::PlatformConfig,
+        rollouts: Vec<serde_json::Value>,
         updated_at: String,
     ) -> ApplicationDetails {
         ApplicationDetails {
             app_type,
             created_at,
-            deployments,
             display_name,
             id,
             ingress: Box::new(ingress),
             monitor: Box::new(monitor),
             platform: Box::new(platform),
+            rollouts,
             updated_at,
         }
     }

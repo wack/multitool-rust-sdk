@@ -21,21 +21,21 @@ use std::sync::Arc;
 #[cfg_attr(feature = "mockall", automock)]
 #[async_trait]
 pub trait ResponseCodeMetricsApi: Send + Sync {
-    /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes
+    /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes
     ///
     ///
     async fn create_response_code_metrics<
         'workspace_id,
         'application_id,
-        'deployment_id,
+        'rollout_id,
         'create_response_code_metrics_request,
     >(
         &self,
         workspace_id: u32,
         application_id: u32,
-        deployment_id: u64,
+        rollout_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
-    ) -> Result<models::CreateResponseCodeMetricsSuccess, Error<CreateResponseCodeMetricsError>>;
+    ) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>>;
 }
 
 pub struct ResponseCodeMetricsApiClient {
@@ -53,21 +53,20 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
     async fn create_response_code_metrics<
         'workspace_id,
         'application_id,
-        'deployment_id,
+        'rollout_id,
         'create_response_code_metrics_request,
     >(
         &self,
         workspace_id: u32,
         application_id: u32,
-        deployment_id: u64,
+        rollout_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
-    ) -> Result<models::CreateResponseCodeMetricsSuccess, Error<CreateResponseCodeMetricsError>>
-    {
+    ) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, rollout_id=rollout_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
@@ -95,8 +94,8 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
             match local_var_content_type {
                 ContentType::Json => serde_json::from_str(&local_var_content).map_err(Error::from),
-                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateResponseCodeMetricsSuccess`"))),
-                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `models::CreateResponseCodeMetricsSuccess`")))),
+                ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `serde_json::Value`"))),
+                ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
             }
         } else {
             let local_var_entity: Option<CreateResponseCodeMetricsError> =

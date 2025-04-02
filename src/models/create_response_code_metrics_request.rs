@@ -13,28 +13,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateResponseCodeMetricsRequest {
-    #[serde(rename = "app_group")]
-    pub app_group: models::ApplicationGroup,
-    #[serde(rename = "status_2xx_count")]
-    pub status_2xx_count: u32,
-    #[serde(rename = "status_4xx_count")]
-    pub status_4xx_count: u32,
-    #[serde(rename = "status_5xx_count")]
-    pub status_5xx_count: u32,
+    #[serde(rename = "status_codes")]
+    pub status_codes: Vec<models::StatusCodeMetrics>,
 }
 
 impl CreateResponseCodeMetricsRequest {
-    pub fn new(
-        app_group: models::ApplicationGroup,
-        status_2xx_count: u32,
-        status_4xx_count: u32,
-        status_5xx_count: u32,
-    ) -> CreateResponseCodeMetricsRequest {
-        CreateResponseCodeMetricsRequest {
-            app_group,
-            status_2xx_count,
-            status_4xx_count,
-            status_5xx_count,
-        }
+    pub fn new(status_codes: Vec<models::StatusCodeMetrics>) -> CreateResponseCodeMetricsRequest {
+        CreateResponseCodeMetricsRequest { status_codes }
     }
 }
