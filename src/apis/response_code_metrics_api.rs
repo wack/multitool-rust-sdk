@@ -21,19 +21,19 @@ use std::sync::Arc;
 #[cfg_attr(feature = "mockall", automock)]
 #[async_trait]
 pub trait ResponseCodeMetricsApi: Send + Sync {
-    /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes
+    /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes
     ///
     ///
     async fn create_response_code_metrics<
         'workspace_id,
         'application_id,
-        'deployment_id,
+        'rollout_id,
         'create_response_code_metrics_request,
     >(
         &self,
         workspace_id: u32,
         application_id: u32,
-        deployment_id: u64,
+        rollout_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
     ) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>>;
 }
@@ -53,20 +53,20 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
     async fn create_response_code_metrics<
         'workspace_id,
         'application_id,
-        'deployment_id,
+        'rollout_id,
         'create_response_code_metrics_request,
     >(
         &self,
         workspace_id: u32,
         application_id: u32,
-        deployment_id: u64,
+        rollout_id: u64,
         create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest,
     ) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, deployment_id=deployment_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, rollout_id=rollout_id);
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 

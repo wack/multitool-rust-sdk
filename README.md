@@ -30,14 +30,14 @@ Class | Method | HTTP request | Description
 *ApplicationsApi* | [**delete_application**](docs/ApplicationsApi.md#delete_application) | **DELETE** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**get_application**](docs/ApplicationsApi.md#get_application) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**list_applications**](docs/ApplicationsApi.md#list_applications) | **GET** /api/v1/workspaces/{workspace_id}/applications | 
-*DeploymentStatesApi* | [**list_deployment_states**](docs/DeploymentStatesApi.md#list_deployment_states) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states | 
-*DeploymentStatesApi* | [**refresh_deployment_state**](docs/DeploymentStatesApi.md#refresh_deployment_state) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh | 
-*DeploymentStatesApi* | [**update_deployment_state**](docs/DeploymentStatesApi.md#update_deployment_state) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id} | 
-*DeploymentsApi* | [**create_deployment**](docs/DeploymentsApi.md#create_deployment) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments | 
-*DeploymentsApi* | [**list_deployments**](docs/DeploymentsApi.md#list_deployments) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments | 
-*DeploymentsApi* | [**read_deployment**](docs/DeploymentsApi.md#read_deployment) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id} | 
 *HeartbeatApi* | [**heartbeat_controller**](docs/HeartbeatApi.md#heartbeat_controller) | **GET** /api/v1/heartbeat | 
-*ResponseCodeMetricsApi* | [**create_response_code_metrics**](docs/ResponseCodeMetricsApi.md#create_response_code_metrics) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes | 
+*ResponseCodeMetricsApi* | [**create_response_code_metrics**](docs/ResponseCodeMetricsApi.md#create_response_code_metrics) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes | 
+*RolloutStatesApi* | [**list_rollout_states**](docs/RolloutStatesApi.md#list_rollout_states) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states | 
+*RolloutStatesApi* | [**refresh_rollout_state**](docs/RolloutStatesApi.md#refresh_rollout_state) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states/{state_id}/refresh | 
+*RolloutStatesApi* | [**update_rollout_state**](docs/RolloutStatesApi.md#update_rollout_state) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states/{state_id} | 
+*RolloutsApi* | [**create_rollout**](docs/RolloutsApi.md#create_rollout) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts | 
+*RolloutsApi* | [**list_rollouts**](docs/RolloutsApi.md#list_rollouts) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts | 
+*RolloutsApi* | [**read_rollout**](docs/RolloutsApi.md#read_rollout) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id} | 
 *UsersApi* | [**create_user**](docs/UsersApi.md#create_user) | **POST** /api/v1/users | 
 *UsersApi* | [**login**](docs/UsersApi.md#login) | **POST** /api/v1/users/login | 
 *WorkspacesApi* | [**create_workspace**](docs/WorkspacesApi.md#create_workspace) | **POST** /api/v1/workspaces | 
@@ -57,30 +57,20 @@ Class | Method | HTTP request | Description
  - [CloudWatchDimensions](docs/CloudWatchDimensions.md)
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
  - [CreateApplicationSuccess](docs/CreateApplicationSuccess.md)
- - [CreateDeploymentSuccess](docs/CreateDeploymentSuccess.md)
  - [CreateResponseCodeMetricsRequest](docs/CreateResponseCodeMetricsRequest.md)
+ - [CreateRolloutSuccess](docs/CreateRolloutSuccess.md)
  - [CreateUserRequest](docs/CreateUserRequest.md)
  - [CreateUserSuccess](docs/CreateUserSuccess.md)
  - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
  - [CreateWorkspaceSuccess](docs/CreateWorkspaceSuccess.md)
- - [Deployment](docs/Deployment.md)
- - [DeploymentEvent](docs/DeploymentEvent.md)
- - [DeploymentEventType](docs/DeploymentEventType.md)
- - [DeploymentState](docs/DeploymentState.md)
- - [DeploymentStateData](docs/DeploymentStateData.md)
- - [DeploymentStateDataOneOf](docs/DeploymentStateDataOneOf.md)
- - [DeploymentStateDataOneOfSetCanaryTraffic](docs/DeploymentStateDataOneOfSetCanaryTraffic.md)
- - [DeploymentStateStatus](docs/DeploymentStateStatus.md)
- - [DeploymentStateType](docs/DeploymentStateType.md)
- - [DeploymentStatus](docs/DeploymentStatus.md)
  - [ErrorResponse](docs/ErrorResponse.md)
  - [HeartbeatController200Response](docs/HeartbeatController200Response.md)
  - [IngressConfig](docs/IngressConfig.md)
  - [IngressConfigOneOf](docs/IngressConfigOneOf.md)
  - [IngressConfigOneOfAwsRestApiGateway](docs/IngressConfigOneOfAwsRestApiGateway.md)
  - [ListApplicationsSuccess](docs/ListApplicationsSuccess.md)
- - [ListDeploymentStatesSuccess](docs/ListDeploymentStatesSuccess.md)
- - [ListDeploymentsSuccess](docs/ListDeploymentsSuccess.md)
+ - [ListRolloutStatesSuccess](docs/ListRolloutStatesSuccess.md)
+ - [ListRolloutsSuccess](docs/ListRolloutsSuccess.md)
  - [ListWorkspaceSuccess](docs/ListWorkspaceSuccess.md)
  - [LoginRequest](docs/LoginRequest.md)
  - [LoginSuccess](docs/LoginSuccess.md)
@@ -91,10 +81,20 @@ Class | Method | HTTP request | Description
  - [PlatformConfigOneOf](docs/PlatformConfigOneOf.md)
  - [PlatformConfigOneOfAwsLambda](docs/PlatformConfigOneOfAwsLambda.md)
  - [ReadApplicationSuccess](docs/ReadApplicationSuccess.md)
- - [ReadDeploymentSuccess](docs/ReadDeploymentSuccess.md)
+ - [ReadRolloutSuccess](docs/ReadRolloutSuccess.md)
+ - [Rollout](docs/Rollout.md)
+ - [RolloutEvent](docs/RolloutEvent.md)
+ - [RolloutEventType](docs/RolloutEventType.md)
+ - [RolloutState](docs/RolloutState.md)
+ - [RolloutStateData](docs/RolloutStateData.md)
+ - [RolloutStateDataOneOf](docs/RolloutStateDataOneOf.md)
+ - [RolloutStateDataOneOfSetCanaryTraffic](docs/RolloutStateDataOneOfSetCanaryTraffic.md)
+ - [RolloutStateStatus](docs/RolloutStateStatus.md)
+ - [RolloutStateType](docs/RolloutStateType.md)
+ - [RolloutStatus](docs/RolloutStatus.md)
  - [StatusCodeMetrics](docs/StatusCodeMetrics.md)
- - [UpdateDeploymentStateRequest](docs/UpdateDeploymentStateRequest.md)
- - [UpdateDeploymentStateSuccess](docs/UpdateDeploymentStateSuccess.md)
+ - [UpdateRolloutStateRequest](docs/UpdateRolloutStateRequest.md)
+ - [UpdateRolloutStateSuccess](docs/UpdateRolloutStateSuccess.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceSuccess](docs/UpdateWorkspaceSuccess.md)
  - [UserDetails](docs/UserDetails.md)

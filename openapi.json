@@ -18,7 +18,9 @@
   "paths": {
     "/api/v1/heartbeat": {
       "get": {
-        "tags": ["Heartbeat"],
+        "tags": [
+          "Heartbeat"
+        ],
         "operationId": "heartbeat_controller",
         "responses": {
           "200": {
@@ -28,7 +30,9 @@
                 "schema": {
                   "type": "object",
                   "description": "A Heartbeat response indicates the status of the server.\nIn almost every conceivable circumstance, the response should\nbe a success.",
-                  "required": ["ok"],
+                  "required": [
+                    "ok"
+                  ],
                   "properties": {
                     "ok": {
                       "type": "boolean"
@@ -44,7 +48,9 @@
     },
     "/api/v1/users": {
       "post": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "operationId": "Create User",
         "requestBody": {
           "content": {
@@ -86,7 +92,9 @@
     },
     "/api/v1/users/login": {
       "post": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "operationId": "Login",
         "requestBody": {
           "content": {
@@ -121,7 +129,9 @@
     },
     "/api/v1/workspaces": {
       "get": {
-        "tags": ["Workspaces"],
+        "tags": [
+          "Workspaces"
+        ],
         "operationId": "List Workspaces",
         "parameters": [
           {
@@ -151,7 +161,9 @@
         }
       },
       "post": {
-        "tags": ["Workspaces"],
+        "tags": [
+          "Workspaces"
+        ],
         "operationId": "Create Workspace",
         "requestBody": {
           "content": {
@@ -182,7 +194,9 @@
     },
     "/api/v1/workspaces/{id}": {
       "get": {
-        "tags": ["Workspaces"],
+        "tags": [
+          "Workspaces"
+        ],
         "operationId": "Read Workspace",
         "parameters": [
           {
@@ -212,7 +226,9 @@
         }
       },
       "patch": {
-        "tags": ["Workspaces"],
+        "tags": [
+          "Workspaces"
+        ],
         "operationId": "Update Workspace",
         "parameters": [
           {
@@ -254,7 +270,9 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications": {
       "get": {
-        "tags": ["Applications"],
+        "tags": [
+          "Applications"
+        ],
         "operationId": "List Applications",
         "parameters": [
           {
@@ -284,7 +302,9 @@
         }
       },
       "post": {
-        "tags": ["Applications"],
+        "tags": [
+          "Applications"
+        ],
         "operationId": "Create Application",
         "parameters": [
           {
@@ -326,7 +346,9 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}": {
       "get": {
-        "tags": ["Applications"],
+        "tags": [
+          "Applications"
+        ],
         "operationId": "Get Application",
         "parameters": [
           {
@@ -365,7 +387,9 @@
         }
       },
       "delete": {
-        "tags": ["Applications"],
+        "tags": [
+          "Applications"
+        ],
         "operationId": "Delete Application",
         "parameters": [
           {
@@ -411,10 +435,12 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments": {
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts": {
       "get": {
-        "tags": ["Deployments"],
-        "operationId": "List Deployments",
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "List Rollouts",
         "parameters": [
           {
             "name": "workspace_id",
@@ -437,11 +463,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Deployment summary",
+            "description": "Rollout summary",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListDeploymentsSuccess"
+                  "$ref": "#/components/schemas/ListRolloutsSuccess"
                 }
               }
             }
@@ -452,8 +478,10 @@
         }
       },
       "post": {
-        "tags": ["Deployments"],
-        "operationId": "Create Deployment",
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Create Rollout",
         "parameters": [
           {
             "name": "workspace_id",
@@ -476,11 +504,11 @@
         ],
         "responses": {
           "201": {
-            "description": "Deployment details",
+            "description": "Rollout details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateDeploymentSuccess"
+                  "$ref": "#/components/schemas/CreateRolloutSuccess"
                 }
               }
             }
@@ -491,10 +519,12 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}": {
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}": {
       "get": {
-        "tags": ["Deployments"],
-        "operationId": "Read Deployment",
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Read Rollout",
         "parameters": [
           {
             "name": "workspace_id",
@@ -515,22 +545,22 @@
             }
           },
           {
-            "name": "deployment_id",
+            "name": "rollout_id",
             "in": "path",
-            "description": "The deployment's id",
+            "description": "The rollout's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentId"
+              "$ref": "#/components/schemas/RolloutId"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployment details",
+            "description": "Rollout details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDeploymentSuccess"
+                  "$ref": "#/components/schemas/ReadRolloutSuccess"
                 }
               }
             }
@@ -541,9 +571,11 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/metrics/response-codes": {
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes": {
       "post": {
-        "tags": ["Response Code Metrics"],
+        "tags": [
+          "Response Code Metrics"
+        ],
         "operationId": "Create Response Code Metrics",
         "parameters": [
           {
@@ -565,12 +597,12 @@
             }
           },
           {
-            "name": "deployment_id",
+            "name": "rollout_id",
             "in": "path",
-            "description": "The deployment's id",
+            "description": "The rollout's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentId"
+              "$ref": "#/components/schemas/RolloutId"
             }
           }
         ],
@@ -601,10 +633,12 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states": {
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states": {
       "get": {
-        "tags": ["Deployment States"],
-        "operationId": "List Deployment States",
+        "tags": [
+          "Rollout States"
+        ],
+        "operationId": "List Rollout States",
         "parameters": [
           {
             "name": "workspace_id",
@@ -625,12 +659,12 @@
             }
           },
           {
-            "name": "deployment_id",
+            "name": "rollout_id",
             "in": "path",
-            "description": "The deployment's id",
+            "description": "The rollout's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentId"
+              "$ref": "#/components/schemas/RolloutId"
             }
           },
           {
@@ -639,17 +673,17 @@
             "description": "An optional status to filter by",
             "required": false,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentStateStatus"
+              "$ref": "#/components/schemas/RolloutStateStatus"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployment state details",
+            "description": "Rollout state details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListDeploymentStatesSuccess"
+                  "$ref": "#/components/schemas/ListRolloutStatesSuccess"
                 }
               }
             }
@@ -660,10 +694,12 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}": {
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states/{state_id}": {
       "patch": {
-        "tags": ["Deployment States"],
-        "operationId": "Update Deployment State",
+        "tags": [
+          "Rollout States"
+        ],
+        "operationId": "Update Rollout State",
         "parameters": [
           {
             "name": "workspace_id",
@@ -684,21 +720,21 @@
             }
           },
           {
-            "name": "deployment_id",
+            "name": "rollout_id",
             "in": "path",
-            "description": "The deployment's id",
+            "description": "The rollout's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentId"
+              "$ref": "#/components/schemas/RolloutId"
             }
           },
           {
             "name": "state_id",
             "in": "path",
-            "description": "The deployment state's id",
+            "description": "The rollout state's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentStateId"
+              "$ref": "#/components/schemas/RolloutStateId"
             }
           }
         ],
@@ -706,7 +742,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDeploymentStateRequest"
+                "$ref": "#/components/schemas/UpdateRolloutStateRequest"
               }
             }
           },
@@ -714,11 +750,11 @@
         },
         "responses": {
           "200": {
-            "description": "Deployment state details",
+            "description": "Rollout state details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateDeploymentStateSuccess"
+                  "$ref": "#/components/schemas/UpdateRolloutStateSuccess"
                 }
               }
             }
@@ -729,10 +765,12 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/deployments/{deployment_id}/states/{state_id}/refresh": {
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states/{state_id}/refresh": {
       "post": {
-        "tags": ["Deployment States"],
-        "operationId": "Refresh Deployment State",
+        "tags": [
+          "Rollout States"
+        ],
+        "operationId": "Refresh Rollout State",
         "parameters": [
           {
             "name": "workspace_id",
@@ -753,31 +791,31 @@
             }
           },
           {
-            "name": "deployment_id",
+            "name": "rollout_id",
             "in": "path",
-            "description": "The deployment's id",
+            "description": "The rollout's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentId"
+              "$ref": "#/components/schemas/RolloutId"
             }
           },
           {
             "name": "state_id",
             "in": "path",
-            "description": "The deployment state's id",
+            "description": "The rollout state's id",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/DeploymentStateId"
+              "$ref": "#/components/schemas/RolloutStateId"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Deployment state details",
+            "description": "Rollout state details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateDeploymentStateSuccess"
+                  "$ref": "#/components/schemas/UpdateRolloutStateSuccess"
                 }
               }
             }
@@ -795,7 +833,9 @@
         "oneOf": [
           {
             "type": "object",
-            "required": ["web_service"],
+            "required": [
+              "web_service"
+            ],
             "properties": {
               "web_service": {
                 "$ref": "#/components/schemas/WebServiceConfig"
@@ -810,7 +850,7 @@
           "id",
           "app_type",
           "display_name",
-          "deployments",
+          "rollouts",
           "ingress",
           "monitor",
           "platform",
@@ -823,12 +863,6 @@
           },
           "created_at": {
             "type": "string"
-          },
-          "deployments": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
           },
           "display_name": {
             "type": "string"
@@ -845,6 +879,12 @@
           "platform": {
             "$ref": "#/components/schemas/PlatformConfig"
           },
+          "rollouts": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
           "updated_at": {
             "type": "string"
           }
@@ -852,7 +892,10 @@
       },
       "ApplicationGroup": {
         "type": "string",
-        "enum": ["canary", "baseline"]
+        "enum": [
+          "canary",
+          "baseline"
+        ]
       },
       "ApplicationId": {
         "type": "integer",
@@ -889,14 +932,19 @@
       "ApplicationType": {
         "type": "string",
         "description": "An identifier of what kind of application we're tracking.",
-        "enum": ["web_service"]
+        "enum": [
+          "web_service"
+        ]
       },
       "CleartextPassword": {
         "type": "string"
       },
       "CloudWatchDimensions": {
         "type": "object",
-        "required": ["name", "value"],
+        "required": [
+          "name",
+          "value"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -908,7 +956,10 @@
       },
       "CreateApplicationRequest": {
         "type": "object",
-        "required": ["display_name", "config"],
+        "required": [
+          "display_name",
+          "config"
+        ],
         "properties": {
           "config": {
             "$ref": "#/components/schemas/ApplicationConfig"
@@ -920,25 +971,20 @@
       },
       "CreateApplicationSuccess": {
         "type": "object",
-        "required": ["application"],
+        "required": [
+          "application"
+        ],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationSummary"
           }
         }
       },
-      "CreateDeploymentSuccess": {
-        "type": "object",
-        "required": ["deployment"],
-        "properties": {
-          "deployment": {
-            "$ref": "#/components/schemas/Deployment"
-          }
-        }
-      },
       "CreateResponseCodeMetricsRequest": {
         "type": "object",
-        "required": ["status_codes"],
+        "required": [
+          "status_codes"
+        ],
         "properties": {
           "status_codes": {
             "type": "array",
@@ -951,10 +997,25 @@
       "CreateResponseCodeMetricsSuccess": {
         "type": "object"
       },
+      "CreateRolloutSuccess": {
+        "type": "object",
+        "required": [
+          "rollout"
+        ],
+        "properties": {
+          "rollout": {
+            "$ref": "#/components/schemas/Rollout"
+          }
+        }
+      },
       "CreateUserRequest": {
         "type": "object",
         "description": "Expected body of user endpoint requests",
-        "required": ["email", "password", "tos_accepted"],
+        "required": [
+          "email",
+          "password",
+          "tos_accepted"
+        ],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email",
@@ -972,7 +1033,9 @@
       },
       "CreateUserSuccess": {
         "type": "object",
-        "required": ["user"],
+        "required": [
+          "user"
+        ],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserDetails"
@@ -981,7 +1044,9 @@
       },
       "CreateWorkspaceRequest": {
         "type": "object",
-        "required": ["display_name"],
+        "required": [
+          "display_name"
+        ],
         "properties": {
           "display_name": {
             "type": "string"
@@ -990,7 +1055,9 @@
       },
       "CreateWorkspaceSuccess": {
         "type": "object",
-        "required": ["workspace"],
+        "required": [
+          "workspace"
+        ],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceSummary"
@@ -1000,178 +1067,14 @@
       "DeleteApplicationResponseBody": {
         "type": "object"
       },
-      "Deployment": {
-        "type": "object",
-        "required": [
-          "id",
-          "status",
-          "active",
-          "number",
-          "app_id",
-          "events",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "active": {
-            "type": "boolean"
-          },
-          "app_id": {
-            "$ref": "#/components/schemas/ApplicationId"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DeploymentEvent"
-            }
-          },
-          "id": {
-            "$ref": "#/components/schemas/DeploymentId"
-          },
-          "number": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          },
-          "status": {
-            "$ref": "#/components/schemas/DeploymentStatus"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        }
-      },
-      "DeploymentEvent": {
-        "type": "object",
-        "required": ["id", "event_type", "created_at", "updated_at"],
-        "properties": {
-          "created_at": {
-            "type": "string"
-          },
-          "data": {},
-          "event_type": {
-            "$ref": "#/components/schemas/DeploymentEventType"
-          },
-          "id": {
-            "$ref": "#/components/schemas/DeploymentEventId"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        }
-      },
-      "DeploymentEventId": {
-        "type": "integer",
-        "format": "int64",
-        "minimum": 0
-      },
-      "DeploymentEventType": {
-        "type": "string",
-        "enum": [
-          "deployment_queued",
-          "deployment_ready",
-          "canary_deployed",
-          "traffic_increased",
-          "traffic_decreased",
-          "promoted",
-          "rolled_back",
-          "superseded"
-        ]
-      },
-      "DeploymentId": {
-        "type": "integer",
-        "format": "int64",
-        "minimum": 0
-      },
-      "DeploymentState": {
-        "type": "object",
-        "required": ["id", "state_type", "status", "created_at", "updated_at"],
-        "properties": {
-          "created_at": {
-            "type": "string"
-          },
-          "data": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/DeploymentStateData"
-              }
-            ]
-          },
-          "id": {
-            "$ref": "#/components/schemas/DeploymentStateId"
-          },
-          "state_type": {
-            "$ref": "#/components/schemas/DeploymentStateType"
-          },
-          "status": {
-            "$ref": "#/components/schemas/DeploymentStateStatus"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        }
-      },
-      "DeploymentStateData": {
-        "oneOf": [
-          {
-            "type": "object",
-            "required": ["SetCanaryTraffic"],
-            "properties": {
-              "SetCanaryTraffic": {
-                "type": "object",
-                "required": ["percent_traffic"],
-                "properties": {
-                  "percent_traffic": {
-                    "type": "integer",
-                    "format": "int32",
-                    "minimum": 0
-                  }
-                }
-              }
-            }
-          }
-        ]
-      },
-      "DeploymentStateId": {
-        "type": "integer",
-        "format": "int64",
-        "minimum": 0
-      },
-      "DeploymentStateStatus": {
-        "type": "string",
-        "enum": ["pending", "in_progress", "superseded", "done", "cancelled"]
-      },
-      "DeploymentStateType": {
-        "type": "string",
-        "enum": [
-          "promote_canary",
-          "deploy_canary",
-          "set_canary_traffic",
-          "rollback_canary"
-        ]
-      },
-      "DeploymentStatus": {
-        "type": "string",
-        "enum": [
-          "queued",
-          "in_progress",
-          "promoted",
-          "rolled_back",
-          "superseded"
-        ]
-      },
       "Email": {
         "type": "string"
       },
       "ErrorResponse": {
         "type": "object",
-        "required": ["errors"],
+        "required": [
+          "errors"
+        ],
         "properties": {
           "errors": {
             "type": "array",
@@ -1185,7 +1088,9 @@
         "oneOf": [
           {
             "type": "object",
-            "required": ["aws_rest_api_gateway"],
+            "required": [
+              "aws_rest_api_gateway"
+            ],
             "properties": {
               "aws_rest_api_gateway": {
                 "type": "object",
@@ -1220,7 +1125,9 @@
       },
       "ListApplicationsSuccess": {
         "type": "object",
-        "required": ["applications"],
+        "required": [
+          "applications"
+        ],
         "properties": {
           "applications": {
             "type": "array",
@@ -1230,33 +1137,39 @@
           }
         }
       },
-      "ListDeploymentStatesSuccess": {
+      "ListRolloutStatesSuccess": {
         "type": "object",
-        "required": ["states"],
+        "required": [
+          "states"
+        ],
         "properties": {
           "states": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DeploymentState"
+              "$ref": "#/components/schemas/RolloutState"
             }
           }
         }
       },
-      "ListDeploymentsSuccess": {
+      "ListRolloutsSuccess": {
         "type": "object",
-        "required": ["deployments"],
+        "required": [
+          "rollouts"
+        ],
         "properties": {
-          "deployments": {
+          "rollouts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Deployment"
+              "$ref": "#/components/schemas/Rollout"
             }
           }
         }
       },
       "ListWorkspaceSuccess": {
         "type": "object",
-        "required": ["workspaces"],
+        "required": [
+          "workspaces"
+        ],
         "properties": {
           "workspaces": {
             "type": "array",
@@ -1268,7 +1181,10 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email",
@@ -1282,7 +1198,9 @@
       },
       "LoginSuccess": {
         "type": "object",
-        "required": ["user"],
+        "required": [
+          "user"
+        ],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserSummary"
@@ -1293,11 +1211,16 @@
         "oneOf": [
           {
             "type": "object",
-            "required": ["aws_cloudwatch_metrics"],
+            "required": [
+              "aws_cloudwatch_metrics"
+            ],
             "properties": {
               "aws_cloudwatch_metrics": {
                 "type": "object",
-                "required": ["region", "dimensions"],
+                "required": [
+                  "region",
+                  "dimensions"
+                ],
                 "properties": {
                   "dimensions": {
                     "type": "array",
@@ -1318,11 +1241,16 @@
         "oneOf": [
           {
             "type": "object",
-            "required": ["aws_lambda"],
+            "required": [
+              "aws_lambda"
+            ],
             "properties": {
               "aws_lambda": {
                 "type": "object",
-                "required": ["region", "name"],
+                "required": [
+                  "region",
+                  "name"
+                ],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -1338,21 +1266,212 @@
       },
       "ReadApplicationSuccess": {
         "type": "object",
-        "required": ["application"],
+        "required": [
+          "application"
+        ],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationDetails"
           }
         }
       },
-      "ReadDeploymentSuccess": {
+      "ReadRolloutSuccess": {
         "type": "object",
-        "required": ["deployment"],
+        "required": [
+          "rollout"
+        ],
         "properties": {
-          "deployment": {
-            "$ref": "#/components/schemas/Deployment"
+          "rollout": {
+            "$ref": "#/components/schemas/Rollout"
           }
         }
+      },
+      "Rollout": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "active",
+          "number",
+          "app_id",
+          "events",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "app_id": {
+            "$ref": "#/components/schemas/ApplicationId"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RolloutEvent"
+            }
+          },
+          "id": {
+            "$ref": "#/components/schemas/RolloutId"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "status": {
+            "$ref": "#/components/schemas/RolloutStatus"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "RolloutEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "event_type",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "data": {},
+          "event_type": {
+            "$ref": "#/components/schemas/RolloutEventType"
+          },
+          "id": {
+            "$ref": "#/components/schemas/RolloutEventId"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "RolloutEventId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "RolloutEventType": {
+        "type": "string",
+        "enum": [
+          "rollout_queued",
+          "rollout_ready",
+          "canary_deployed",
+          "traffic_increased",
+          "traffic_decreased",
+          "promoted",
+          "rolled_back",
+          "superseded"
+        ]
+      },
+      "RolloutId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "RolloutState": {
+        "type": "object",
+        "required": [
+          "id",
+          "state_type",
+          "status",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "created_at": {
+            "type": "string"
+          },
+          "data": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RolloutStateData"
+              }
+            ]
+          },
+          "id": {
+            "$ref": "#/components/schemas/RolloutStateId"
+          },
+          "state_type": {
+            "$ref": "#/components/schemas/RolloutStateType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RolloutStateStatus"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "RolloutStateData": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "SetCanaryTraffic"
+            ],
+            "properties": {
+              "SetCanaryTraffic": {
+                "type": "object",
+                "required": [
+                  "percent_traffic"
+                ],
+                "properties": {
+                  "percent_traffic": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RolloutStateId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "RolloutStateStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "in_progress",
+          "superseded",
+          "done",
+          "cancelled"
+        ]
+      },
+      "RolloutStateType": {
+        "type": "string",
+        "enum": [
+          "promote_canary",
+          "deploy_canary",
+          "set_canary_traffic",
+          "rollback_canary"
+        ]
+      },
+      "RolloutStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "in_progress",
+          "promoted",
+          "rolled_back",
+          "superseded"
+        ]
       },
       "StatusCodeMetrics": {
         "type": "object",
@@ -1387,7 +1506,7 @@
           }
         }
       },
-      "UpdateDeploymentStateRequest": {
+      "UpdateRolloutStateRequest": {
         "type": "object",
         "properties": {
           "status": {
@@ -1396,18 +1515,20 @@
                 "type": "null"
               },
               {
-                "$ref": "#/components/schemas/DeploymentStateStatus"
+                "$ref": "#/components/schemas/RolloutStateStatus"
               }
             ]
           }
         }
       },
-      "UpdateDeploymentStateSuccess": {
+      "UpdateRolloutStateSuccess": {
         "type": "object",
-        "required": ["state"],
+        "required": [
+          "state"
+        ],
         "properties": {
           "state": {
-            "$ref": "#/components/schemas/DeploymentState"
+            "$ref": "#/components/schemas/RolloutState"
           }
         }
       },
@@ -1415,13 +1536,18 @@
         "type": "object",
         "properties": {
           "display_name": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
       "UpdateWorkspaceSuccess": {
         "type": "object",
-        "required": ["workspace"],
+        "required": [
+          "workspace"
+        ],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceSummary"
@@ -1430,7 +1556,13 @@
       },
       "UserDetails": {
         "type": "object",
-        "required": ["id", "email", "created_at", "jwt", "expires_at"],
+        "required": [
+          "id",
+          "email",
+          "created_at",
+          "jwt",
+          "expires_at"
+        ],
         "properties": {
           "created_at": {
             "type": "string",
@@ -1458,7 +1590,12 @@
       "UserSummary": {
         "type": "object",
         "description": "Successful login response payload",
-        "required": ["id", "email", "jwt", "expires_at"],
+        "required": [
+          "id",
+          "email",
+          "jwt",
+          "expires_at"
+        ],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email"
@@ -1476,7 +1613,11 @@
       },
       "WebServiceConfig": {
         "type": "object",
-        "required": ["ingress", "monitor", "platform"],
+        "required": [
+          "ingress",
+          "monitor",
+          "platform"
+        ],
         "properties": {
           "ingress": {
             "$ref": "#/components/schemas/IngressConfig"
@@ -1529,7 +1670,9 @@
       },
       "WorkspaceReadSuccess": {
         "type": "object",
-        "required": ["workspace"],
+        "required": [
+          "workspace"
+        ],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceDetails"
@@ -1538,7 +1681,11 @@
       },
       "WorkspaceSummary": {
         "type": "object",
-        "required": ["id", "display_name", "created_at"],
+        "required": [
+          "id",
+          "display_name",
+          "created_at"
+        ],
         "properties": {
           "created_at": {
             "type": "string"
@@ -1578,16 +1725,16 @@
       "description": "Applications"
     },
     {
-      "name": "Deployments",
-      "description": "Deployments"
+      "name": "Rollouts",
+      "description": "Rollouts"
     },
     {
       "name": "Response Code Metrics",
       "description": "Response Code Metrics"
     },
     {
-      "name": "Deployment States",
-      "description": "Deployment States"
+      "name": "Rollout States",
+      "description": "Rollout States"
     }
   ]
 }

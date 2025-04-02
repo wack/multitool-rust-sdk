@@ -12,18 +12,18 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdateWorkspaceRequest {
+pub struct UpdateRolloutStateRequest {
     #[serde(
-        rename = "display_name",
+        rename = "status",
         default,
         with = "::serde_with::rust::double_option",
         skip_serializing_if = "Option::is_none"
     )]
-    pub display_name: Option<Option<String>>,
+    pub status: Option<Option<models::RolloutStateStatus>>,
 }
 
-impl UpdateWorkspaceRequest {
-    pub fn new() -> UpdateWorkspaceRequest {
-        UpdateWorkspaceRequest { display_name: None }
+impl UpdateRolloutStateRequest {
+    pub fn new() -> UpdateRolloutStateRequest {
+        UpdateRolloutStateRequest { status: None }
     }
 }

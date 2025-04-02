@@ -11,34 +11,36 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// WorkspaceDetails : Details about a particular workspace.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct WorkspaceDetails {
-    #[serde(rename = "applications")]
-    pub applications: Vec<models::ApplicationSummary>,
+pub struct RolloutEvent {
     #[serde(rename = "created_at")]
     pub created_at: String,
-    #[serde(rename = "display_name")]
-    pub display_name: String,
+    #[serde(
+        rename = "data",
+        default,
+        with = "::serde_with::rust::double_option",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data: Option<Option<serde_json::Value>>,
+    #[serde(rename = "event_type")]
+    pub event_type: models::RolloutEventType,
     #[serde(rename = "id")]
-    pub id: u32,
+    pub id: u64,
     #[serde(rename = "updated_at")]
     pub updated_at: String,
 }
 
-impl WorkspaceDetails {
-    /// Details about a particular workspace.
+impl RolloutEvent {
     pub fn new(
-        applications: Vec<models::ApplicationSummary>,
         created_at: String,
-        display_name: String,
-        id: u32,
+        event_type: models::RolloutEventType,
+        id: u64,
         updated_at: String,
-    ) -> WorkspaceDetails {
-        WorkspaceDetails {
-            applications,
+    ) -> RolloutEvent {
+        RolloutEvent {
             created_at,
-            display_name,
+            data: None,
+            event_type,
             id,
             updated_at,
         }
