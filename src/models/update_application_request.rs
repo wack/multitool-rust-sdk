@@ -12,14 +12,14 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdateWorkspaceRequest {
+pub struct UpdateApplicationRequest {
     #[serde(rename = "display_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub display_name: Option<Option<String>>,
 }
 
-impl UpdateWorkspaceRequest {
-    pub fn new() -> UpdateWorkspaceRequest {
-        UpdateWorkspaceRequest {
+impl UpdateApplicationRequest {
+    pub fn new() -> UpdateApplicationRequest {
+        UpdateApplicationRequest {
             display_name: None,
         }
     }

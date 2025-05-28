@@ -12,14 +12,14 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateApplicationSuccess {
+pub struct UpdateApplicationSuccess {
     #[serde(rename = "application")]
     pub application: Box<models::ApplicationDetails>,
 }
 
-impl CreateApplicationSuccess {
-    pub fn new(application: models::ApplicationDetails) -> CreateApplicationSuccess {
-        CreateApplicationSuccess {
+impl UpdateApplicationSuccess {
+    pub fn new(application: models::ApplicationDetails) -> UpdateApplicationSuccess {
+        UpdateApplicationSuccess {
             application: Box::new(application),
         }
     }

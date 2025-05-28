@@ -4,14 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_type** | [**models::ApplicationType**](ApplicationType.md) |  | 
+**cloud** | Option<[**models::Cloud**](Cloud.md)> |  | [optional]
 **created_at** | **String** |  | 
 **display_name** | **String** |  | 
 **id** | **u32** |  | 
-**ingress** | [**models::IngressConfig**](IngressConfig.md) |  | 
-**monitor** | [**models::MonitorConfig**](MonitorConfig.md) |  | 
-**platform** | [**models::PlatformConfig**](PlatformConfig.md) |  | 
-**rollouts** | [**Vec<serde_json::Value>**](serde_json::Value.md) |  | 
 **updated_at** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

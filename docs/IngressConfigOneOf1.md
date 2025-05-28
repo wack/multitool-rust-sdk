@@ -1,14 +1,10 @@
-# WorkspaceDetails
+# IngressConfigOneOf1
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**applications** | [**Vec<models::ApplicationDetails>**](ApplicationDetails.md) |  | 
-**created_at** | **String** |  | 
-**display_name** | **String** |  | 
-**id** | **u32** |  | 
-**updated_at** | **String** |  | 
+**cloudflare_worker** | [**models::IngressConfigOneOf1CloudflareWorker**](IngressConfig_oneOf_1_cloudflare_worker.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

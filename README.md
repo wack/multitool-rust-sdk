@@ -30,6 +30,7 @@ Class | Method | HTTP request | Description
 *ApplicationsApi* | [**delete_application**](docs/ApplicationsApi.md#delete_application) | **DELETE** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**get_application**](docs/ApplicationsApi.md#get_application) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**list_applications**](docs/ApplicationsApi.md#list_applications) | **GET** /api/v1/workspaces/{workspace_id}/applications | 
+*ApplicationsApi* | [**update_application**](docs/ApplicationsApi.md#update_application) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *HeartbeatApi* | [**heartbeat_controller**](docs/HeartbeatApi.md#heartbeat_controller) | **GET** /api/v1/heartbeat | 
 *ResponseCodeMetricsApi* | [**create_response_code_metrics**](docs/ResponseCodeMetricsApi.md#create_response_code_metrics) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes | 
 *RolloutStatesApi* | [**list_rollout_states**](docs/RolloutStatesApi.md#list_rollout_states) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states | 
@@ -52,12 +53,12 @@ Class | Method | HTTP request | Description
  - [ApplicationConfigOneOf](docs/ApplicationConfigOneOf.md)
  - [ApplicationDetails](docs/ApplicationDetails.md)
  - [ApplicationGroup](docs/ApplicationGroup.md)
- - [ApplicationSummary](docs/ApplicationSummary.md)
- - [ApplicationType](docs/ApplicationType.md)
+ - [Cloud](docs/Cloud.md)
  - [CloudWatchDimensions](docs/CloudWatchDimensions.md)
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
  - [CreateApplicationSuccess](docs/CreateApplicationSuccess.md)
  - [CreateResponseCodeMetricsRequest](docs/CreateResponseCodeMetricsRequest.md)
+ - [CreateRolloutRequest](docs/CreateRolloutRequest.md)
  - [CreateRolloutSuccess](docs/CreateRolloutSuccess.md)
  - [CreateUserRequest](docs/CreateUserRequest.md)
  - [CreateUserSuccess](docs/CreateUserSuccess.md)
@@ -67,6 +68,8 @@ Class | Method | HTTP request | Description
  - [HeartbeatController200Response](docs/HeartbeatController200Response.md)
  - [IngressConfig](docs/IngressConfig.md)
  - [IngressConfigOneOf](docs/IngressConfigOneOf.md)
+ - [IngressConfigOneOf1](docs/IngressConfigOneOf1.md)
+ - [IngressConfigOneOf1CloudflareWorker](docs/IngressConfigOneOf1CloudflareWorker.md)
  - [IngressConfigOneOfAwsRestApiGateway](docs/IngressConfigOneOfAwsRestApiGateway.md)
  - [ListApplicationsSuccess](docs/ListApplicationsSuccess.md)
  - [ListRolloutStatesSuccess](docs/ListRolloutStatesSuccess.md)
@@ -76,6 +79,7 @@ Class | Method | HTTP request | Description
  - [LoginSuccess](docs/LoginSuccess.md)
  - [MonitorConfig](docs/MonitorConfig.md)
  - [MonitorConfigOneOf](docs/MonitorConfigOneOf.md)
+ - [MonitorConfigOneOf1](docs/MonitorConfigOneOf1.md)
  - [MonitorConfigOneOfAwsCloudwatchMetrics](docs/MonitorConfigOneOfAwsCloudwatchMetrics.md)
  - [PlatformConfig](docs/PlatformConfig.md)
  - [PlatformConfigOneOf](docs/PlatformConfigOneOf.md)
@@ -93,6 +97,8 @@ Class | Method | HTTP request | Description
  - [RolloutStateType](docs/RolloutStateType.md)
  - [RolloutStatus](docs/RolloutStatus.md)
  - [StatusCodeMetrics](docs/StatusCodeMetrics.md)
+ - [UpdateApplicationRequest](docs/UpdateApplicationRequest.md)
+ - [UpdateApplicationSuccess](docs/UpdateApplicationSuccess.md)
  - [UpdateRolloutStateRequest](docs/UpdateRolloutStateRequest.md)
  - [UpdateRolloutStateSuccess](docs/UpdateRolloutStateSuccess.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)

@@ -24,19 +24,21 @@ pub trait RolloutsApi: Send + Sync {
     /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts
     ///
     ///
-    async fn create_rollout<'workspace_id, 'application_id>(
+    async fn create_rollout<'workspace_id, 'application_id, 'create_rollout_request>(
         &self,
         workspace_id: u32,
         application_id: u32,
+        create_rollout_request: models::CreateRolloutRequest,
     ) -> Result<models::CreateRolloutSuccess, Error<CreateRolloutError>>;
 
     /// GET /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts
     ///
     ///
-    async fn list_rollouts<'workspace_id, 'application_id>(
+    async fn list_rollouts<'workspace_id, 'application_id, 'rollout_number>(
         &self,
         workspace_id: u32,
         application_id: u32,
+        rollout_number: Option<u64>,
     ) -> Result<models::ListRolloutsSuccess, Error<ListRolloutsError>>;
 
     /// GET /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}
@@ -62,10 +64,11 @@ impl RolloutsApiClient {
 
 #[async_trait]
 impl RolloutsApi for RolloutsApiClient {
-    async fn create_rollout<'workspace_id, 'application_id>(
+    async fn create_rollout<'workspace_id, 'application_id, 'create_rollout_request>(
         &self,
         workspace_id: u32,
         application_id: u32,
+        create_rollout_request: models::CreateRolloutRequest,
     ) -> Result<models::CreateRolloutSuccess, Error<CreateRolloutError>> {
         let local_var_configuration = &self.configuration;
 
@@ -87,6 +90,7 @@ impl RolloutsApi for RolloutsApiClient {
         if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
             local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
         };
+        local_var_req_builder = local_var_req_builder.json(&create_rollout_request);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;
@@ -118,10 +122,11 @@ impl RolloutsApi for RolloutsApiClient {
         }
     }
 
-    async fn list_rollouts<'workspace_id, 'application_id>(
+    async fn list_rollouts<'workspace_id, 'application_id, 'rollout_number>(
         &self,
         workspace_id: u32,
         application_id: u32,
+        rollout_number: Option<u64>,
     ) -> Result<models::ListRolloutsSuccess, Error<ListRolloutsError>> {
         let local_var_configuration = &self.configuration;
 
@@ -136,6 +141,10 @@ impl RolloutsApi for RolloutsApiClient {
         let mut local_var_req_builder =
             local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+        if let Some(ref local_var_str) = rollout_number {
+            local_var_req_builder =
+                local_var_req_builder.query(&[("rollout_number", &local_var_str.to_string())]);
+        }
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
             local_var_req_builder = local_var_req_builder
                 .header(reqwest::header::USER_AGENT, local_var_user_agent.clone());

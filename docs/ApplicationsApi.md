@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_application**](ApplicationsApi.md#delete_application) | **DELETE** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 [**get_application**](ApplicationsApi.md#get_application) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 [**list_applications**](ApplicationsApi.md#list_applications) | **GET** /api/v1/workspaces/{workspace_id}/applications | 
+[**update_application**](ApplicationsApi.md#update_application) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 
 
 
@@ -121,6 +122,36 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## update_application
+
+> models::UpdateApplicationSuccess update_application(workspace_id, application_id, update_application_request)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
+**update_application_request** | [**UpdateApplicationRequest**](UpdateApplicationRequest.md) |  | [required] |
+
+### Return type
+
+[**models::UpdateApplicationSuccess**](UpdateApplicationSuccess.md)
+
+### Authorization
+
+[bearer_auth](../README.md#bearer_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

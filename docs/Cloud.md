@@ -1,11 +1,12 @@
-# PlatformConfig
+# Cloud
 
 ## Enum Variants
 
-| Name | Description |
+| Name | Value |
 |---- | -----|
-| IngressConfigOneOf1 |  |
-| PlatformConfigOneOf |  |
+| Aws | Aws |
+| Cloudflare | Cloudflare |
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

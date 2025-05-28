@@ -12,15 +12,15 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct LoginSuccess {
-    #[serde(rename = "user")]
-    pub user: Box<models::UserSummary>,
+pub struct CreateRolloutRequest {
+    #[serde(rename = "config")]
+    pub config: Box<models::ApplicationConfig>,
 }
 
-impl LoginSuccess {
-    pub fn new(user: models::UserSummary) -> LoginSuccess {
-        LoginSuccess {
-            user: Box::new(user),
+impl CreateRolloutRequest {
+    pub fn new(config: models::ApplicationConfig) -> CreateRolloutRequest {
+        CreateRolloutRequest {
+            config: Box::new(config),
         }
     }
 }

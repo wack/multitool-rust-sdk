@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## create_rollout
 
-> models::CreateRolloutSuccess create_rollout(workspace_id, application_id)
+> models::CreateRolloutSuccess create_rollout(workspace_id, application_id, create_rollout_request)
 
 
 ### Parameters
@@ -22,6 +22,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **workspace_id** | **u32** | The workspace's id | [required] |
 **application_id** | **u32** | The application's id | [required] |
+**create_rollout_request** | [**CreateRolloutRequest**](CreateRolloutRequest.md) |  | [required] |
 
 ### Return type
 
@@ -33,7 +34,7 @@ Name | Type | Description  | Required | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -41,7 +42,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_rollouts
 
-> models::ListRolloutsSuccess list_rollouts(workspace_id, application_id)
+> models::ListRolloutsSuccess list_rollouts(workspace_id, application_id, rollout_number)
 
 
 ### Parameters
@@ -51,6 +52,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **workspace_id** | **u32** | The workspace's id | [required] |
 **application_id** | **u32** | The application's id | [required] |
+**rollout_number** | Option<**u64**> | The rollout's number within a given application |  |
 
 ### Return type
 

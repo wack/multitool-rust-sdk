@@ -13,47 +13,35 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApplicationDetails {
-    #[serde(rename = "app_type")]
-    pub app_type: models::ApplicationType,
+    #[serde(
+        rename = "cloud",
+        default,
+        with = "::serde_with::rust::double_option",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cloud: Option<Option<models::Cloud>>,
     #[serde(rename = "created_at")]
     pub created_at: String,
     #[serde(rename = "display_name")]
     pub display_name: String,
     #[serde(rename = "id")]
     pub id: u32,
-    #[serde(rename = "ingress")]
-    pub ingress: Box<models::IngressConfig>,
-    #[serde(rename = "monitor")]
-    pub monitor: Box<models::MonitorConfig>,
-    #[serde(rename = "platform")]
-    pub platform: Box<models::PlatformConfig>,
-    #[serde(rename = "rollouts")]
-    pub rollouts: Vec<serde_json::Value>,
     #[serde(rename = "updated_at")]
     pub updated_at: String,
 }
 
 impl ApplicationDetails {
     pub fn new(
-        app_type: models::ApplicationType,
         created_at: String,
         display_name: String,
         id: u32,
-        ingress: models::IngressConfig,
-        monitor: models::MonitorConfig,
-        platform: models::PlatformConfig,
-        rollouts: Vec<serde_json::Value>,
         updated_at: String,
     ) -> ApplicationDetails {
         ApplicationDetails {
-            app_type,
+            cloud: None,
             created_at,
             display_name,
             id,
-            ingress: Box::new(ingress),
-            monitor: Box::new(monitor),
-            platform: Box::new(platform),
-            rollouts,
             updated_at,
         }
     }

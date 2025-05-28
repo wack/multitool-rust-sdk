@@ -433,6 +433,57 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Update Application",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ApplicationId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApplicationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Details of the updated Application",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApplicationSuccess"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
       }
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts": {
@@ -458,6 +509,15 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/ApplicationId"
+            }
+          },
+          {
+            "name": "rollout_number",
+            "in": "query",
+            "description": "The rollout's number within a given application",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/RolloutNumber"
             }
           }
         ],
@@ -502,6 +562,16 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRolloutRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "201": {
             "description": "Rollout details",
@@ -848,18 +918,20 @@
         "type": "object",
         "required": [
           "id",
-          "app_type",
           "display_name",
-          "rollouts",
-          "ingress",
-          "monitor",
-          "platform",
           "created_at",
           "updated_at"
         ],
         "properties": {
-          "app_type": {
-            "$ref": "#/components/schemas/ApplicationType"
+          "cloud": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Cloud"
+              }
+            ]
           },
           "created_at": {
             "type": "string"
@@ -869,21 +941,6 @@
           },
           "id": {
             "$ref": "#/components/schemas/ApplicationId"
-          },
-          "ingress": {
-            "$ref": "#/components/schemas/IngressConfig"
-          },
-          "monitor": {
-            "$ref": "#/components/schemas/MonitorConfig"
-          },
-          "platform": {
-            "$ref": "#/components/schemas/PlatformConfig"
-          },
-          "rollouts": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
           },
           "updated_at": {
             "type": "string"
@@ -902,42 +959,15 @@
         "format": "int32",
         "minimum": 0
       },
-      "ApplicationSummary": {
-        "type": "object",
-        "required": [
-          "id",
-          "app_type",
-          "display_name",
-          "created_at",
-          "updated_at"
-        ],
-        "properties": {
-          "app_type": {
-            "$ref": "#/components/schemas/ApplicationType"
-          },
-          "created_at": {
-            "type": "string"
-          },
-          "display_name": {
-            "type": "string"
-          },
-          "id": {
-            "$ref": "#/components/schemas/ApplicationId"
-          },
-          "updated_at": {
-            "type": "string"
-          }
-        }
-      },
-      "ApplicationType": {
-        "type": "string",
-        "description": "An identifier of what kind of application we're tracking.",
-        "enum": [
-          "web_service"
-        ]
-      },
       "CleartextPassword": {
         "type": "string"
+      },
+      "Cloud": {
+        "type": "string",
+        "enum": [
+          "Aws",
+          "Cloudflare"
+        ]
       },
       "CloudWatchDimensions": {
         "type": "object",
@@ -957,13 +987,9 @@
       "CreateApplicationRequest": {
         "type": "object",
         "required": [
-          "display_name",
-          "config"
+          "display_name"
         ],
         "properties": {
-          "config": {
-            "$ref": "#/components/schemas/ApplicationConfig"
-          },
           "display_name": {
             "type": "string"
           }
@@ -976,7 +1002,7 @@
         ],
         "properties": {
           "application": {
-            "$ref": "#/components/schemas/ApplicationSummary"
+            "$ref": "#/components/schemas/ApplicationDetails"
           }
         }
       },
@@ -996,6 +1022,17 @@
       },
       "CreateResponseCodeMetricsSuccess": {
         "type": "object"
+      },
+      "CreateRolloutRequest": {
+        "type": "object",
+        "required": [
+          "config"
+        ],
+        "properties": {
+          "config": {
+            "$ref": "#/components/schemas/ApplicationConfig"
+          }
+        }
       },
       "CreateRolloutSuccess": {
         "type": "object",
@@ -1120,6 +1157,29 @@
                 }
               }
             }
+          },
+          {
+            "type": "object",
+            "required": [
+              "cloudflare_worker"
+            ],
+            "properties": {
+              "cloudflare_worker": {
+                "type": "object",
+                "required": [
+                  "account_id",
+                  "worker_name"
+                ],
+                "properties": {
+                  "account_id": {
+                    "type": "string"
+                  },
+                  "worker_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         ]
       },
@@ -1132,7 +1192,7 @@
           "applications": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ApplicationSummary"
+              "$ref": "#/components/schemas/ApplicationDetails"
             }
           }
         }
@@ -1234,6 +1294,29 @@
                 }
               }
             }
+          },
+          {
+            "type": "object",
+            "required": [
+              "cloudflare_workers_observability"
+            ],
+            "properties": {
+              "cloudflare_workers_observability": {
+                "type": "object",
+                "required": [
+                  "account_id",
+                  "worker_name"
+                ],
+                "properties": {
+                  "account_id": {
+                    "type": "string"
+                  },
+                  "worker_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         ]
       },
@@ -1256,6 +1339,29 @@
                     "type": "string"
                   },
                   "region": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "cloudflare_worker"
+            ],
+            "properties": {
+              "cloudflare_worker": {
+                "type": "object",
+                "required": [
+                  "account_id",
+                  "worker_name"
+                ],
+                "properties": {
+                  "account_id": {
+                    "type": "string"
+                  },
+                  "worker_name": {
                     "type": "string"
                   }
                 }
@@ -1293,17 +1399,21 @@
           "status",
           "active",
           "number",
-          "app_id",
+          "application_id",
           "events",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "config"
         ],
         "properties": {
           "active": {
             "type": "boolean"
           },
-          "app_id": {
+          "application_id": {
             "$ref": "#/components/schemas/ApplicationId"
+          },
+          "config": {
+            "$ref": "#/components/schemas/ApplicationConfig"
           },
           "created_at": {
             "type": "string"
@@ -1318,9 +1428,7 @@
             "$ref": "#/components/schemas/RolloutId"
           },
           "number": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "$ref": "#/components/schemas/RolloutNumber"
           },
           "status": {
             "$ref": "#/components/schemas/RolloutStatus"
@@ -1373,6 +1481,11 @@
         ]
       },
       "RolloutId": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 0
+      },
+      "RolloutNumber": {
         "type": "integer",
         "format": "int64",
         "minimum": 0
@@ -1503,6 +1616,28 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
+          }
+        }
+      },
+      "UpdateApplicationRequest": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "UpdateApplicationSuccess": {
+        "type": "object",
+        "required": [
+          "application"
+        ],
+        "properties": {
+          "application": {
+            "$ref": "#/components/schemas/ApplicationDetails"
           }
         }
       },
@@ -1644,7 +1779,7 @@
           "applications": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ApplicationSummary"
+              "$ref": "#/components/schemas/ApplicationDetails"
             }
           },
           "created_at": {
