@@ -49,8 +49,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [ApplicationConfig](docs/ApplicationConfig.md)
- - [ApplicationConfigOneOf](docs/ApplicationConfigOneOf.md)
  - [ApplicationDetails](docs/ApplicationDetails.md)
  - [ApplicationGroup](docs/ApplicationGroup.md)
  - [Cloud](docs/Cloud.md)
@@ -58,7 +56,6 @@ Class | Method | HTTP request | Description
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
  - [CreateApplicationSuccess](docs/CreateApplicationSuccess.md)
  - [CreateResponseCodeMetricsRequest](docs/CreateResponseCodeMetricsRequest.md)
- - [CreateRolloutRequest](docs/CreateRolloutRequest.md)
  - [CreateRolloutSuccess](docs/CreateRolloutSuccess.md)
  - [CreateUserRequest](docs/CreateUserRequest.md)
  - [CreateUserSuccess](docs/CreateUserSuccess.md)
@@ -87,6 +84,8 @@ Class | Method | HTTP request | Description
  - [ReadApplicationSuccess](docs/ReadApplicationSuccess.md)
  - [ReadRolloutSuccess](docs/ReadRolloutSuccess.md)
  - [Rollout](docs/Rollout.md)
+ - [RolloutConfig](docs/RolloutConfig.md)
+ - [RolloutConfigOneOf](docs/RolloutConfigOneOf.md)
  - [RolloutEvent](docs/RolloutEvent.md)
  - [RolloutEventType](docs/RolloutEventType.md)
  - [RolloutState](docs/RolloutState.md)

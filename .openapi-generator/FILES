@@ -1,8 +1,6 @@
 .gitignore
 Cargo.toml
 README.md
-docs/ApplicationConfig.md
-docs/ApplicationConfigOneOf.md
 docs/ApplicationDetails.md
 docs/ApplicationGroup.md
 docs/ApplicationsApi.md
@@ -11,7 +9,6 @@ docs/CloudWatchDimensions.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationSuccess.md
 docs/CreateResponseCodeMetricsRequest.md
-docs/CreateRolloutRequest.md
 docs/CreateRolloutSuccess.md
 docs/CreateUserRequest.md
 docs/CreateUserSuccess.md
@@ -42,6 +39,8 @@ docs/ReadApplicationSuccess.md
 docs/ReadRolloutSuccess.md
 docs/ResponseCodeMetricsApi.md
 docs/Rollout.md
+docs/RolloutConfig.md
+docs/RolloutConfigOneOf.md
 docs/RolloutEvent.md
 docs/RolloutEventType.md
 docs/RolloutState.md
@@ -78,8 +77,6 @@ src/apis/rollouts_api.rs
 src/apis/users_api.rs
 src/apis/workspaces_api.rs
 src/lib.rs
-src/models/application_config.rs
-src/models/application_config_one_of.rs
 src/models/application_details.rs
 src/models/application_group.rs
 src/models/cloud.rs
@@ -87,7 +84,6 @@ src/models/cloud_watch_dimensions.rs
 src/models/create_application_request.rs
 src/models/create_application_success.rs
 src/models/create_response_code_metrics_request.rs
-src/models/create_rollout_request.rs
 src/models/create_rollout_success.rs
 src/models/create_user_request.rs
 src/models/create_user_success.rs
@@ -117,6 +113,8 @@ src/models/platform_config_one_of_aws_lambda.rs
 src/models/read_application_success.rs
 src/models/read_rollout_success.rs
 src/models/rollout.rs
+src/models/rollout_config.rs
+src/models/rollout_config_one_of.rs
 src/models/rollout_event.rs
 src/models/rollout_event_type.rs
 src/models/rollout_state.rs

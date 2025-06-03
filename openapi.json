@@ -565,9 +565,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateRolloutRequest"
-              }
+              "schema": {}
             }
           },
           "required": true
@@ -899,21 +897,6 @@
   },
   "components": {
     "schemas": {
-      "ApplicationConfig": {
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "web_service"
-            ],
-            "properties": {
-              "web_service": {
-                "$ref": "#/components/schemas/WebServiceConfig"
-              }
-            }
-          }
-        ]
-      },
       "ApplicationDetails": {
         "type": "object",
         "required": [
@@ -1022,17 +1005,6 @@
       },
       "CreateResponseCodeMetricsSuccess": {
         "type": "object"
-      },
-      "CreateRolloutRequest": {
-        "type": "object",
-        "required": [
-          "config"
-        ],
-        "properties": {
-          "config": {
-            "$ref": "#/components/schemas/ApplicationConfig"
-          }
-        }
       },
       "CreateRolloutSuccess": {
         "type": "object",
@@ -1278,7 +1250,6 @@
               "aws_cloudwatch_metrics": {
                 "type": "object",
                 "required": [
-                  "region",
                   "dimensions"
                 ],
                 "properties": {
@@ -1287,9 +1258,6 @@
                     "items": {
                       "$ref": "#/components/schemas/CloudWatchDimensions"
                     }
-                  },
-                  "region": {
-                    "type": "string"
                   }
                 }
               }
@@ -1413,7 +1381,7 @@
             "$ref": "#/components/schemas/ApplicationId"
           },
           "config": {
-            "$ref": "#/components/schemas/ApplicationConfig"
+            "$ref": "#/components/schemas/RolloutConfig"
           },
           "created_at": {
             "type": "string"
@@ -1437,6 +1405,21 @@
             "type": "string"
           }
         }
+      },
+      "RolloutConfig": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "web_service"
+            ],
+            "properties": {
+              "web_service": {
+                "$ref": "#/components/schemas/WebServiceConfig"
+              }
+            }
+          }
+        ]
       },
       "RolloutEvent": {
         "type": "object",

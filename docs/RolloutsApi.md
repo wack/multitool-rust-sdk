@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## create_rollout
 
-> models::CreateRolloutSuccess create_rollout(workspace_id, application_id, create_rollout_request)
+> models::CreateRolloutSuccess create_rollout(workspace_id, application_id, body)
 
 
 ### Parameters
@@ -22,7 +22,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **workspace_id** | **u32** | The workspace's id | [required] |
 **application_id** | **u32** | The application's id | [required] |
-**create_rollout_request** | [**CreateRolloutRequest**](CreateRolloutRequest.md) |  | [required] |
+**body** | Option<**serde_json::Value**> |  | [required] |
 
 ### Return type
 

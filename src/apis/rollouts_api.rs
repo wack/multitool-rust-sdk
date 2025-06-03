@@ -24,11 +24,11 @@ pub trait RolloutsApi: Send + Sync {
     /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts
     ///
     ///
-    async fn create_rollout<'workspace_id, 'application_id, 'create_rollout_request>(
+    async fn create_rollout<'workspace_id, 'application_id, 'body>(
         &self,
         workspace_id: u32,
         application_id: u32,
-        create_rollout_request: models::CreateRolloutRequest,
+        body: Option<serde_json::Value>,
     ) -> Result<models::CreateRolloutSuccess, Error<CreateRolloutError>>;
 
     /// GET /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts
@@ -64,11 +64,11 @@ impl RolloutsApiClient {
 
 #[async_trait]
 impl RolloutsApi for RolloutsApiClient {
-    async fn create_rollout<'workspace_id, 'application_id, 'create_rollout_request>(
+    async fn create_rollout<'workspace_id, 'application_id, 'body>(
         &self,
         workspace_id: u32,
         application_id: u32,
-        create_rollout_request: models::CreateRolloutRequest,
+        body: Option<serde_json::Value>,
     ) -> Result<models::CreateRolloutSuccess, Error<CreateRolloutError>> {
         let local_var_configuration = &self.configuration;
 
@@ -90,7 +90,7 @@ impl RolloutsApi for RolloutsApiClient {
         if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
             local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
         };
-        local_var_req_builder = local_var_req_builder.json(&create_rollout_request);
+        local_var_req_builder = local_var_req_builder.json(&body);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;

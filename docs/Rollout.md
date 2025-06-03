@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active** | **bool** |  | 
 **application_id** | **u32** |  | 
-**config** | [**models::ApplicationConfig**](ApplicationConfig.md) |  | 
+**config** | [**models::RolloutConfig**](RolloutConfig.md) |  | 
 **created_at** | **String** |  | 
 **events** | [**Vec<models::RolloutEvent>**](RolloutEvent.md) |  | 
 **id** | **u64** |  | 
