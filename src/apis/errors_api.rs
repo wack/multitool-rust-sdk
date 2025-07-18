@@ -21,19 +21,19 @@ use crate::apis::ContentType;
 
 #[cfg_attr(feature = "mockall", automock)]
 #[async_trait]
-pub trait ResponseCodeMetricsApi: Send + Sync {
+pub trait ErrorsApi: Send + Sync {
 
-    /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes
+    /// POST /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/errors
     ///
     /// 
-    async fn create_response_code_metrics<'workspace_id, 'application_id, 'rollout_id, 'create_response_code_metrics_request>(&self, workspace_id: u32, application_id: u32, rollout_id: u64, create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>>;
+    async fn log_error<'workspace_id, 'application_id, 'rollout_id, 'create_error_request>(&self, workspace_id: u32, application_id: u32, rollout_id: u64, create_error_request: models::CreateErrorRequest) -> Result<serde_json::Value, Error<LogErrorError>>;
 }
 
-pub struct ResponseCodeMetricsApiClient {
+pub struct ErrorsApiClient {
     configuration: Arc<configuration::Configuration>
 }
 
-impl ResponseCodeMetricsApiClient {
+impl ErrorsApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self { configuration }
     }
@@ -42,13 +42,13 @@ impl ResponseCodeMetricsApiClient {
 
 
 #[async_trait]
-impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
-    async fn create_response_code_metrics<'workspace_id, 'application_id, 'rollout_id, 'create_response_code_metrics_request>(&self, workspace_id: u32, application_id: u32, rollout_id: u64, create_response_code_metrics_request: models::CreateResponseCodeMetricsRequest) -> Result<serde_json::Value, Error<CreateResponseCodeMetricsError>> {
+impl ErrorsApi for ErrorsApiClient {
+    async fn log_error<'workspace_id, 'application_id, 'rollout_id, 'create_error_request>(&self, workspace_id: u32, application_id: u32, rollout_id: u64, create_error_request: models::CreateErrorRequest) -> Result<serde_json::Value, Error<LogErrorError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
 
-        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, rollout_id=rollout_id);
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/errors", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, rollout_id=rollout_id);
         let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
 
         if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
@@ -57,7 +57,7 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
         if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
             local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
         };
-        local_var_req_builder = local_var_req_builder.json(&create_response_code_metrics_request);
+        local_var_req_builder = local_var_req_builder.json(&create_error_request);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;
@@ -78,7 +78,7 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
                 ContentType::Unsupported(local_var_unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{local_var_unknown_type}` content type response that cannot be converted to `serde_json::Value`")))),
             }
         } else {
-            let local_var_entity: Option<CreateResponseCodeMetricsError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_entity: Option<LogErrorError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -86,10 +86,11 @@ impl ResponseCodeMetricsApi for ResponseCodeMetricsApiClient {
 
 }
 
-/// struct for typed errors of method [`create_response_code_metrics`]
+/// struct for typed errors of method [`log_error`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum CreateResponseCodeMetricsError {
+pub enum LogErrorError {
+    Status404(),
     Status500(),
     UnknownValue(serde_json::Value),
 }

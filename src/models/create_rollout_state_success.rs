@@ -12,15 +12,15 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateRolloutRequest {
-    #[serde(rename = "config")]
-    pub config: Box<models::ApplicationConfig>,
+pub struct CreateRolloutStateSuccess {
+    #[serde(rename = "state")]
+    pub state: Box<models::RolloutState>,
 }
 
-impl CreateRolloutRequest {
-    pub fn new(config: models::ApplicationConfig) -> CreateRolloutRequest {
-        CreateRolloutRequest {
-            config: Box::new(config),
+impl CreateRolloutStateSuccess {
+    pub fn new(state: models::RolloutState) -> CreateRolloutStateSuccess {
+        CreateRolloutStateSuccess {
+            state: Box::new(state),
         }
     }
 }

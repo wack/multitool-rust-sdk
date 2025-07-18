@@ -3,15 +3,15 @@ CARGO_MAKE_RUN_CODECOV = true
 
 [tasks.dev-test-flow]
 dependencies = [
-  "pre-build",
-  "format-flow",
-  "clippy-flow",
-  "build",
-  "post-build",
-  "pre-docs",
-  "docs",
-  "post-docs",
-  "test-flow",
+    "pre-build",
+    "format-flow",
+    "clippy-flow",
+    "build",
+    "post-build",
+    "pre-docs",
+    "docs",
+    "post-docs",
+    "test-flow",
 ]
 
 [tasks.pre-build]
@@ -19,18 +19,18 @@ dependencies = ["sort-ci", "format-toml-conditioned-flow"]
 
 [tasks.ci-flow]
 dependencies = [
-  "pre-ci-flow",
-  "print-env-flow",
-  "pre-build",
-  "check-format-flow",
-  "clippy-flow",
-  "build",
-  "post-build",
-  "pre-docs",
-  "docs",
-  "post-docs",
-  "test-flow",
-  "post-ci-flow",
+    "pre-ci-flow",
+    "print-env-flow",
+    "pre-build",
+    "check-format-flow",
+    "clippy-flow",
+    "build",
+    "post-build",
+    "pre-docs",
+    "docs",
+    "post-docs",
+    "test-flow",
+    "post-ci-flow",
 ]
 
 [tasks.fmt]
@@ -70,7 +70,7 @@ dependencies = ["generate-sdk", "sort", "format-flow", "clippy-flow"]
 # if the generator is producing the wrong library version.
 [tasks.generate-sdk]
 description = "Generate the SDK. Does not fmt or sort the output. Use `cargo make generate` instead."
-private = true
+# private = true
 script = ['''
 docker run --rm -v "$PWD:/local" \
   openapitools/openapi-generator-cli:v7.12.0 generate \
