@@ -30,6 +30,8 @@ pub enum RolloutEventType {
     RolledBack,
     #[serde(rename = "superseded")]
     Superseded,
+    #[serde(rename = "canceled")]
+    Canceled,
 
 }
 
@@ -44,6 +46,7 @@ impl std::fmt::Display for RolloutEventType {
             Self::Promoted => write!(f, "promoted"),
             Self::RolledBack => write!(f, "rolled_back"),
             Self::Superseded => write!(f, "superseded"),
+            Self::Canceled => write!(f, "canceled"),
         }
     }
 }

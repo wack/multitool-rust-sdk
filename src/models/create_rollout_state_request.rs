@@ -12,14 +12,17 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdateDeploymentStateRequest {
+pub struct CreateRolloutStateRequest {
+    #[serde(rename = "state_type")]
+    pub state_type: models::RolloutStateType,
     #[serde(rename = "status", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub status: Option<Option<models::DeploymentStateStatus>>,
+    pub status: Option<Option<models::RolloutStateStatus>>,
 }
 
-impl UpdateDeploymentStateRequest {
-    pub fn new() -> UpdateDeploymentStateRequest {
-        UpdateDeploymentStateRequest {
+impl CreateRolloutStateRequest {
+    pub fn new(state_type: models::RolloutStateType) -> CreateRolloutStateRequest {
+        CreateRolloutStateRequest {
+            state_type,
             status: None,
         }
     }

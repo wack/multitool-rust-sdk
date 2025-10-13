@@ -16,7 +16,7 @@ pub enum Error<T> {
     ResponseError(ResponseContent<T>),
 }
 
-impl<T> fmt::Display for Error<T> {
+impl <T> fmt::Display for Error<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let (module, e) = match self {
             Error::Reqwest(e) => ("reqwest", e.to_string()),
@@ -28,7 +28,7 @@ impl<T> fmt::Display for Error<T> {
     }
 }
 
-impl<T: fmt::Debug> error::Error for Error<T> {
+impl <T: fmt::Debug> error::Error for Error<T> {
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         Some(match self {
             Error::Reqwest(e) => e,
@@ -39,19 +39,19 @@ impl<T: fmt::Debug> error::Error for Error<T> {
     }
 }
 
-impl<T> From<reqwest::Error> for Error<T> {
+impl <T> From<reqwest::Error> for Error<T> {
     fn from(e: reqwest::Error) -> Self {
         Error::Reqwest(e)
     }
 }
 
-impl<T> From<serde_json::Error> for Error<T> {
+impl <T> From<serde_json::Error> for Error<T> {
     fn from(e: serde_json::Error) -> Self {
         Error::Serde(e)
     }
 }
 
-impl<T> From<std::io::Error> for Error<T> {
+impl <T> From<std::io::Error> for Error<T> {
     fn from(e: std::io::Error) -> Self {
         Error::Io(e)
     }
@@ -78,10 +78,8 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
                             value,
                         ));
                     }
-                }
-                serde_json::Value::String(s) => {
-                    params.push((format!("{}[{}]", prefix, key), s.clone()))
-                }
+                },
+                serde_json::Value::String(s) => params.push((format!("{}[{}]", prefix, key), s.clone())),
                 _ => params.push((format!("{}[{}]", prefix, key), value.to_string())),
             }
         }
@@ -98,7 +96,7 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
 enum ContentType {
     Json,
     Text,
-    Unsupported(String),
+    Unsupported(String)
 }
 
 impl From<&str> for ContentType {
@@ -114,6 +112,7 @@ impl From<&str> for ContentType {
 }
 
 pub mod applications_api;
+pub mod errors_api;
 pub mod heartbeat_api;
 pub mod response_code_metrics_api;
 pub mod rollout_states_api;
@@ -127,6 +126,7 @@ use std::sync::Arc;
 
 pub trait Api {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi;
+    fn errors_api(&self) -> &dyn errors_api::ErrorsApi;
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi;
     fn response_code_metrics_api(&self) -> &dyn response_code_metrics_api::ResponseCodeMetricsApi;
     fn rollout_states_api(&self) -> &dyn rollout_states_api::RolloutStatesApi;
@@ -137,6 +137,7 @@ pub trait Api {
 
 pub struct ApiClient {
     applications_api: Box<dyn applications_api::ApplicationsApi>,
+    errors_api: Box<dyn errors_api::ErrorsApi>,
     heartbeat_api: Box<dyn heartbeat_api::HeartbeatApi>,
     response_code_metrics_api: Box<dyn response_code_metrics_api::ResponseCodeMetricsApi>,
     rollout_states_api: Box<dyn rollout_states_api::RolloutStatesApi>,
@@ -148,23 +149,14 @@ pub struct ApiClient {
 impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
-            applications_api: Box::new(applications_api::ApplicationsApiClient::new(
-                configuration.clone(),
-            )),
-            heartbeat_api: Box::new(heartbeat_api::HeartbeatApiClient::new(
-                configuration.clone(),
-            )),
-            response_code_metrics_api: Box::new(
-                response_code_metrics_api::ResponseCodeMetricsApiClient::new(configuration.clone()),
-            ),
-            rollout_states_api: Box::new(rollout_states_api::RolloutStatesApiClient::new(
-                configuration.clone(),
-            )),
+            applications_api: Box::new(applications_api::ApplicationsApiClient::new(configuration.clone())),
+            errors_api: Box::new(errors_api::ErrorsApiClient::new(configuration.clone())),
+            heartbeat_api: Box::new(heartbeat_api::HeartbeatApiClient::new(configuration.clone())),
+            response_code_metrics_api: Box::new(response_code_metrics_api::ResponseCodeMetricsApiClient::new(configuration.clone())),
+            rollout_states_api: Box::new(rollout_states_api::RolloutStatesApiClient::new(configuration.clone())),
             rollouts_api: Box::new(rollouts_api::RolloutsApiClient::new(configuration.clone())),
             users_api: Box::new(users_api::UsersApiClient::new(configuration.clone())),
-            workspaces_api: Box::new(workspaces_api::WorkspacesApiClient::new(
-                configuration.clone(),
-            )),
+            workspaces_api: Box::new(workspaces_api::WorkspacesApiClient::new(configuration.clone())),
         }
     }
 }
@@ -172,6 +164,9 @@ impl ApiClient {
 impl Api for ApiClient {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
         self.applications_api.as_ref()
+    }
+    fn errors_api(&self) -> &dyn errors_api::ErrorsApi {
+        self.errors_api.as_ref()
     }
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi {
         self.heartbeat_api.as_ref()
@@ -196,6 +191,7 @@ impl Api for ApiClient {
 #[cfg(feature = "mockall")]
 pub struct MockApiClient {
     pub applications_api_mock: applications_api::MockApplicationsApi,
+    pub errors_api_mock: errors_api::MockErrorsApi,
     pub heartbeat_api_mock: heartbeat_api::MockHeartbeatApi,
     pub response_code_metrics_api_mock: response_code_metrics_api::MockResponseCodeMetricsApi,
     pub rollout_states_api_mock: rollout_states_api::MockRolloutStatesApi,
@@ -209,9 +205,9 @@ impl MockApiClient {
     pub fn new() -> Self {
         Self {
             applications_api_mock: applications_api::MockApplicationsApi::new(),
+            errors_api_mock: errors_api::MockErrorsApi::new(),
             heartbeat_api_mock: heartbeat_api::MockHeartbeatApi::new(),
-            response_code_metrics_api_mock:
-                response_code_metrics_api::MockResponseCodeMetricsApi::new(),
+            response_code_metrics_api_mock: response_code_metrics_api::MockResponseCodeMetricsApi::new(),
             rollout_states_api_mock: rollout_states_api::MockRolloutStatesApi::new(),
             rollouts_api_mock: rollouts_api::MockRolloutsApi::new(),
             users_api_mock: users_api::MockUsersApi::new(),
@@ -224,6 +220,9 @@ impl MockApiClient {
 impl Api for MockApiClient {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
         &self.applications_api_mock
+    }
+    fn errors_api(&self) -> &dyn errors_api::ErrorsApi {
+        &self.errors_api_mock
     }
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi {
         &self.heartbeat_api_mock
@@ -244,3 +243,4 @@ impl Api for MockApiClient {
         &self.workspaces_api_mock
     }
 }
+

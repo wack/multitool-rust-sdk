@@ -8,6 +8,7 @@
 | DeployCanary | deploy_canary |
 | SetCanaryTraffic | set_canary_traffic |
 | RollbackCanary | rollback_canary |
+| CancelCanary | cancel_canary |
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

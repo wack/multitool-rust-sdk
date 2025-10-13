@@ -18,9 +18,7 @@
   "paths": {
     "/api/v1/heartbeat": {
       "get": {
-        "tags": [
-          "Heartbeat"
-        ],
+        "tags": ["Heartbeat"],
         "operationId": "heartbeat_controller",
         "responses": {
           "200": {
@@ -30,9 +28,7 @@
                 "schema": {
                   "type": "object",
                   "description": "A Heartbeat response indicates the status of the server.\nIn almost every conceivable circumstance, the response should\nbe a success.",
-                  "required": [
-                    "ok"
-                  ],
+                  "required": ["ok"],
                   "properties": {
                     "ok": {
                       "type": "boolean"
@@ -48,9 +44,7 @@
     },
     "/api/v1/users": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Create User",
         "requestBody": {
           "content": {
@@ -92,9 +86,7 @@
     },
     "/api/v1/users/login": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Login",
         "requestBody": {
           "content": {
@@ -129,9 +121,7 @@
     },
     "/api/v1/workspaces": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "List Workspaces",
         "parameters": [
           {
@@ -161,9 +151,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "Create Workspace",
         "requestBody": {
           "content": {
@@ -194,9 +182,7 @@
     },
     "/api/v1/workspaces/{id}": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "Read Workspace",
         "parameters": [
           {
@@ -226,9 +212,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "operationId": "Update Workspace",
         "parameters": [
           {
@@ -270,9 +254,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications": {
       "get": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "List Applications",
         "parameters": [
           {
@@ -302,9 +284,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Create Application",
         "parameters": [
           {
@@ -346,9 +326,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}": {
       "get": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Get Application",
         "parameters": [
           {
@@ -387,9 +365,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Delete Application",
         "parameters": [
           {
@@ -435,9 +411,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Applications"
-        ],
+        "tags": ["Applications"],
         "operationId": "Update Application",
         "parameters": [
           {
@@ -488,9 +462,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts": {
       "get": {
-        "tags": [
-          "Rollouts"
-        ],
+        "tags": ["Rollouts"],
         "operationId": "List Rollouts",
         "parameters": [
           {
@@ -538,9 +510,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Rollouts"
-        ],
+        "tags": ["Rollouts"],
         "operationId": "Create Rollout",
         "parameters": [
           {
@@ -589,9 +559,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}": {
       "get": {
-        "tags": [
-          "Rollouts"
-        ],
+        "tags": ["Rollouts"],
         "operationId": "Read Rollout",
         "parameters": [
           {
@@ -639,11 +607,75 @@
         }
       }
     },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/errors": {
+      "post": {
+        "tags": ["Errors"],
+        "operationId": "Log Error",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ApplicationId"
+            }
+          },
+          {
+            "name": "rollout_id",
+            "in": "path",
+            "description": "The rollout's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RolloutId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateErrorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Error logged successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateErrorSuccess"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Error already logged"
+          },
+          "404": {
+            "description": "Workspace, application, or rollout not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes": {
       "post": {
-        "tags": [
-          "Response Code Metrics"
-        ],
+        "tags": ["Response Code Metrics"],
         "operationId": "Create Response Code Metrics",
         "parameters": [
           {
@@ -701,11 +733,75 @@
         }
       }
     },
+    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/state": {
+      "post": {
+        "tags": ["Rollout States"],
+        "operationId": "Create Rollout State",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ApplicationId"
+            }
+          },
+          {
+            "name": "rollout_id",
+            "in": "path",
+            "description": "The rollout's id to add the state to",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RolloutId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRolloutStateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Rollout state created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRolloutStateSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid rollout status"
+          },
+          "404": {
+            "description": "Rollout not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
+      }
+    },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states": {
       "get": {
-        "tags": [
-          "Rollout States"
-        ],
+        "tags": ["Rollout States"],
         "operationId": "List Rollout States",
         "parameters": [
           {
@@ -764,9 +860,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states/{state_id}": {
       "patch": {
-        "tags": [
-          "Rollout States"
-        ],
+        "tags": ["Rollout States"],
         "operationId": "Update Rollout State",
         "parameters": [
           {
@@ -835,9 +929,7 @@
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/states/{state_id}/refresh": {
       "post": {
-        "tags": [
-          "Rollout States"
-        ],
+        "tags": ["Rollout States"],
         "operationId": "Refresh Rollout State",
         "parameters": [
           {
@@ -899,12 +991,7 @@
     "schemas": {
       "ApplicationDetails": {
         "type": "object",
-        "required": [
-          "id",
-          "display_name",
-          "created_at",
-          "updated_at"
-        ],
+        "required": ["id", "display_name", "created_at", "updated_at"],
         "properties": {
           "cloud": {
             "oneOf": [
@@ -932,10 +1019,7 @@
       },
       "ApplicationGroup": {
         "type": "string",
-        "enum": [
-          "canary",
-          "baseline"
-        ]
+        "enum": ["canary", "baseline"]
       },
       "ApplicationId": {
         "type": "integer",
@@ -947,17 +1031,11 @@
       },
       "Cloud": {
         "type": "string",
-        "enum": [
-          "Aws",
-          "Cloudflare"
-        ]
+        "enum": ["Aws", "Cloudflare"]
       },
       "CloudWatchDimensions": {
         "type": "object",
-        "required": [
-          "name",
-          "value"
-        ],
+        "required": ["name", "value"],
         "properties": {
           "name": {
             "type": "string"
@@ -969,9 +1047,7 @@
       },
       "CreateApplicationRequest": {
         "type": "object",
-        "required": [
-          "display_name"
-        ],
+        "required": ["display_name"],
         "properties": {
           "display_name": {
             "type": "string"
@@ -980,20 +1056,38 @@
       },
       "CreateApplicationSuccess": {
         "type": "object",
-        "required": [
-          "application"
-        ],
+        "required": ["application"],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationDetails"
           }
         }
       },
+      "CreateErrorRequest": {
+        "type": "object",
+        "required": ["url_path", "status_code", "logs"],
+        "properties": {
+          "logs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url_path": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateErrorSuccess": {
+        "type": "object"
+      },
       "CreateResponseCodeMetricsRequest": {
         "type": "object",
-        "required": [
-          "status_codes"
-        ],
+        "required": ["status_codes"],
         "properties": {
           "status_codes": {
             "type": "array",
@@ -1006,11 +1100,37 @@
       "CreateResponseCodeMetricsSuccess": {
         "type": "object"
       },
+      "CreateRolloutStateRequest": {
+        "type": "object",
+        "required": ["state_type"],
+        "properties": {
+          "state_type": {
+            "$ref": "#/components/schemas/RolloutStateType"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RolloutStateStatus"
+              }
+            ]
+          }
+        }
+      },
+      "CreateRolloutStateSuccess": {
+        "type": "object",
+        "required": ["state"],
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/RolloutState"
+          }
+        }
+      },
       "CreateRolloutSuccess": {
         "type": "object",
-        "required": [
-          "rollout"
-        ],
+        "required": ["rollout"],
         "properties": {
           "rollout": {
             "$ref": "#/components/schemas/Rollout"
@@ -1020,11 +1140,7 @@
       "CreateUserRequest": {
         "type": "object",
         "description": "Expected body of user endpoint requests",
-        "required": [
-          "email",
-          "password",
-          "tos_accepted"
-        ],
+        "required": ["email", "password", "tos_accepted"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email",
@@ -1042,9 +1158,7 @@
       },
       "CreateUserSuccess": {
         "type": "object",
-        "required": [
-          "user"
-        ],
+        "required": ["user"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserDetails"
@@ -1053,9 +1167,7 @@
       },
       "CreateWorkspaceRequest": {
         "type": "object",
-        "required": [
-          "display_name"
-        ],
+        "required": ["display_name"],
         "properties": {
           "display_name": {
             "type": "string"
@@ -1064,9 +1176,7 @@
       },
       "CreateWorkspaceSuccess": {
         "type": "object",
-        "required": [
-          "workspace"
-        ],
+        "required": ["workspace"],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceSummary"
@@ -1081,9 +1191,7 @@
       },
       "ErrorResponse": {
         "type": "object",
-        "required": [
-          "errors"
-        ],
+        "required": ["errors"],
         "properties": {
           "errors": {
             "type": "array",
@@ -1097,9 +1205,7 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "aws_rest_api_gateway"
-            ],
+            "required": ["aws_rest_api_gateway"],
             "properties": {
               "aws_rest_api_gateway": {
                 "type": "object",
@@ -1132,16 +1238,11 @@
           },
           {
             "type": "object",
-            "required": [
-              "cloudflare_worker"
-            ],
+            "required": ["cloudflare_worker"],
             "properties": {
               "cloudflare_worker": {
                 "type": "object",
-                "required": [
-                  "account_id",
-                  "worker_name"
-                ],
+                "required": ["account_id", "worker_name"],
                 "properties": {
                   "account_id": {
                     "type": "string"
@@ -1157,9 +1258,7 @@
       },
       "ListApplicationsSuccess": {
         "type": "object",
-        "required": [
-          "applications"
-        ],
+        "required": ["applications"],
         "properties": {
           "applications": {
             "type": "array",
@@ -1171,9 +1270,7 @@
       },
       "ListRolloutStatesSuccess": {
         "type": "object",
-        "required": [
-          "states"
-        ],
+        "required": ["states"],
         "properties": {
           "states": {
             "type": "array",
@@ -1185,9 +1282,7 @@
       },
       "ListRolloutsSuccess": {
         "type": "object",
-        "required": [
-          "rollouts"
-        ],
+        "required": ["rollouts"],
         "properties": {
           "rollouts": {
             "type": "array",
@@ -1199,9 +1294,7 @@
       },
       "ListWorkspaceSuccess": {
         "type": "object",
-        "required": [
-          "workspaces"
-        ],
+        "required": ["workspaces"],
         "properties": {
           "workspaces": {
             "type": "array",
@@ -1213,10 +1306,7 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email",
@@ -1230,9 +1320,7 @@
       },
       "LoginSuccess": {
         "type": "object",
-        "required": [
-          "user"
-        ],
+        "required": ["user"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserSummary"
@@ -1243,15 +1331,11 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "aws_cloudwatch_metrics"
-            ],
+            "required": ["aws_cloudwatch_metrics"],
             "properties": {
               "aws_cloudwatch_metrics": {
                 "type": "object",
-                "required": [
-                  "dimensions"
-                ],
+                "required": ["dimensions"],
                 "properties": {
                   "dimensions": {
                     "type": "array",
@@ -1265,16 +1349,11 @@
           },
           {
             "type": "object",
-            "required": [
-              "cloudflare_workers_observability"
-            ],
+            "required": ["cloudflare_workers_observability"],
             "properties": {
               "cloudflare_workers_observability": {
                 "type": "object",
-                "required": [
-                  "account_id",
-                  "worker_name"
-                ],
+                "required": ["account_id", "worker_name"],
                 "properties": {
                   "account_id": {
                     "type": "string"
@@ -1292,16 +1371,11 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "aws_lambda"
-            ],
+            "required": ["aws_lambda"],
             "properties": {
               "aws_lambda": {
                 "type": "object",
-                "required": [
-                  "region",
-                  "name"
-                ],
+                "required": ["region", "name"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -1315,16 +1389,11 @@
           },
           {
             "type": "object",
-            "required": [
-              "cloudflare_worker"
-            ],
+            "required": ["cloudflare_worker"],
             "properties": {
               "cloudflare_worker": {
                 "type": "object",
-                "required": [
-                  "account_id",
-                  "worker_name"
-                ],
+                "required": ["account_id", "worker_name"],
                 "properties": {
                   "account_id": {
                     "type": "string"
@@ -1340,9 +1409,7 @@
       },
       "ReadApplicationSuccess": {
         "type": "object",
-        "required": [
-          "application"
-        ],
+        "required": ["application"],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationDetails"
@@ -1351,9 +1418,7 @@
       },
       "ReadRolloutSuccess": {
         "type": "object",
-        "required": [
-          "rollout"
-        ],
+        "required": ["rollout"],
         "properties": {
           "rollout": {
             "$ref": "#/components/schemas/Rollout"
@@ -1410,9 +1475,7 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "web_service"
-            ],
+            "required": ["web_service"],
             "properties": {
               "web_service": {
                 "$ref": "#/components/schemas/WebServiceConfig"
@@ -1423,12 +1486,7 @@
       },
       "RolloutEvent": {
         "type": "object",
-        "required": [
-          "id",
-          "event_type",
-          "created_at",
-          "updated_at"
-        ],
+        "required": ["id", "event_type", "created_at", "updated_at"],
         "properties": {
           "created_at": {
             "type": "string"
@@ -1460,7 +1518,8 @@
           "traffic_decreased",
           "promoted",
           "rolled_back",
-          "superseded"
+          "superseded",
+          "canceled"
         ]
       },
       "RolloutId": {
@@ -1475,13 +1534,7 @@
       },
       "RolloutState": {
         "type": "object",
-        "required": [
-          "id",
-          "state_type",
-          "status",
-          "created_at",
-          "updated_at"
-        ],
+        "required": ["id", "state_type", "status", "created_at", "updated_at"],
         "properties": {
           "created_at": {
             "type": "string"
@@ -1514,15 +1567,11 @@
         "oneOf": [
           {
             "type": "object",
-            "required": [
-              "SetCanaryTraffic"
-            ],
+            "required": ["SetCanaryTraffic"],
             "properties": {
               "SetCanaryTraffic": {
                 "type": "object",
-                "required": [
-                  "percent_traffic"
-                ],
+                "required": ["percent_traffic"],
                 "properties": {
                   "percent_traffic": {
                     "type": "integer",
@@ -1542,13 +1591,7 @@
       },
       "RolloutStateStatus": {
         "type": "string",
-        "enum": [
-          "pending",
-          "in_progress",
-          "superseded",
-          "done",
-          "cancelled"
-        ]
+        "enum": ["pending", "in_progress", "superseded", "done", "cancelled"]
       },
       "RolloutStateType": {
         "type": "string",
@@ -1556,7 +1599,8 @@
           "promote_canary",
           "deploy_canary",
           "set_canary_traffic",
-          "rollback_canary"
+          "rollback_canary",
+          "cancel_canary"
         ]
       },
       "RolloutStatus": {
@@ -1606,18 +1650,13 @@
         "type": "object",
         "properties": {
           "display_name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           }
         }
       },
       "UpdateApplicationSuccess": {
         "type": "object",
-        "required": [
-          "application"
-        ],
+        "required": ["application"],
         "properties": {
           "application": {
             "$ref": "#/components/schemas/ApplicationDetails"
@@ -1641,9 +1680,7 @@
       },
       "UpdateRolloutStateSuccess": {
         "type": "object",
-        "required": [
-          "state"
-        ],
+        "required": ["state"],
         "properties": {
           "state": {
             "$ref": "#/components/schemas/RolloutState"
@@ -1654,18 +1691,13 @@
         "type": "object",
         "properties": {
           "display_name": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           }
         }
       },
       "UpdateWorkspaceSuccess": {
         "type": "object",
-        "required": [
-          "workspace"
-        ],
+        "required": ["workspace"],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceSummary"
@@ -1674,13 +1706,7 @@
       },
       "UserDetails": {
         "type": "object",
-        "required": [
-          "id",
-          "email",
-          "created_at",
-          "jwt",
-          "expires_at"
-        ],
+        "required": ["id", "email", "created_at", "jwt", "expires_at"],
         "properties": {
           "created_at": {
             "type": "string",
@@ -1708,12 +1734,7 @@
       "UserSummary": {
         "type": "object",
         "description": "Successful login response payload",
-        "required": [
-          "id",
-          "email",
-          "jwt",
-          "expires_at"
-        ],
+        "required": ["id", "email", "jwt", "expires_at"],
         "properties": {
           "email": {
             "$ref": "#/components/schemas/Email"
@@ -1731,11 +1752,7 @@
       },
       "WebServiceConfig": {
         "type": "object",
-        "required": [
-          "ingress",
-          "monitor",
-          "platform"
-        ],
+        "required": ["ingress", "monitor", "platform"],
         "properties": {
           "ingress": {
             "$ref": "#/components/schemas/IngressConfig"
@@ -1788,9 +1805,7 @@
       },
       "WorkspaceReadSuccess": {
         "type": "object",
-        "required": [
-          "workspace"
-        ],
+        "required": ["workspace"],
         "properties": {
           "workspace": {
             "$ref": "#/components/schemas/WorkspaceDetails"
@@ -1799,11 +1814,7 @@
       },
       "WorkspaceSummary": {
         "type": "object",
-        "required": [
-          "id",
-          "display_name",
-          "created_at"
-        ],
+        "required": ["id", "display_name", "created_at"],
         "properties": {
           "created_at": {
             "type": "string"
@@ -1849,6 +1860,10 @@
     {
       "name": "Response Code Metrics",
       "description": "Response Code Metrics"
+    },
+    {
+      "name": "Errors",
+      "description": "Errors"
     },
     {
       "name": "Rollout States",

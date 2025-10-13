@@ -22,6 +22,8 @@ pub enum RolloutStateType {
     SetCanaryTraffic,
     #[serde(rename = "rollback_canary")]
     RollbackCanary,
+    #[serde(rename = "cancel_canary")]
+    CancelCanary,
 
 }
 
@@ -32,6 +34,7 @@ impl std::fmt::Display for RolloutStateType {
             Self::DeployCanary => write!(f, "deploy_canary"),
             Self::SetCanaryTraffic => write!(f, "set_canary_traffic"),
             Self::RollbackCanary => write!(f, "rollback_canary"),
+            Self::CancelCanary => write!(f, "cancel_canary"),
         }
     }
 }
