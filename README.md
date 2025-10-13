@@ -31,6 +31,7 @@ Class | Method | HTTP request | Description
 *ApplicationsApi* | [**get_application**](docs/ApplicationsApi.md#get_application) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
 *ApplicationsApi* | [**list_applications**](docs/ApplicationsApi.md#list_applications) | **GET** /api/v1/workspaces/{workspace_id}/applications | 
 *ApplicationsApi* | [**update_application**](docs/ApplicationsApi.md#update_application) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id} | 
+*ErrorsApi* | [**log_error**](docs/ErrorsApi.md#log_error) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/errors | 
 *HeartbeatApi* | [**heartbeat_controller**](docs/HeartbeatApi.md#heartbeat_controller) | **GET** /api/v1/heartbeat | 
 *ResponseCodeMetricsApi* | [**create_response_code_metrics**](docs/ResponseCodeMetricsApi.md#create_response_code_metrics) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes | 
 *RolloutStatesApi* | [**create_rollout_state**](docs/RolloutStatesApi.md#create_rollout_state) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/state | 
@@ -56,6 +57,7 @@ Class | Method | HTTP request | Description
  - [CloudWatchDimensions](docs/CloudWatchDimensions.md)
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
  - [CreateApplicationSuccess](docs/CreateApplicationSuccess.md)
+ - [CreateErrorRequest](docs/CreateErrorRequest.md)
  - [CreateResponseCodeMetricsRequest](docs/CreateResponseCodeMetricsRequest.md)
  - [CreateRolloutStateRequest](docs/CreateRolloutStateRequest.md)
  - [CreateRolloutStateSuccess](docs/CreateRolloutStateSuccess.md)
