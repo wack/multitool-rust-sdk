@@ -8,7 +8,6 @@ docs/Cloud.md
 docs/CloudWatchDimensions.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationSuccess.md
-docs/CreateErrorRequest.md
 docs/CreateResponseCodeMetricsRequest.md
 docs/CreateRolloutStateRequest.md
 docs/CreateRolloutStateSuccess.md
@@ -18,7 +17,6 @@ docs/CreateUserSuccess.md
 docs/CreateWorkspaceRequest.md
 docs/CreateWorkspaceSuccess.md
 docs/ErrorResponse.md
-docs/ErrorsApi.md
 docs/HeartbeatApi.md
 docs/HeartbeatController200Response.md
 docs/IngressConfig.md
@@ -73,7 +71,6 @@ docs/WorkspaceSummary.md
 docs/WorkspacesApi.md
 src/apis/applications_api.rs
 src/apis/configuration.rs
-src/apis/errors_api.rs
 src/apis/heartbeat_api.rs
 src/apis/mod.rs
 src/apis/response_code_metrics_api.rs
@@ -88,7 +85,6 @@ src/models/cloud.rs
 src/models/cloud_watch_dimensions.rs
 src/models/create_application_request.rs
 src/models/create_application_success.rs
-src/models/create_error_request.rs
 src/models/create_response_code_metrics_request.rs
 src/models/create_rollout_state_request.rs
 src/models/create_rollout_state_success.rs

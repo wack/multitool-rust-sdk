@@ -607,69 +607,6 @@
         }
       }
     },
-    "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/errors": {
-      "post": {
-        "tags": ["Errors"],
-        "operationId": "Log Error",
-        "parameters": [
-          {
-            "name": "workspace_id",
-            "in": "path",
-            "description": "The workspace's id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/WorkspaceId"
-            }
-          },
-          {
-            "name": "application_id",
-            "in": "path",
-            "description": "The application's id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ApplicationId"
-            }
-          },
-          {
-            "name": "rollout_id",
-            "in": "path",
-            "description": "The rollout's id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/RolloutId"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateErrorRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Error logged successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateErrorSuccess"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Workspace, application, or rollout not found"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        }
-      }
-    },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/response-codes": {
       "post": {
         "tags": ["Response Code Metrics"],
@@ -1059,23 +996,6 @@
             "$ref": "#/components/schemas/ApplicationDetails"
           }
         }
-      },
-      "CreateErrorRequest": {
-        "type": "object",
-        "required": ["url_path", "status_code", "logs"],
-        "properties": {
-          "logs": {},
-          "status_code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "url_path": {
-            "type": "string"
-          }
-        }
-      },
-      "CreateErrorSuccess": {
-        "type": "object"
       },
       "CreateResponseCodeMetricsRequest": {
         "type": "object",
@@ -1852,10 +1772,6 @@
     {
       "name": "Response Code Metrics",
       "description": "Response Code Metrics"
-    },
-    {
-      "name": "Errors",
-      "description": "Errors"
     },
     {
       "name": "Rollout States",

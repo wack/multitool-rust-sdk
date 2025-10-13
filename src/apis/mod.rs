@@ -112,7 +112,6 @@ impl From<&str> for ContentType {
 }
 
 pub mod applications_api;
-pub mod errors_api;
 pub mod heartbeat_api;
 pub mod response_code_metrics_api;
 pub mod rollout_states_api;
@@ -126,7 +125,6 @@ use std::sync::Arc;
 
 pub trait Api {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi;
-    fn errors_api(&self) -> &dyn errors_api::ErrorsApi;
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi;
     fn response_code_metrics_api(&self) -> &dyn response_code_metrics_api::ResponseCodeMetricsApi;
     fn rollout_states_api(&self) -> &dyn rollout_states_api::RolloutStatesApi;
@@ -137,7 +135,6 @@ pub trait Api {
 
 pub struct ApiClient {
     applications_api: Box<dyn applications_api::ApplicationsApi>,
-    errors_api: Box<dyn errors_api::ErrorsApi>,
     heartbeat_api: Box<dyn heartbeat_api::HeartbeatApi>,
     response_code_metrics_api: Box<dyn response_code_metrics_api::ResponseCodeMetricsApi>,
     rollout_states_api: Box<dyn rollout_states_api::RolloutStatesApi>,
@@ -150,7 +147,6 @@ impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
             applications_api: Box::new(applications_api::ApplicationsApiClient::new(configuration.clone())),
-            errors_api: Box::new(errors_api::ErrorsApiClient::new(configuration.clone())),
             heartbeat_api: Box::new(heartbeat_api::HeartbeatApiClient::new(configuration.clone())),
             response_code_metrics_api: Box::new(response_code_metrics_api::ResponseCodeMetricsApiClient::new(configuration.clone())),
             rollout_states_api: Box::new(rollout_states_api::RolloutStatesApiClient::new(configuration.clone())),
@@ -164,9 +160,6 @@ impl ApiClient {
 impl Api for ApiClient {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
         self.applications_api.as_ref()
-    }
-    fn errors_api(&self) -> &dyn errors_api::ErrorsApi {
-        self.errors_api.as_ref()
     }
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi {
         self.heartbeat_api.as_ref()
@@ -191,7 +184,6 @@ impl Api for ApiClient {
 #[cfg(feature = "mockall")]
 pub struct MockApiClient {
     pub applications_api_mock: applications_api::MockApplicationsApi,
-    pub errors_api_mock: errors_api::MockErrorsApi,
     pub heartbeat_api_mock: heartbeat_api::MockHeartbeatApi,
     pub response_code_metrics_api_mock: response_code_metrics_api::MockResponseCodeMetricsApi,
     pub rollout_states_api_mock: rollout_states_api::MockRolloutStatesApi,
@@ -205,7 +197,6 @@ impl MockApiClient {
     pub fn new() -> Self {
         Self {
             applications_api_mock: applications_api::MockApplicationsApi::new(),
-            errors_api_mock: errors_api::MockErrorsApi::new(),
             heartbeat_api_mock: heartbeat_api::MockHeartbeatApi::new(),
             response_code_metrics_api_mock: response_code_metrics_api::MockResponseCodeMetricsApi::new(),
             rollout_states_api_mock: rollout_states_api::MockRolloutStatesApi::new(),
@@ -220,9 +211,6 @@ impl MockApiClient {
 impl Api for MockApiClient {
     fn applications_api(&self) -> &dyn applications_api::ApplicationsApi {
         &self.applications_api_mock
-    }
-    fn errors_api(&self) -> &dyn errors_api::ErrorsApi {
-        &self.errors_api_mock
     }
     fn heartbeat_api(&self) -> &dyn heartbeat_api::HeartbeatApi {
         &self.heartbeat_api_mock

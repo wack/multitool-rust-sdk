@@ -10,8 +10,6 @@ pub mod create_application_request;
 pub use self::create_application_request::CreateApplicationRequest;
 pub mod create_application_success;
 pub use self::create_application_success::CreateApplicationSuccess;
-pub mod create_error_request;
-pub use self::create_error_request::CreateErrorRequest;
 pub mod create_response_code_metrics_request;
 pub use self::create_response_code_metrics_request::CreateResponseCodeMetricsRequest;
 pub mod create_rollout_state_request;
