@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**logs** | Option<[**serde_json::Value**](.md)> |  | 
+**logs** | **Vec<String>** |  | 
 **status_code** | **i32** |  | 
 **url_path** | **String** |  | 
 

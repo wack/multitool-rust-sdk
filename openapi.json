@@ -1067,7 +1067,12 @@
         "type": "object",
         "required": ["url_path", "status_code", "logs"],
         "properties": {
-          "logs": {},
+          "logs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "status_code": {
             "type": "integer",
             "format": "int32"

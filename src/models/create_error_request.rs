@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateErrorRequest {
-    #[serde(rename = "logs", deserialize_with = "Option::deserialize")]
-    pub logs: Option<serde_json::Value>,
+    #[serde(rename = "logs")]
+    pub logs: Vec<String>,
     #[serde(rename = "status_code")]
     pub status_code: i32,
     #[serde(rename = "url_path")]
@@ -22,7 +22,7 @@ pub struct CreateErrorRequest {
 }
 
 impl CreateErrorRequest {
-    pub fn new(logs: Option<serde_json::Value>, status_code: i32, url_path: String) -> CreateErrorRequest {
+    pub fn new(logs: Vec<String>, status_code: i32, url_path: String) -> CreateErrorRequest {
         CreateErrorRequest {
             logs,
             status_code,
