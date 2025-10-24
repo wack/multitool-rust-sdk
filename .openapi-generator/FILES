@@ -61,6 +61,7 @@ docs/UpdateApplicationRequest.md
 docs/UpdateApplicationSuccess.md
 docs/UpdateRolloutStateRequest.md
 docs/UpdateRolloutStateSuccess.md
+docs/UpdateRolloutStatusRequest.md
 docs/UpdateWorkspaceRequest.md
 docs/UpdateWorkspaceSuccess.md
 docs/UserDetails.md
@@ -137,6 +138,7 @@ src/models/update_application_request.rs
 src/models/update_application_success.rs
 src/models/update_rollout_state_request.rs
 src/models/update_rollout_state_success.rs
+src/models/update_rollout_status_request.rs
 src/models/update_workspace_request.rs
 src/models/update_workspace_success.rs
 src/models/user_details.rs

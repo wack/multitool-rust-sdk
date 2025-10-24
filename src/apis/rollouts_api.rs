@@ -37,6 +37,11 @@ pub trait RolloutsApi: Send + Sync {
     ///
     /// 
     async fn read_rollout<'workspace_id, 'application_id, 'rollout_id>(&self, workspace_id: u32, application_id: u32, rollout_id: u64) -> Result<models::ReadRolloutSuccess, Error<ReadRolloutError>>;
+
+    /// PATCH /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}
+    ///
+    /// 
+    async fn update_rollout_status<'workspace_id, 'application_id, 'rollout_id, 'update_rollout_status_request>(&self, workspace_id: u32, application_id: u32, rollout_id: u64, update_rollout_status_request: models::UpdateRolloutStatusRequest) -> Result<(), Error<UpdateRolloutStatusError>>;
 }
 
 pub struct RolloutsApiClient {
@@ -177,6 +182,37 @@ impl RolloutsApi for RolloutsApiClient {
         }
     }
 
+    async fn update_rollout_status<'workspace_id, 'application_id, 'rollout_id, 'update_rollout_status_request>(&self, workspace_id: u32, application_id: u32, rollout_id: u64, update_rollout_status_request: models::UpdateRolloutStatusRequest) -> Result<(), Error<UpdateRolloutStatusError>> {
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}", local_var_configuration.base_path, workspace_id=workspace_id, application_id=application_id, rollout_id=rollout_id);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::PATCH, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        local_var_req_builder = local_var_req_builder.json(&update_rollout_status_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            Ok(())
+        } else {
+            let local_var_entity: Option<UpdateRolloutStatusError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
 }
 
 /// struct for typed errors of method [`create_rollout`]
@@ -199,6 +235,16 @@ pub enum ListRolloutsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ReadRolloutError {
+    Status500(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`update_rollout_status`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum UpdateRolloutStatusError {
+    Status404(),
+    Status422(models::ErrorResponse),
     Status500(),
     UnknownValue(serde_json::Value),
 }

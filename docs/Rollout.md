@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **config** | [**models::RolloutConfig**](RolloutConfig.md) |  | 
 **created_at** | **String** |  | 
 **events** | [**Vec<models::RolloutEvent>**](RolloutEvent.md) |  | 
+**force** | **bool** |  | 
 **id** | **u64** |  | 
 **number** | **u64** |  | 
 **status** | [**models::RolloutStatus**](RolloutStatus.md) |  | 

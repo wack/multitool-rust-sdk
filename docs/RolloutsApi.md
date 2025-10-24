@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_rollout**](RolloutsApi.md#create_rollout) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts | 
 [**list_rollouts**](RolloutsApi.md#list_rollouts) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts | 
 [**read_rollout**](RolloutsApi.md#read_rollout) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id} | 
+[**update_rollout_status**](RolloutsApi.md#update_rollout_status) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id} | 
 
 
 
@@ -95,6 +96,37 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## update_rollout_status
+
+> update_rollout_status(workspace_id, application_id, rollout_id, update_rollout_status_request)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**workspace_id** | **u32** | The workspace's id | [required] |
+**application_id** | **u32** | The application's id | [required] |
+**rollout_id** | **u64** | The rollout's id | [required] |
+**update_rollout_status_request** | [**UpdateRolloutStatusRequest**](UpdateRolloutStatusRequest.md) |  | [required] |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearer_auth](../README.md#bearer_auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

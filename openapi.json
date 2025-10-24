@@ -605,6 +605,70 @@
             "description": "Internal error"
           }
         }
+      },
+      "patch": {
+        "tags": ["Rollouts"],
+        "operationId": "Update Rollout Status",
+        "parameters": [
+          {
+            "name": "workspace_id",
+            "in": "path",
+            "description": "The workspace's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/WorkspaceId"
+            }
+          },
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "The application's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ApplicationId"
+            }
+          },
+          {
+            "name": "rollout_id",
+            "in": "path",
+            "description": "The rollout's id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RolloutId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRolloutStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Rollout status updated successfully"
+          },
+          "404": {
+            "description": "Workspace, application, or rollout not found"
+          },
+          "422": {
+            "description": "Invalid status or status transition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        }
       }
     },
     "/api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id}/metrics/errors": {
@@ -1436,7 +1500,8 @@
           "events",
           "created_at",
           "updated_at",
-          "config"
+          "config",
+          "force"
         ],
         "properties": {
           "active": {
@@ -1456,6 +1521,9 @@
             "items": {
               "$ref": "#/components/schemas/RolloutEvent"
             }
+          },
+          "force": {
+            "type": "boolean"
           },
           "id": {
             "$ref": "#/components/schemas/RolloutId"
@@ -1684,6 +1752,15 @@
         "properties": {
           "state": {
             "$ref": "#/components/schemas/RolloutState"
+          }
+        }
+      },
+      "UpdateRolloutStatusRequest": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/RolloutStatus"
           }
         }
       },

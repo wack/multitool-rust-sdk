@@ -23,6 +23,8 @@ pub struct Rollout {
     pub created_at: String,
     #[serde(rename = "events")]
     pub events: Vec<models::RolloutEvent>,
+    #[serde(rename = "force")]
+    pub force: bool,
     #[serde(rename = "id")]
     pub id: u64,
     #[serde(rename = "number")]
@@ -34,13 +36,14 @@ pub struct Rollout {
 }
 
 impl Rollout {
-    pub fn new(active: bool, application_id: u32, config: models::RolloutConfig, created_at: String, events: Vec<models::RolloutEvent>, id: u64, number: u64, status: models::RolloutStatus, updated_at: String) -> Rollout {
+    pub fn new(active: bool, application_id: u32, config: models::RolloutConfig, created_at: String, events: Vec<models::RolloutEvent>, force: bool, id: u64, number: u64, status: models::RolloutStatus, updated_at: String) -> Rollout {
         Rollout {
             active,
             application_id,
             config: Box::new(config),
             created_at,
             events,
+            force,
             id,
             number,
             status,
