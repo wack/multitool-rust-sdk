@@ -41,6 +41,7 @@ Class | Method | HTTP request | Description
 *RolloutsApi* | [**create_rollout**](docs/RolloutsApi.md#create_rollout) | **POST** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts | 
 *RolloutsApi* | [**list_rollouts**](docs/RolloutsApi.md#list_rollouts) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts | 
 *RolloutsApi* | [**read_rollout**](docs/RolloutsApi.md#read_rollout) | **GET** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id} | 
+*RolloutsApi* | [**update_rollout_status**](docs/RolloutsApi.md#update_rollout_status) | **PATCH** /api/v1/workspaces/{workspace_id}/applications/{application_id}/rollouts/{rollout_id} | 
 *UsersApi* | [**create_user**](docs/UsersApi.md#create_user) | **POST** /api/v1/users | 
 *UsersApi* | [**login**](docs/UsersApi.md#login) | **POST** /api/v1/users/login | 
 *WorkspacesApi* | [**create_workspace**](docs/WorkspacesApi.md#create_workspace) | **POST** /api/v1/workspaces | 
@@ -105,6 +106,7 @@ Class | Method | HTTP request | Description
  - [UpdateApplicationSuccess](docs/UpdateApplicationSuccess.md)
  - [UpdateRolloutStateRequest](docs/UpdateRolloutStateRequest.md)
  - [UpdateRolloutStateSuccess](docs/UpdateRolloutStateSuccess.md)
+ - [UpdateRolloutStatusRequest](docs/UpdateRolloutStatusRequest.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceSuccess](docs/UpdateWorkspaceSuccess.md)
  - [UserDetails](docs/UserDetails.md)

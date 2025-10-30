@@ -106,6 +106,8 @@ pub mod update_rollout_state_request;
 pub use self::update_rollout_state_request::UpdateRolloutStateRequest;
 pub mod update_rollout_state_success;
 pub use self::update_rollout_state_success::UpdateRolloutStateSuccess;
+pub mod update_rollout_status_request;
+pub use self::update_rollout_status_request::UpdateRolloutStatusRequest;
 pub mod update_workspace_request;
 pub use self::update_workspace_request::UpdateWorkspaceRequest;
 pub mod update_workspace_success;
